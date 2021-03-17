@@ -9,6 +9,10 @@ namespace TicTacToe2D
         // plus if the board is full, the game  is drawn
         // should this be an interface?
         // pass in gamecontext return bool
+        public GamePredicate()
+        {
+            GameContext game = new GameContext();
+        }
         public GameContext IsAWinningColumn(bool winningColumn)
         {
             throw new NotImplementedException();

@@ -5,6 +5,12 @@ namespace TicTacToe2D
     public class Controller
     {
         // Controls the game. input == Gamecontext, returns Gamecontext
+        private GameContext _game;
+
+        public Controller(GameContext game)
+        {
+            _game = game;
+        }
         public GameContext Initialise()
         {
             throw new NotImplementedException();

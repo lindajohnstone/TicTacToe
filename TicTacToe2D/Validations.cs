@@ -6,12 +6,13 @@ namespace TicTacToe2D
     {
         // validates player input to ensure that the requested player position is within the board
         // and also is not already occupied
-        public bool IsValid()
+
+        public bool IsValid(GameContext game)
         {
             throw new NotImplementedException();
         }
 
-        public bool IsOccupied()
+        public bool IsOccupied(GameContext game)
         {
             throw new NotImplementedException();
         }
