@@ -15,7 +15,8 @@ namespace TicTacToe2D
             X = x;
             Y = y;
         }
-        public Coords StoreLocation(int x, int y) // TODO: int x, int y as parameters?; return position(x,y)
+        // override ToString() method instead?
+        public Coords StoreLocation(int x, int y) // TODO: int x, int y as parameters?; return position(x,y) Method name ?
         {
             throw new NotImplementedException();
         }

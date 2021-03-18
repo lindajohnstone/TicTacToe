@@ -2,15 +2,13 @@ using System;
 
 namespace TicTacToe2D
 {
-    public class Field
+    public enum Field
     {
         // location
         // state
-        enum State
-        { 
+        
             empty, 
             x, 
             y
-        }
     }
 }
