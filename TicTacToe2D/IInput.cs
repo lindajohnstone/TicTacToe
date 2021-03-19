@@ -8,5 +8,6 @@ namespace TicTacToe2D
         // stub used for testing
         public string ConsoleReadLine();
         public ConsoleKeyInfo ConsolReadKey(); // q for quit
+        // public bool ConsoleKeyAvailable(); // ??
     }
 }
