@@ -4,10 +4,8 @@ namespace TicTacToe2D
     {
         /*
             TODO: should Controller be renamed to GameController? - possibly more than one controller required
-            TODO: does the field know how many fields or is this the responsibility of the board?
             TODO: input from player comes in as a string...
             TODO: input from player - responsibility of GameContext or Controller
-            TODO: output to console - responsibility of GameContext or Controller
             
             Players                                     - Players
             Field                                       - Field

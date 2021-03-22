@@ -1,12 +1,12 @@
 namespace TicTacToe2D
 {
-    public class Players
+    public enum Player
     {
         // the players - 2 human players
-        enum Player
-        {
+        //public enum Player
+        //{
             X,
             O
-        }
+        //}
     }
 }

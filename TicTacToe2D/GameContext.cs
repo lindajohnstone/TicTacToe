@@ -7,7 +7,7 @@ namespace TicTacToe2D
         // stores Board, Player, game state
         // accesses board, player, validations?, gamepredicate?
         public Board GameBoard { get; private set; }
-        public Players Players { get; private set; }
+        public Player Player { get; private set; }
         private Validations _validations;
         private GamePredicate _conditions;
 
@@ -20,7 +20,7 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public Players GetPlayers()
+        public Player GetPlayers()
         {
             throw new NotImplementedException();
         }

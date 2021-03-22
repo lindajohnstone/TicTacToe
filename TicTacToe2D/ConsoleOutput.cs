@@ -1,3 +1,5 @@
+using System;
+
 namespace TicTacToe2D
 {
     public class ConsoleOutput : IOutput
@@ -12,6 +14,10 @@ namespace TicTacToe2D
         public string ConsoleWriteLine()
         {
             throw new System.NotImplementedException();
+        }
+        public void DrawBoard(Board board)
+        {
+            throw new NotImplementedException();
         }
     }
 }

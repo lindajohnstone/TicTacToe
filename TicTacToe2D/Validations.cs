@@ -12,7 +12,7 @@ namespace TicTacToe2D
         {
             
         }
-        public bool IsValid(GameContext game)
+        public bool IsValidTurn(GameContext game)
         {
             throw new NotImplementedException();
         }
@@ -21,5 +21,6 @@ namespace TicTacToe2D
         {
             throw new NotImplementedException();
         }
+    
     }
 }

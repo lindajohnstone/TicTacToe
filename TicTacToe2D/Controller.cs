@@ -21,9 +21,15 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
+        private Validations ValidTurn()
+        {
+            throw new NotImplementedException();
+        }
+
         public GameContext PlayGame(GameContext game) // should this be in GameContext?
         {
             throw new NotImplementedException();
         }
+        // EndGame
     }
 }
