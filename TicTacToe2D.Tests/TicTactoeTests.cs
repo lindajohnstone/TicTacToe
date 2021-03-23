@@ -80,11 +80,23 @@ namespace TicTacToe2D.Tests
         }
     
         [Fact]
-        public void Board_contents()
+        public void Board()
         {
-            var expected = new Board(3);
-            var result = new Board(3);
-            // TODO: how to retrieve contents of the board?
+            var expected = new Board(3).Dictionary;
+            var result = new Board(3).Dictionary;
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(0, 0, true)]
+        [InlineData(1,2, true)]
+        [InlineData(2,0, true)]
+        [InlineData(1,3, false)]
+        [InlineData(6,9,false)]
+        public void Board_contents(int x, int y, bool expected)
+        {
+            var position = new Position(x, y);
+            var result = new Board(3).Dictionary.ContainsKey(position);
             Assert.Equal(expected, result);
         }
     }

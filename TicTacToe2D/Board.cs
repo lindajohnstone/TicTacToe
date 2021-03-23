@@ -6,8 +6,8 @@ namespace TicTacToe2D
     public class Board
     {
         // container of fields
-        // Dictionary with coord as key, field as value??
-        private Dictionary<Position, FieldContents> Dictionary;
+        // Dictionary with position as key, fieldcontents as value??
+        public Dictionary<Position, FieldContents> Dictionary { get; private set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
 
