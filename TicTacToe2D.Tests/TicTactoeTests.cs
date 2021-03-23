@@ -99,5 +99,19 @@ namespace TicTacToe2D.Tests
             var result = new Board(3).Dictionary.ContainsKey(position);
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void Board_dictionary_count()
+        {
+            var result = new Board(3).Dictionary;
+            Assert.Equal(9, result.Count);
+        }
+
+        [Fact]
+        public void Board_check_if_empty_field()
+        {
+            var result = new Board(3).Dictionary.ContainsValue(FieldContents.empty);
+            Assert.Equal(true, result);
+        }
     }
 }
