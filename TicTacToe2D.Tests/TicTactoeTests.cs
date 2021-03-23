@@ -1,5 +1,6 @@
 using System;
 using Xunit;
+using FluentAssertions;
 
 namespace TicTacToe2D.Tests
 {
@@ -24,12 +25,57 @@ namespace TicTacToe2D.Tests
 
         [Theory]
         [InlineData(1,2,1,2, true)]
+        [InlineData(2,3,2,3,true)]
+        [InlineData(1000, 2000, 1000, 2000, true)]
+        [InlineData(133, 32, 33, 32, false)]
+        [InlineData(1000, 2000, 2000, 2000, false)]
+        [InlineData(1,3,2,3,false)]
         public void Position_equals(int x1, int y1, int x2, int y2, bool expected)
+        {
+            var one = new Position(x1, y1);
+            var two = new Position(x2, y2);
+            var result = (one.Equals(two));
+            Assert.Equal(expected, result);
+        }
+
+        [Theory]
+        [InlineData(1, 2, 1, 2, true)]
+        [InlineData(2, 3, 2, 3, true)]
+        [InlineData(1000, 2000, 1000, 2000, true)]
+        [InlineData(133, 32, 33, 32, false)]
+        [InlineData(1000, 2000, 2000, 2000, false)]
+        [InlineData(1, 3, 2, 3, false)]
+        public void Position_equals_operator(int x1, int y1, int x2, int y2, bool expected)
         {
             var one = new Position(x1, y1);
             var two = new Position(x2, y2);
             var result = (one == two);
             Assert.Equal(expected, result);
         }
+
+        [Theory]
+        [InlineData(1, 2, 1, 2, true)]
+        [InlineData(2, 3, 2, 3, true)]
+        [InlineData(1000, 2000, 1000, 2000, true)]
+        [InlineData(133, 32, 33, 32, false)]
+        [InlineData(1000, 2000, 2000, 2000, false)]
+        [InlineData(1, 3, 2, 3, false)]
+        public void Position_equals_using_fluentassertions(int x1, int y1, int x2, int y2, bool expected)
+        {
+            var one = new Position(x1, y1);
+            var two = new Position(x2, y2);
+            if(expected) one.Should().Be(two);
+            else one.Should().NotBe(two);
+        }
+
+        // tests using Position
+        // Board constructor
+        // ConsoleOutput DrawBoard ??
+        [Fact]
+        public void Board_constructor()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

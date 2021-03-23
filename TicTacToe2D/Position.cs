@@ -15,44 +15,39 @@ namespace TicTacToe2D
             X = x;
             Y = y;
         }
-        /*
-            class name options:
-            Coords - exact position of a field. Pair
-            Position - where something has been located
-            Point - particular place - no - Point is a class, may cause confusion
 
-        */
-
-        // override object.Equals
         public override bool Equals(object obj)
         {
-            //
-            // See the full list of guidelines at
-            //   http://go.microsoft.com/fwlink/?LinkID=85237
-            // and also the guidance for operator== at
-            //   http://go.microsoft.com/fwlink/?LinkId=85238
-            //
 
             if (obj == null || GetType() != obj.GetType())
             {
                 return false;
             }
-
-            // TODO: write your implementation of Equals() here.  
+  
             else
             {
                 Position position = (Position)obj;
-                return ( X == position.X) && (Y == position.Y);
+                return X == position.X && Y == position.Y;
             }
-            // return base.Equals (obj);
         }
 
-        // override object.GetHashCode
+        public static bool operator== (Position obj1, Position obj2)
+        {
+            if (obj1.X == obj2.X && obj1.Y == obj2.Y) return true;
+            return false;
+        }
+
+        // TODO: method Compare to do all calcs, checks, edge cases
+
+        public static bool operator!= (Position obj1, Position obj2)
+        {
+            if (obj1.X != obj2.X || obj1.Y != obj2.Y) return false;
+            return true;
+        }
+
         public override int GetHashCode()
         {
-            // TODO: write your implementation of GetHashCode() here. uncomment return
-            throw new System.NotImplementedException();
-            //return base.GetHashCode();
+            return X ^ Y;
         }
     }
 }
