@@ -3,10 +3,7 @@ namespace TicTacToe2D
     public enum Player
     {
         // the players - 2 human players
-        //public enum Player
-        //{
             X,
             O
-        //}
     }
 }

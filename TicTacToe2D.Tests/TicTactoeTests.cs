@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using FluentAssertions;
+using System.Collections.Generic;
 
 namespace TicTacToe2D.Tests
 {
@@ -9,7 +10,7 @@ namespace TicTacToe2D.Tests
         [Theory]
         [InlineData(1,2)]
         [InlineData(0,2)]
-        [InlineData(1,2)]
+        [InlineData(1,5)]
         [InlineData(0,0)]
         [InlineData(1,1)]
         [InlineData(100, 300000)]
@@ -68,14 +69,23 @@ namespace TicTacToe2D.Tests
             else one.Should().NotBe(two);
         }
 
-        // tests using Position
-        // Board constructor
-        // ConsoleOutput DrawBoard ??
-        [Fact]
-        public void Board_constructor()
+        [Theory]
+        [InlineData(3)]
+        public void Board_dimensions(int dimensionLength)
         {
-            throw new NotImplementedException();
+            var expected = dimensionLength;
+            var result = new Board(dimensionLength);
+            Assert.Equal(expected, result.Width);
+            Assert.Equal(expected, result.Height);
         }
-
+    
+        [Fact]
+        public void Board_contents()
+        {
+            var expected = new Board(3);
+            var result = new Board(3);
+            // TODO: how to retrieve contents of the board?
+            Assert.Equal(expected, result);
+        }
     }
 }

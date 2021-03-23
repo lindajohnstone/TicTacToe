@@ -1,14 +1,8 @@
-using System;
-
 namespace TicTacToe2D
 {
-    public enum Field
+    public class Field
     {
-        // location
-        // state
-        
-            empty, 
-            x, 
-            y
+        public Position Position { get; set; }
+        public FieldContents FieldContents { get; set; }
     }
 }

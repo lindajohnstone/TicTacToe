@@ -7,16 +7,24 @@ namespace TicTacToe2D
     {
         // container of fields
         // Dictionary with coord as key, field as value??
-        private Dictionary<Position, Field> _dictionary;
+        private Dictionary<Position, FieldContents> Dictionary;
         public int Width { get; private set; }
         public int Height { get; private set; }
 
-        public Board() 
+        public Board(int boardSize) 
         {
-            // implement population of dictionary with coords and fields based on 3x3 fields.
-
-            //_dictionary.Add(position(0,0), Field.empty);// Field.0
-            // loop 
+            // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
+            Width = boardSize;
+            Height = boardSize;
+            Dictionary = new Dictionary<Position, FieldContents>();
+            for (int row = 0; row < Width; row++)
+            {
+                for (int column = 0; column < Height; column++)
+                {
+                    var position = new Position(row, column);
+                    Dictionary.Add(position, FieldContents.empty);// Field.0
+                }
+            }
         }  
 
         

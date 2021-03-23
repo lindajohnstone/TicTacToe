@@ -31,17 +31,23 @@ namespace TicTacToe2D
             }
         }
 
-        public static bool operator== (Position obj1, Position obj2)
+        public static bool operator == (Position obj1, Position obj2)
         {
-            if (obj1.X == obj2.X && obj1.Y == obj2.Y) return true;
+            if (obj1.X == obj2.X && obj1.Y == obj2.Y)
+            {
+                return true;
+            }
             return false;
         }
 
         // TODO: method Compare to do all calcs, checks, edge cases
-
-        public static bool operator!= (Position obj1, Position obj2)
+        // TODO: merge operator methods - one calls other
+        public static bool operator != (Position obj1, Position obj2)
         {
-            if (obj1.X != obj2.X || obj1.Y != obj2.Y) return false;
+            if (obj1.X != obj2.X || obj1.Y != obj2.Y)
+            {
+                return false;
+            }
             return true;
         }
 
