@@ -10,21 +10,25 @@ namespace TicTacToe2D
         // should this be an interface?
         // pass in gamecontext return bool
         private GameContext _game;
-        public GamePredicate()
+        public GamePredicate(GameContext game)
         {
-            
+            _game = game;
         }
-        public GameContext IsAWinningColumn(bool winningColumn)
+        public bool IsAWinningColumn(GameContext game)
+        {
+            // TODO: if dictionary contains position (0,0) & its value is FieldContents.x
+            // & if dictionary contains position (1,0) & its' value is FieldContents.x
+            // & if dictionary contains position (2,0) & its' value is FieldContents.x
+            // return true
+            return false;
+        }
+
+        public bool IsAWinningRow(GameContext game)
         {
             throw new NotImplementedException();
         }
 
-        public GameContext IsAWinningRow(bool winningRow)
-        {
-            throw new NotImplementedException();
-        }
-
-        public GameContext IsAWinningDiagonal(bool winningDiagonal)
+        public bool IsAWinningDiagonal(GameContext game)
         {
             throw new NotImplementedException();
         }
