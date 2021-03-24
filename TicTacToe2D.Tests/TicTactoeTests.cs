@@ -88,11 +88,11 @@ namespace TicTacToe2D.Tests
         }
 
         [Theory]
-        [InlineData(0, 0, true)]
+        [InlineData(0,0, true)]
         [InlineData(1,2, true)]
         [InlineData(2,0, true)]
         [InlineData(1,3, false)]
-        [InlineData(6,9,false)]
+        [InlineData(6,9, false)]
         public void Board_contents(int x, int y, bool expected)
         {
             var position = new Position(x, y);
@@ -112,6 +112,24 @@ namespace TicTacToe2D.Tests
         {
             var result = new Board(3).Dictionary.ContainsValue(FieldContents.empty);
             Assert.Equal(true, result);
+        }
+
+        [Theory]
+        [InlineData(0, 0, FieldContents.empty)]
+        [InlineData(0, 1, FieldContents.empty)]
+        [InlineData(0, 2, FieldContents.empty)]
+        [InlineData(1, 0, FieldContents.empty)]
+        [InlineData(1, 1, FieldContents.empty)]
+        [InlineData(1, 2, FieldContents.empty)]
+        [InlineData(2, 0, FieldContents.empty)]
+        [InlineData(2, 1, FieldContents.empty)]
+        [InlineData(2, 2, FieldContents.empty)]
+        public void Board_dictionary_keyvaluepair(int x, int y, FieldContents value)
+        {
+            var board = new Board(3).Dictionary;
+            var position = new Position(x, y);
+            // each position is empty
+            board.ContainsKey(position).Should().Be(board.ContainsValue(value));
         }
     }
 }
