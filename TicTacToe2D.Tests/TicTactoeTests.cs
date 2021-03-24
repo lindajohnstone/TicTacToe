@@ -124,12 +124,14 @@ namespace TicTacToe2D.Tests
         [InlineData(2, 0, FieldContents.empty)]
         [InlineData(2, 1, FieldContents.empty)]
         [InlineData(2, 2, FieldContents.empty)]
-        public void Board_dictionary_keyvaluepair(int x, int y, FieldContents value)
+        public void Board_dictionary_key_value_match_using_fluent_assertions(int x, int y, FieldContents value)
         {
-            var board = new Board(3).Dictionary;
             var position = new Position(x, y);
-            // each position is empty
-            board.ContainsKey(position).Should().Be(board.ContainsValue(value));
+            var board = new Board(3).Dictionary;
+            foreach (KeyValuePair<Position, FieldContents> kvp in board)
+            {
+                board.Should().Contain(position, value);
+            }
         }
     }
 }
