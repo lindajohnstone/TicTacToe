@@ -30,10 +30,18 @@ namespace TicTacToe2D
                 return X == position.X && Y == position.Y;
             }
         }
-
-        public static bool operator == (Position obj1, Position obj2)
+        
+        public static bool OperatorOverride(Position obj1, Position obj2)
         {
             if (obj1.X == obj2.X && obj1.Y == obj2.Y)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool operator == (Position obj1, Position obj2)
+        {
+            if (OperatorOverride(obj1, obj2))
             {
                 return true;
             }
@@ -44,7 +52,7 @@ namespace TicTacToe2D
         // TODO: merge operator methods - one calls other
         public static bool operator != (Position obj1, Position obj2)
         {
-            if (obj1.X != obj2.X || obj1.Y != obj2.Y)
+            if (!OperatorOverride(obj1, obj2))
             {
                 return false;
             }
