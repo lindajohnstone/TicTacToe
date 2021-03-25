@@ -30,6 +30,11 @@ namespace TicTacToe2D
                 return X == position.X && Y == position.Y;
             }
         }
+
+        public override int GetHashCode()
+        {
+            return X ^ Y;
+        }
         
         public static bool OperatorOverride(Position obj1, Position obj2)
         {
@@ -57,11 +62,6 @@ namespace TicTacToe2D
                 return false;
             }
             return true;
-        }
-
-        public override int GetHashCode()
-        {
-            return X ^ Y;
-        }
+        }  
     }
 }
