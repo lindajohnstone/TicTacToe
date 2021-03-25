@@ -15,17 +15,28 @@ namespace TicTacToe2D
         {
             
         }
-        public bool IsAWinningColumn(Board board)
+        public bool IsAWinningColumn(Board board, Player player)
         {
             var values = board.Dictionary;
             var count = 0;
             var keys = new List<int>();
             foreach (KeyValuePair<Position, FieldContents> value  in values)
             {
-                if(value.Value == FieldContents.x)
+                if (player == Player.X)
                 {
-                    count++;
-                    keys.Add(value.Key.X);
+                    if (value.Value == FieldContents.x)
+                    {
+                        count++;
+                        keys.Add(value.Key.X);
+                    }
+                }
+                else
+                {
+                    if (value.Value == FieldContents.y)
+                    {
+                        count++;
+                        keys.Add(value.Key.Y);
+                    }
                 }
             }
             if (count == 3 &&  keys.Sum() % 3 == 0)
