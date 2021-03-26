@@ -14,6 +14,7 @@ namespace TicTacToe2D.Tests
             var win = new GamePredicate();
             var board = new Board(3);
             // win if position(0,0), position(1,0) && position(2,0) all have FieldContents == 'x'
+            // pos.y
             var player = Player.X;
             var pos1 = new Position(x1, y1);
             var pos2 = new Position(x2, y2);
@@ -67,13 +68,16 @@ namespace TicTacToe2D.Tests
         {
             var win = new GamePredicate();
             var board = new Board(3);
-            board.Dictionary[new Position(0, 0)] = FieldContents.x;
+            var pos1 = new Position(0, 0);
+            board.Dictionary[pos1] = FieldContents.x;
             board.Dictionary[new Position(0, 1)] = FieldContents.y;
             board.Dictionary[new Position(0, 2)] = FieldContents.x;
             board.Dictionary[new Position(1, 1)] = FieldContents.x;
             board.Dictionary[new Position(1, 2)] = FieldContents.y;
             board.Dictionary[new Position(2, 0)] = FieldContents.y;
-            Assert.Equal(false, win.IsAWinningColumn(board, Player.X));
+            
+            //Assert.Equal(0, pos1.X);
+            //Assert.Equal(false, win.IsAWinningColumn(board, Player.X));
             Assert.Equal(false, win.IsAWinningColumn(board, Player.O));
         }
     }

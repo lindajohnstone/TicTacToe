@@ -24,45 +24,26 @@ namespace TicTacToe2D
             {
                 var key = value.Key;
                 var fieldContents = new FieldContents();
-                fieldContents = GetFieldContents(player);
+                if (player == Player.X)
+                {
+                    fieldContents = FieldContents.x;
+                }
+                else
+                {
+                    fieldContents = FieldContents.y;
+                }
                 if (value.Value == fieldContents)
                 {
                     count++;
-                    GetKey(player, keys, key);
+                    keys.Add(key.Y);
                 }
             }
-            if (count == 3 &&  keys.Sum() % 3 == 0)
+            var numKeys = keys.Distinct();
+            if (count == 3 &&  numKeys.Count() == 1)
             {
                 return true;
             }
             return false;
-        }
-
-        private static FieldContents GetFieldContents(Player player)
-        {
-            FieldContents fieldContents;
-            if (player == Player.X)
-            {
-                fieldContents = FieldContents.x;
-            }
-            else
-            {
-                fieldContents = FieldContents.y;
-            }
-
-            return fieldContents;
-        }
-
-        private static void GetKey(Player player, List<int> keys, Position key)
-        {
-            if (player == Player.X)
-            {
-                keys.Add(key.X);
-            }
-            else
-            {
-                keys.Add(key.Y);
-            }
         }
 
         public bool IsAWinningRow(GameContext game)

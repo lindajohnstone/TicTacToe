@@ -73,5 +73,24 @@ namespace TicTacToe2D.Tests
                 board.Should().Contain(position, value);
             }
         }
+
+        [Fact]
+        public void testName()
+        {
+            var board = new Board(3).Dictionary;
+            var pos1 = new Position(0, 0);
+            var pos2 = new Position(1, 0);
+            var pos3 = new Position(2, 0);
+            var count = 0;
+            Assert.Equal(pos1.Y, pos2.Y);
+            foreach (var position in board)
+            {
+                if (position.Key.Y == 0)
+                {
+                    count++;
+                }
+            }
+            Assert.Equal(3, count);
+        }
     }
 }
