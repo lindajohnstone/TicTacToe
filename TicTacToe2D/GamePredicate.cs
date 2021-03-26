@@ -30,27 +30,6 @@ namespace TicTacToe2D
             return Check(count, keys);
         }
 
-        private static bool Check(int count, List<int> keys)
-        {
-            var numKeys = keys.Distinct();
-            if (count == 3 && numKeys.Count() == 1)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        private static int GetKeys(int count, List<int> keys, KeyValuePair<Position, FieldContents> value, Position key, FieldContents fieldContents)
-        {
-            if (value.Value == fieldContents)
-            {
-                count++;
-                keys.Add(key.Y);
-            }
-
-            return count;
-        }
-
         private static FieldContents GetFieldContents(Player player)
         {
             FieldContents fieldContents;
@@ -64,6 +43,27 @@ namespace TicTacToe2D
             }
 
             return fieldContents;
+        }
+
+        private static int GetKeys(int count, List<int> keys, KeyValuePair<Position, FieldContents> value, Position key, FieldContents fieldContents)
+        {
+            if (value.Value == fieldContents)
+            {
+                count++;
+                keys.Add(key.Y);
+            }
+
+            return count;
+        }
+
+        private static bool Check(int count, List<int> keys)
+        {
+            var numKeys = keys.Distinct();
+            if (count == 3 && numKeys.Count() == 1)
+            {
+                return true;
+            }
+            return false;
         }
 
         public bool IsAWinningRow(GameContext game)

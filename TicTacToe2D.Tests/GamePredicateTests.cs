@@ -75,10 +75,9 @@ namespace TicTacToe2D.Tests
             board.Dictionary[new Position(1, 1)] = FieldContents.x;
             board.Dictionary[new Position(1, 2)] = FieldContents.y;
             board.Dictionary[new Position(2, 0)] = FieldContents.y;
-            
-            //Assert.Equal(0, pos1.X);
-            //Assert.Equal(false, win.IsAWinningColumn(board, Player.X));
+            Assert.Equal(false, win.IsAWinningColumn(board, Player.X));
             Assert.Equal(false, win.IsAWinningColumn(board, Player.O));
         }
+        
     }
 }
