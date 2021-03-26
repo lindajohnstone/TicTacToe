@@ -39,13 +39,42 @@ namespace TicTacToe2D.Tests
             var pos3 = new Position(x3, y3);
             //var player = new Player();
             var player = Player.O;
-            // link player to FieldContents
-
             board.Dictionary[pos1] = FieldContents.y;
             board.Dictionary[pos2] = FieldContents.y;
             board.Dictionary[pos3] = FieldContents.y;
             var result = win.IsAWinningColumn(board, player);
             Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void GamePredicate_Is_a_winning_column_not_either_player()
+        {
+            var win = new GamePredicate();
+            var board = new Board(3);
+            board.Dictionary[new Position(0, 0)] = FieldContents.x;
+            board.Dictionary[new Position(0, 1)] = FieldContents.y;
+            board.Dictionary[new Position(0, 2)] = FieldContents.x;
+            board.Dictionary[new Position(1, 1)] = FieldContents.x;
+            board.Dictionary[new Position(1, 2)] = FieldContents.y;
+            board.Dictionary[new Position(2, 0)] = FieldContents.y;
+            board.Dictionary[new Position(2, 1)] = FieldContents.x;
+            board.Dictionary[new Position(2, 2)] = FieldContents.y;
+            Assert.Equal(false, win.IsAWinningColumn(board, Player.X));
+            Assert.Equal(false, win.IsAWinningColumn(board, Player.O));
+        }
+
+        [Fact]
+        public void GamePredicate_Is_a_winning_column_3_PlayerX_3PlayerY()
+        {
+            var win = new GamePredicate();
+            var board = new Board(3);
+            board.Dictionary[new Position(0, 0)] = FieldContents.x;
+            board.Dictionary[new Position(0, 1)] = FieldContents.y;
+            board.Dictionary[new Position(0, 2)] = FieldContents.x;
+            board.Dictionary[new Position(1, 1)] = FieldContents.x;
+            board.Dictionary[new Position(1, 2)] = FieldContents.y;
+            board.Dictionary[new Position(2, 0)] = FieldContents.y;
+            Assert.Equal(false, win.IsAWinningColumn(board, Player.X));
+            Assert.Equal(false, win.IsAWinningColumn(board, Player.O));
         }
     }
 }

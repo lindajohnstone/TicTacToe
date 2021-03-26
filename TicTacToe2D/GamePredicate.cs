@@ -20,23 +20,15 @@ namespace TicTacToe2D
             var values = board.Dictionary;
             var count = 0;
             var keys = new List<int>();
-            foreach (KeyValuePair<Position, FieldContents> value  in values)
+            foreach (KeyValuePair<Position, FieldContents> value in values)
             {
-                if (player == Player.X)
+                var key = value.Key;
+                var fieldContents = new FieldContents();
+                fieldContents = GetFieldContents(player);
+                if (value.Value == fieldContents)
                 {
-                    if (value.Value == FieldContents.x)
-                    {
-                        count++;
-                        keys.Add(value.Key.X);
-                    }
-                }
-                else
-                {
-                    if (value.Value == FieldContents.y)
-                    {
-                        count++;
-                        keys.Add(value.Key.Y);
-                    }
+                    count++;
+                    GetKey(player, keys, key);
                 }
             }
             if (count == 3 &&  keys.Sum() % 3 == 0)
@@ -44,6 +36,33 @@ namespace TicTacToe2D
                 return true;
             }
             return false;
+        }
+
+        private static FieldContents GetFieldContents(Player player)
+        {
+            FieldContents fieldContents;
+            if (player == Player.X)
+            {
+                fieldContents = FieldContents.x;
+            }
+            else
+            {
+                fieldContents = FieldContents.y;
+            }
+
+            return fieldContents;
+        }
+
+        private static void GetKey(Player player, List<int> keys, Position key)
+        {
+            if (player == Player.X)
+            {
+                keys.Add(key.X);
+            }
+            else
+            {
+                keys.Add(key.Y);
+            }
         }
 
         public bool IsAWinningRow(GameContext game)
