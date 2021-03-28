@@ -8,7 +8,7 @@ namespace TicTacToe2D
     {
         // handles the win and draw conditions
         // horizontal, vertical and both diagonal winning conditions
-        // plus if the board is full, the game  is drawn
+        // plus if the board is full, the game is drawn
         // should this be an interface?
         // pass in gamecontext return bool
         public GamePredicate()
@@ -41,7 +41,6 @@ namespace TicTacToe2D
             {
                 fieldContents = FieldContents.y;
             }
-
             return fieldContents;
         }
 
@@ -52,7 +51,6 @@ namespace TicTacToe2D
                 count++;
                 keys.Add(key.Y);
             }
-
             return count;
         }
 

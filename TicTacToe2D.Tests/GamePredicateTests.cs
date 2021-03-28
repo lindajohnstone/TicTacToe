@@ -78,6 +78,5 @@ namespace TicTacToe2D.Tests
             Assert.Equal(false, win.IsAWinningColumn(board, Player.X));
             Assert.Equal(false, win.IsAWinningColumn(board, Player.O));
         }
-        
     }
 }
