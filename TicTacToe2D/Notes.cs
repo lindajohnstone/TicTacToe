@@ -10,6 +10,7 @@ namespace TicTacToe2D
             If predicate uses board & player & so does gamecontext - coupled? or cause stack overflow
             Validations 'linked' to ConsoleInput
             Is Turn class named correctly?
+            Does GameContext need Validations & GamePredicate?
 
                 Class               Methods / Properties                            Used by
             1/  Player              - enum of Player values                         - GamePredicate
@@ -21,14 +22,14 @@ namespace TicTacToe2D
                                                                                     - Field  
             3/  Position            - Equals                                        - Board
                                     - GetHashCode                                   - Turn
-                                    - OperatorOverride
-                                    - operator ==
-                                    - operator !=
-            4/  IInput
+                                    - OperatorOverride                              
+                                    - operator ==                                   
+                                    - operator !=                                   
+            4/  IInput                      
             5/  IOutput
             6/  ConsoleInput        - ConsoleReadLine
                                     - ConsoleReadKey    - has player pressed 'q'
-            7/  ConsoleOutput       - ConsoleWriteLine
+            7/  ConsoleOutput       - ConsoleWriteLine                              
                                     - ConsoleWrite
                                     - DrawBoard
             8/  Controller          - Initialise
@@ -47,7 +48,7 @@ namespace TicTacToe2D
                                     - property FieldContents
             13/ Turn                - property Player
                                     - property Position       
-            14/ Board               - property Dictionary
+            14/ Board               - property Dictionary                           - GamePredicate
                                     - property int Width
                                     - property int Height
         */
