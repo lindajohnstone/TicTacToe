@@ -17,34 +17,23 @@ namespace TicTacToe2D
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
             Width = boardSize;
             Height = boardSize;
-            FieldDictionary = new Dictionary<Position, FieldContents>();
-            for (int row = 0; row < Width; row++)
-            {
-                for (int column = 0; column < Height; column++)
-                {
-                    var position = new Position(row, column);
-                    SetField(position, FieldContents.empty);
-                }
-            }
-            //FieldDictionary = BoardInitialiser(boardSize);
+            FieldDictionary = BoardInitializer(boardSize);
             WinningLines = CreateWinningLines(boardSize);
         }
 
-        // public static Dictionary<Position, FieldContents> BoardInitialiser(int boardSize)
-        // {
-        //     var Width = boardSize;
-        //     var Height = boardSize;
-        //     var FieldDictionary = new Dictionary<Position, FieldContents>();
-        //     for (int row = 0; row < Width; row++)
-        //     {
-        //         for (int column = 0; column < Height; column++)
-        //         {
-        //             var position = new Position(row, column);
-        //             SetField(position, FieldContents.empty);
-        //         }
-        //     }
-        //     return FieldDictionary;
-        // }
+        public static Dictionary<Position, FieldContents> BoardInitializer(int boardSize)
+        {
+            var FieldDictionary = new Dictionary<Position, FieldContents>();
+            for (int row = 0; row < boardSize; row++)
+            {
+                for (int column = 0; column < boardSize; column++)
+                {
+                    var position = new Position(row, column);
+                    FieldDictionary.Add(position, FieldContents.empty);
+                }
+            }
+            return FieldDictionary;
+        }
 
         private static List<List<Position>> CreateWinningLines(int boardSize)
         {
