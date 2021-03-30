@@ -17,12 +17,12 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, result.Height);
         }
 
-        // [Fact]
+        // [Fact] //TODO: failing
         // public void Board()
         // {
         //     var expected = new Board(3);
         //     var result = new Board(3);
-        //     Assert.Equal(expected, result);
+        //     Assert.True(expected.Equals(result));
         // }
 
         [Theory]
@@ -60,10 +60,10 @@ namespace TicTacToe2D.Tests
         //     Assert.Equal("Position X coordinate is out of range", result.Message);
         // }
 
-        // [Fact]
+        // [Fact]// TODO: failing
         // public void Board_dictionary_count()
         // {
-        //     var result = new Board(3).;
+        //     var result = new Board(3).Dictionary;
         //     Assert.Equal(9, result.Count);
         // }
 
@@ -73,7 +73,7 @@ namespace TicTacToe2D.Tests
             var pos1 = new Position(0, 0);
             var pos2 = new Position(1, 0);
             var pos3 = new Position(2, 0);
-            var positions = new[] { pos1, pos2, pos3 };
+            var positions = new[] { new Position(0, 0), pos2, pos3 };
             var count = 0;
             Assert.Equal(pos1.Y, pos2.Y);
             foreach (var position in positions)

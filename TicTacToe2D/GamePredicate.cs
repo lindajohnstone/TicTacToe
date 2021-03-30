@@ -8,56 +8,35 @@ namespace TicTacToe2D
     {
         // handles the win and draw conditions
         // horizontal, vertical and both diagonal winning conditions
-        // plus if the board is full, the game is drawn
+        // plus if the board is full, the game  is drawn
         // should this be an interface?
         // pass in gamecontext return bool
         public GamePredicate()
         {
             
         }
-        public bool IsAWinningColumn(Board board, Player player)
+        public bool IsAWinningColumn(Board board)
         {
-            var values = board.Dictionary;
-            var count = 0;
-            var keys = new List<int>();
-            foreach (KeyValuePair<Position, FieldContents> value in values)
+            for (int column = 0; column < board.Height; column++)
             {
-                var key = value.Key;
-                var fieldContents = new FieldContents();
-                fieldContents = GetFieldContents(player);
-                count = GetKeys(count, keys, value, key, fieldContents);
+                //var row = 0;
+                var position1 = new Position(0, column);
+                var position2 = new Position(1, column);
+                var position3 = new Position(2, column);
+                if (board.GetField(position1).Equals(board.GetField(position2)) && board.GetField(position2).Equals(board.GetField(position3)))
+                {
+                    return AreAllSame(position1, position2, position3);
+                }
             }
-            return Check(count, keys);
+            return false;
+            //for (int )
+            // select all positions with Y == 0
+            // new method AreAllSame to determine if all have same fieldcontents
         }
 
-        private static FieldContents GetFieldContents(Player player)
+        public bool AreAllSame(Position position1, Position position2, Position position3)
         {
-            FieldContents fieldContents;
-            if (player == Player.X)
-            {
-                fieldContents = FieldContents.x;
-            }
-            else
-            {
-                fieldContents = FieldContents.y;
-            }
-            return fieldContents;
-        }
-
-        private static int GetKeys(int count, List<int> keys, KeyValuePair<Position, FieldContents> value, Position key, FieldContents fieldContents)
-        {
-            if (value.Value == fieldContents)
-            {
-                count++;
-                keys.Add(key.Y);
-            }
-            return count;
-        }
-
-        private static bool Check(int count, List<int> keys)
-        {
-            var numKeys = keys.Distinct();
-            if (count == 3 && numKeys.Count() == 1)
+            if (position1.Y == position2.Y && position2.Y == position3.Y)
             {
                 return true;
             }

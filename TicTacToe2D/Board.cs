@@ -6,7 +6,7 @@ namespace TicTacToe2D
     public class Board
     {
         // container of fields
-        private Dictionary<Position, FieldContents> Dictionary { get; set; }
+        private Dictionary<Position, FieldContents> Set { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -15,7 +15,7 @@ namespace TicTacToe2D
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
             Width = boardSize;
             Height = boardSize;
-            Dictionary = new Dictionary<Position, FieldContents>();
+            Set = new Dictionary<Position, FieldContents>();
             for (int row = 0; row < Width; row++)
             {
                 for (int column = 0; column < Height; column++)
@@ -29,13 +29,13 @@ namespace TicTacToe2D
         public FieldContents GetField(Position position)
         {
             EnsureValidPosition(position);
-            return this.Dictionary[position];
+            return this.Set[position];
         }
 
         public void SetField(Position position, FieldContents fieldContents)
         {
             EnsureValidPosition(position);
-            this.Dictionary[position] = fieldContents;
+            this.Set[position] = fieldContents;
         }
 
         private void EnsureValidPosition(Position position)
