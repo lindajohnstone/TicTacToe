@@ -26,10 +26,29 @@ namespace TicTacToe2D
                     SetField(position, FieldContents.empty);
                 }
             }
+            //FieldDictionary = BoardInitialiser(boardSize);
+            WinningLines = CreateWinningLines(boardSize);
         }
 
-        private void InitializeWinningLines(int boardSize)
+        // public static Dictionary<Position, FieldContents> BoardInitialiser(int boardSize)
+        // {
+        //     var Width = boardSize;
+        //     var Height = boardSize;
+        //     var FieldDictionary = new Dictionary<Position, FieldContents>();
+        //     for (int row = 0; row < Width; row++)
+        //     {
+        //         for (int column = 0; column < Height; column++)
+        //         {
+        //             var position = new Position(row, column);
+        //             SetField(position, FieldContents.empty);
+        //         }
+        //     }
+        //     return FieldDictionary;
+        // }
+
+        private static List<List<Position>> CreateWinningLines(int boardSize)
         {
+            var WinningLines = new List<List<Position>>();
             // add all winning rows
             for (var y = 0; y < boardSize; y++)
             {
@@ -41,7 +60,17 @@ namespace TicTacToe2D
                 WinningLines.Add(line);
             }
             // add all winning columns
-            // add all winning diagonals            
+            for (var x = 0; x < boardSize; x++)
+            {
+                var line = new List<Position>();
+                for (var y = 0; y < boardSize; y++)
+                {
+                    line.Add(new Position(x, y));
+                }
+                WinningLines.Add(line);
+            }
+                // add all winning diagonals 
+                return WinningLines;
         }
 
         public FieldContents GetField(Position position)
@@ -66,6 +95,11 @@ namespace TicTacToe2D
             {
                 throw new ArgumentException("Position Y coordinate is out of range");
             }
+        }
+
+        public List<List<Position>> GetWinningLines()
+        {
+            return WinningLines;
         }
     }
 }
