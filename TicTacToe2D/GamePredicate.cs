@@ -20,7 +20,7 @@ namespace TicTacToe2D
             for (int column = 0; column < board.Height; column++)
             {
                 //var row = 0;
-                var position1 = new Position(0, column);
+                var position1 = new Position(0, column);//TODO: more efficient way to find these
                 var position2 = new Position(1, column);
                 var position3 = new Position(2, column);
                 if (board.GetField(position1).Equals(board.GetField(position2)) && board.GetField(position2).Equals(board.GetField(position3)))
@@ -29,9 +29,16 @@ namespace TicTacToe2D
                 }
             }
             return false;
-            //for (int )
-            // select all positions with Y == 0
-            // new method AreAllSame to determine if all have same fieldcontents
+        }
+
+        public bool IsWinningBoard(Board board, List<List<Position>> winningLines, FieldContents fieldContents)
+        {
+            return winningLines.Any((line) => IsWinningLine(board, fieldContents, line));
+        }
+
+        public bool IsWinningLine(Board board, FieldContents fieldContents, List<Position> positions)
+        {
+            return positions.All((x) => board.GetField(x) == fieldContents);
         }
 
         public bool AreAllSame(Position position1, Position position2, Position position3)

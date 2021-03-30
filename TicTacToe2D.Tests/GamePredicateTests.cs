@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace TicTacToe2D.Tests
@@ -87,6 +88,24 @@ namespace TicTacToe2D.Tests
             board.SetField(new Position(2, 1), FieldContents.x);
             board.SetField(new Position(2, 2), FieldContents.y);
             Assert.Equal(true, win.IsAWinningColumn(board));
+        }
+
+        [Fact]
+        public void GamePredicate_IsWinningBoard()
+        {
+            var win = new GamePredicate();
+            var board = new Board(3);
+            var winningList = new List<Position>();
+            winningList.Add(new Position(0, 0));
+            winningList.Add(new Position(1, 0));
+            winningList.Add(new Position(2, 0));
+            board.SetField(new Position(0, 0), FieldContents.x);
+            board.SetField(new Position(1, 0), FieldContents.x);
+            board.SetField(new Position(2, 0), FieldContents.x);
+            var winList = new List<List<Position>>();
+            winList.Add(winningList);
+            var result = win.IsWinningBoard(board, winList, FieldContents.x);
+            Assert.Equal(true, result);
         }
     }
 }

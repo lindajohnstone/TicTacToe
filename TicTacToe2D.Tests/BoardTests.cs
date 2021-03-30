@@ -42,23 +42,23 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, result);
         }
 
-        // [Fact] //TODO: throws a keynotfoundexception
-        // public void Board_invalid_Y_position()
-        // {
-        //     var position = new Position(1, 3);
-        //     var board = new Board(3);
-        //     var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
-        //     Assert.Equal("Position Y coordinate is out of range", result.Message);
-        // }
+        [Fact] //TODO: failing
+        public void Board_invalid_Y_position()
+        {
+            var position = new Position(1, 3);
+            var board = new Board(3);
+            var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
+            Assert.Equal("Position Y coordinate is out of range", result.Message);
+        }
 
-        // [Fact]//TODO: throws a keynotfoundexception
-        // public void Board_invalid_X_position()
-        // {
-        //     var position = new Position(1, 3);
-        //     var board = new Board(3);
-        //     var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
-        //     Assert.Equal("Position X coordinate is out of range", result.Message);
-        // }
+        [Fact]//TODO: failing
+        public void Board_invalid_X_position()
+        {
+            var position = new Position(6, 0);
+            var board = new Board(3);
+            var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
+            Assert.Equal("Position X coordinate is out of range", result.Message);
+        }
 
         // [Fact]// TODO: failing
         // public void Board_dictionary_count()
