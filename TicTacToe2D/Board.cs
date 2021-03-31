@@ -15,10 +15,43 @@ namespace TicTacToe2D
         public Board(int boardSize)
         {
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
+            Initialize(boardSize, BoardInitializer(boardSize));
+        }
+
+        public Board(FieldContents[][] sourceData)
+        {
+            Initialize(sourceData.Length, BoardInitializer(sourceData));
+        }
+
+        public Board(Board sourceBoard)
+        {
+            Initialize(sourceBoard.Width, sourceBoard.FieldDictionary);
+        }
+
+        public void Initialize(int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
+        {
             Width = boardSize;
             Height = boardSize;
-            FieldDictionary = BoardInitializer(boardSize);
+            FieldDictionary = fieldDictionary;
             WinningLines = CreateWinningLines(boardSize);
+        }
+
+        public static Dictionary<Position, FieldContents> BoardInitializer(FieldContents[][] sourceData)
+        {
+            var boardSize = sourceData.Length;
+            var FieldDictionary = new Dictionary<Position, FieldContents>();
+            for (int row = 0; row < boardSize; row++)
+            {
+                if (sourceData[row].Length != boardSize) {
+                    throw new ArgumentOutOfRangeException("sourceData should be a square array");
+                }
+                for (int column = 0; column < boardSize; column++)
+                {
+                    var position = new Position(row, column);
+                    FieldDictionary.Add(position, sourceData[row][column]);
+                }
+            }
+            return FieldDictionary;
         }
 
         public static Dictionary<Position, FieldContents> BoardInitializer(int boardSize)
