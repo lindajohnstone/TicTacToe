@@ -6,7 +6,7 @@ namespace TicTacToe2D.Tests
 {
     public class GamePredicateTests
     {
-        [Theory]
+        [Theory] //TODO: update to new format
         [InlineData(0, 0, 1, 0, 2, 0, true)]
         [InlineData(0, 1, 1, 1, 2, 1, true)]
         [InlineData(0, 2, 1, 2, 2, 2, true)]
@@ -24,7 +24,16 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, result);
         }
 
-        [Theory]
+        [Fact]
+        public void IsWinningBoard_true()
+        {
+            var board = new Board(SourceData.BoardIsWinningBoardTrue());
+            var win = new GamePredicate();
+            Assert.True(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+            Assert.True(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
+        }
+
+        [Theory]//TODO: update to new format
         [InlineData(0, 0, 1, 0, 2, 0, true)]
         [InlineData(0, 1, 1, 1, 2, 1, true)]
         [InlineData(0, 2, 1, 2, 2, 2, true)]
@@ -43,54 +52,42 @@ namespace TicTacToe2D.Tests
         }
         
         [Fact]
-        public void GamePredicate_Is_a_winning_column_not_either_player()
+        public void GamePredicate_neither_player_wins()
         {
             var win = new GamePredicate();
-            var board = new Board(3);
-            board.SetField(new Position(0, 0), FieldContents.x);
-            board.SetField(new Position(0, 1), FieldContents.y);
-            board.SetField(new Position(0, 2), FieldContents.x);
-            board.SetField(new Position(1, 1), FieldContents.x);
-            board.SetField(new Position(1, 2), FieldContents.y);
-            board.SetField(new Position(2, 0), FieldContents.y);
-            board.SetField(new Position(2, 1), FieldContents.x);
-            board.SetField(new Position(2, 2), FieldContents.y);
-            Assert.Equal(false, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-            Assert.Equal(false, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
+            var board = new Board(SourceData.BoardNeitherXNorYWins());
+            Assert.False(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+            Assert.False(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
         }
 
         [Fact]
         public void GamePredicate_Is_a_winning_column_3_PlayerX_3PlayerY()
         {
             var win = new GamePredicate();
-            var board = new Board(3);
-            board.SetField(new Position(0, 0), FieldContents.x);
-            board.SetField(new Position(0, 1), FieldContents.y);
-            board.SetField(new Position(0, 2), FieldContents.x);
-            board.SetField(new Position(1, 1), FieldContents.x);
-            board.SetField(new Position(1, 2), FieldContents.y);
-            board.SetField(new Position(2, 0), FieldContents.y);
-            Assert.Equal(false, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-            Assert.Equal(false, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
+            var board = new Board(SourceData.BoardYWinsXWins());
+            Assert.False(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+            Assert.False(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
         }
 
         [Fact]
-        public void GamePredicate_Is_a_winning_column_v4()
+        public void GamePredicate_Y_wins_X_loses()
         {
             var win = new GamePredicate();
-            var board = new Board(3);
-            board.SetField(new Position(0, 0), FieldContents.x);
-            board.SetField(new Position(0, 2), FieldContents.y);
-            board.SetField(new Position(1, 0), FieldContents.x);
-            board.SetField(new Position(1, 1), FieldContents.y);
-            board.SetField(new Position(1, 2), FieldContents.y);
-            board.SetField(new Position(2, 1), FieldContents.x);
-            board.SetField(new Position(2, 2), FieldContents.y);
-            Assert.Equal(false, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-            Assert.Equal(true, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
+            var board = new Board(SourceData.BoardYWinsXLoses());
+            Assert.False(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+            Assert.True(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
         }
 
-        [Theory]
+        [Fact]
+        public void IsWinningBoard_false()
+        {
+            var board = new Board(SourceData.BoardIsWinningBoardFalse());
+            var win = new GamePredicate();
+            Assert.False(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+            Assert.False(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
+        }
+
+        [Theory]//TODO: update to new format
         [InlineData(0, 0, 1, 0, 2, 0, FieldContents.x, true)]
         [InlineData(0, 0, 1, 0, 2, 0, FieldContents.y, false)]
         public void GamePredicate_IsWinningBoard_true(int x1, int y1, int x2, int y2, int x3, int y3, FieldContents fieldContents, bool expected)
@@ -108,7 +105,7 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, result);
         }
 
-        [Fact]
+        [Fact]//TODO: update to new format
         public void GamePredicate_IsWinningBoard_false()
         {
             var win = new GamePredicate();
@@ -121,7 +118,21 @@ namespace TicTacToe2D.Tests
             board.SetField(new Position(1, 0), FieldContents.y);
             board.SetField(new Position(2, 0), FieldContents.y);
             var result = win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
-            Assert.Equal(false, result);
+            Assert.False(result);
+        }
+        [Fact]
+        public void IsWinningBoard_X_wins()
+        {
+            var board = new Board(SourceData.BoardIsWinningBoardXWinningColumn());
+            var win = new GamePredicate();
+            Assert.True(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+        }
+        [Fact]
+        public void IsWinningBoard_Y_wins()
+        {
+            var board = new Board(SourceData.BoardIsWinningBoardYWinningColumn());
+            var win = new GamePredicate();
+            Assert.True(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
         }
     }
 }

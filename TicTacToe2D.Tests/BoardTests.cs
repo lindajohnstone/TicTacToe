@@ -1,50 +1,10 @@
 using System;
 using Xunit;
-using FluentAssertions;
-using System.Collections.Generic;
 
 namespace TicTacToe2D.Tests
 {
     public class BoardTests
     {
-        public Board BoardIsWinningBoardTrue() {
-            var initData = new FieldContents[][] {
-                new []{FieldContents.x, FieldContents.y, FieldContents.empty},
-                new []{FieldContents.x, FieldContents.y, FieldContents.empty},
-                new []{FieldContents.x, FieldContents.y, FieldContents.empty}
-            };
-            return new Board(initData);
-        }
-        
-        public Board BoardIsWinningBoardFalse() {
-            var initData = new FieldContents[][] {
-                new []{FieldContents.x,     FieldContents.x,     FieldContents.empty},
-                new []{FieldContents.y,     FieldContents.empty, FieldContents.y},
-                new []{FieldContents.empty, FieldContents.x,     FieldContents.y}
-            };
-            return new Board(initData);
-        }
-
-        public Board BoardIsWinningBoardXWinningColumn()
-        {
-            var initData = new FieldContents[][] {
-                new []{FieldContents.x, FieldContents.y, FieldContents.empty},
-                new []{FieldContents.x, FieldContents.y, FieldContents.empty},
-                new []{FieldContents.x, FieldContents.empty, FieldContents.empty}
-            };
-            return new Board(initData);
-        }
-
-        public Board BoardIsWinningBoardYWinningColumn()
-        {
-            var initData = new FieldContents[][] {
-                new []{FieldContents.x,     FieldContents.y, FieldContents.empty},
-                new []{FieldContents.x,     FieldContents.y, FieldContents.x},
-                new []{FieldContents.empty, FieldContents.y, FieldContents.empty}
-            };
-            return new Board(initData);
-        }
-
         [Theory]
         [InlineData(3)]
         public void Board_dimensions(int dimensionLength)
@@ -68,28 +28,10 @@ namespace TicTacToe2D.Tests
         public void Board_has_valid_fields(int x, int y, FieldContents expected)
         {
             var position = new Position(x, y);
-            var result = BoardIsWinningBoardTrue().GetField(position);
+            var result = SourceData.BoardIsWinningBoardTrue().GetField(position);
             Assert.Equal(expected, result);
         }
-
-        [Fact]
-        public void IsWinningBoard_true()
-        {
-            var board = new Board(BoardIsWinningBoardTrue());
-            var win = new GamePredicate();
-            Assert.Equal(true, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-            Assert.Equal(true, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
-        }
-
-        [Fact]
-        public void IsWinningBoard_false()
-        {
-            var board = new Board(BoardIsWinningBoardFalse());
-            var win = new GamePredicate();
-            Assert.Equal(false, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-            Assert.Equal(false, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
-        }
-
+        
         [Fact] 
         public void Board_invalid_Y_position()
         {
@@ -108,23 +50,7 @@ namespace TicTacToe2D.Tests
             Assert.Equal("Position X coordinate is out of range", result.Message);
         }
 
-        [Fact]
-        public void IsWinningBoard_X_wins()
-        {
-            var board = new Board(BoardIsWinningBoardXWinningColumn());
-            var win = new GamePredicate();
-            Assert.Equal(true, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-        }
-
-        [Fact]
-        public void IsWinningBoard_Y_wins()
-        {
-            var board = new Board(BoardIsWinningBoardYWinningColumn());
-            var win = new GamePredicate();
-            Assert.Equal(true, win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
-        }
-
-        [Fact]
+        [Fact]//TODO: update to new format or delete??
         public void Board_position_Y()
         {
             var pos1 = new Position(0, 0);
@@ -141,6 +67,25 @@ namespace TicTacToe2D.Tests
                 }
             }
             Assert.Equal(3, count);
+        }
+
+        [Fact]
+        public void Board_is_initialized()//TODO: failing
+        {
+            var board = new Board(SourceData.BoardIsInitialized());
+            Assert.True(board == (new Board(3)));
+            Assert.True(board.Equals(new Board(3)));
+        }
+
+        [Fact]
+        public void Board_X_MovePlayer()//TODO: failing
+        {
+            var board = new Board(SourceData.BoardIsInitialized());
+            var position = new Position(0, 1);
+            var fieldContents = FieldContents.x;
+            var result = board.MovePlayer(position, fieldContents);
+            var expected = SourceData.BoardIsWinningBoardTrue() == result;
+            Assert.True(expected);
         }
     }
 }

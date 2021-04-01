@@ -1,5 +1,6 @@
     using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToe2D
 {
@@ -9,6 +10,7 @@ namespace TicTacToe2D
         private Dictionary<Position, FieldContents> FieldDictionary { get; set; }
 
         private List<List<Position>> WinningLines { get; set; }
+        private List<Position> AllPositions { get; set; }
         public int Width { get; private set; }
         public int Height { get; private set; }
 
@@ -34,6 +36,7 @@ namespace TicTacToe2D
             Height = boardSize;
             FieldDictionary = fieldDictionary;
             WinningLines = CreateWinningLines(boardSize);
+            AllPositions = CreateAllPositions(boardSize);
         }
 
         public static Dictionary<Position, FieldContents> BoardInitializer(FieldContents[][] sourceData)
@@ -42,7 +45,8 @@ namespace TicTacToe2D
             var FieldDictionary = new Dictionary<Position, FieldContents>();
             for (int row = 0; row < boardSize; row++)
             {
-                if (sourceData[row].Length != boardSize) {
+                if (sourceData[row].Length != boardSize) 
+                {
                     throw new ArgumentOutOfRangeException("sourceData should be a square array");
                 }
                 for (int column = 0; column < boardSize; column++)
@@ -72,27 +76,46 @@ namespace TicTacToe2D
         {
             var WinningLines = new List<List<Position>>();
             // add all winning rows
-            for (var y = 0; y < boardSize; y++)
+            for (var column = 0; column < boardSize; column++)
             {
                 var line = new List<Position>();
-                for (var x = 0; x < boardSize; x++)
+                for (var row = 0; row < boardSize; row++)
                 {
-                    line.Add(new Position(x, y));
+                    line.Add(new Position(row, column));
                 }
                 WinningLines.Add(line);
             }
             // add all winning columns
-            for (var x = 0; x < boardSize; x++)
+            for (var row = 0; row < boardSize; row++)
             {
                 var line = new List<Position>();
-                for (var y = 0; y < boardSize; y++)
+                for (var column = 0; column < boardSize; column++)
                 {
-                    line.Add(new Position(x, y));
+                    line.Add(new Position(row, column));
                 }
                 WinningLines.Add(line);
             }
-                // add all winning diagonals 
-                return WinningLines;
+            // add all winning diagonals //TODO: 
+            return WinningLines;
+        }
+
+        private static List<Position> CreateAllPositions(int boardSize)
+        {
+            var AllPositions = new List<Position>();
+            for (var row = 0; row < boardSize; row++)
+            {
+                for (var column = 0; column < boardSize; column++)
+                {
+                    AllPositions.Add(new Position(row, column));
+                }
+            }
+            return AllPositions; 
+        }
+        public Board MovePlayer(Position position, FieldContents fieldContents)
+        {
+            var board = new Board(this);
+            board.SetField(position, fieldContents);
+            return board;
         }
 
         public FieldContents GetField(Position position)
@@ -122,6 +145,38 @@ namespace TicTacToe2D
         public List<List<Position>> GetWinningLines()
         {
             return WinningLines;
+        }
+        public static bool OperatorOverride(Board obj1, Board obj2)
+        {
+            
+            if (obj1.Width == obj2.Width && obj1.Height == obj2.Height)
+            {
+                return obj1.GetAllPositions().All((x) => obj1.GetField(x) == obj2.GetField(x));
+            }
+            return false;
+        }
+
+        private List<Position> GetAllPositions()
+        {
+            return AllPositions;
+        }
+
+        public static bool operator ==(Board obj1, Board obj2 )
+        {
+            if (OperatorOverride(obj1, obj2))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool operator !=(Board obj1, Board obj2)
+        {
+            if (!OperatorOverride(obj1, obj2))
+            {
+                return false;
+            }
+            return true;
         }
     }
 }
