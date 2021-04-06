@@ -148,7 +148,6 @@ namespace TicTacToe2D
         }
         public static bool OperatorOverride(Board obj1, Board obj2)
         {
-            
             if (obj1.Width == obj2.Width && obj1.Height == obj2.Height)
             {
                 return obj1.GetAllPositions().All((x) => obj1.GetField(x) == obj2.GetField(x));
@@ -159,6 +158,26 @@ namespace TicTacToe2D
         private List<Position> GetAllPositions()
         {
             return AllPositions;
+        }
+
+        public override bool Equals(object obj)
+        {
+            /*
+                obj Width == board.Width
+                obj Height == board.Height
+                obj AllPositions == board.AllPositions
+            */
+            return obj is Board board &&
+                   EqualityComparer<Dictionary<Position, FieldContents>>.Default.Equals(FieldDictionary, board.FieldDictionary) &&
+                   EqualityComparer<List<List<Position>>>.Default.Equals(WinningLines, board.WinningLines) &&
+                   EqualityComparer<List<Position>>.Default.Equals(AllPositions, board.AllPositions) &&
+                   Width == board.Width &&
+                   Height == board.Height;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
         }
 
         public static bool operator ==(Board obj1, Board obj2 )
