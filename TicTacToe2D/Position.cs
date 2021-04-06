@@ -31,6 +31,11 @@ namespace TicTacToe2D
             }
         }
 
+        public static Position operator +(Position obj1, Position obj2)
+        {
+            return new Position((obj1.X + obj2.X), (obj1.Y + obj2.Y));
+        }
+
         public override int GetHashCode()
         {
             return X ^ Y;

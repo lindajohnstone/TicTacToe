@@ -97,5 +97,26 @@ namespace TicTacToe2D.Tests
             };
             return new Board(initData);
         }
+        public static Board BoardXWinningTopRow()
+        {
+            var initData = new FieldContents[][]
+            {
+                new []  {FieldContents.x,       FieldContents.x,    FieldContents.x},
+                new []  {FieldContents.empty,   FieldContents.y,    FieldContents.y},
+                new []  {FieldContents.y,       FieldContents.x,    FieldContents.y}
+            };
+            return new Board(initData);
+        }
+
+        public static Board BoardYWinningCentreRow()
+        {
+            var initData = new FieldContents[][]
+            {
+                new [] {FieldContents.y,    FieldContents.x,    FieldContents.x},
+                new []{FieldContents.y,     FieldContents.y,    FieldContents.y},
+                new []{FieldContents.x,     FieldContents.x,    FieldContents.empty}
+            };
+            return new Board(initData);
+        }
     }
 }

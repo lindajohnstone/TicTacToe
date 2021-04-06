@@ -75,28 +75,42 @@ namespace TicTacToe2D
         private static List<List<Position>> CreateWinningLines(int boardSize)
         {
             var WinningLines = new List<List<Position>>();
-            // add all winning rows
-            for (var column = 0; column < boardSize; column++)
+            // // add all winning rows
+            for (var row = 0; row < boardSize; row++)
             {
-                var line = new List<Position>();
-                for (var row = 0; row < boardSize; row++)
-                {
-                    line.Add(new Position(row, column));
-                }
+                var line = CreateWinningLine(new Position(0, row), new Position(0, 1), boardSize);
                 WinningLines.Add(line);
             }
             // add all winning columns
-            for (var row = 0; row < boardSize; row++)
+            for (var column = 0; column < boardSize; column++)
             {
-                var line = new List<Position>();
-                for (var column = 0; column < boardSize; column++)
-                {
-                    line.Add(new Position(row, column));
-                }
+                var line = CreateWinningLine(new Position(column, 0), new Position(1, 0), boardSize);
                 WinningLines.Add(line);
             }
-            // add all winning diagonals //TODO: 
+            // add all winning diagonals 
+            for (var row = 0; row < boardSize; row++)
+            {
+                var line = CreateWinningLine(new Position(0, row), new Position(1, 1), boardSize);
+                WinningLines.Add(line);
+            }
+            for (var row = 0; row < boardSize; row++)
+            {
+                var line = CreateWinningLine(new Position(0, row), new Position(-1, 1), boardSize);
+                WinningLines.Add(line);
+            }
             return WinningLines;
+        }
+
+        private static List<Position> CreateWinningLine(Position start, Position delta, int boardSize)
+        {
+            var line = new List<Position>();
+            var currentPosition = start;
+            for (var i = 0; i < boardSize; i++)
+            {
+                line.Add(currentPosition);
+                currentPosition += delta;
+            }
+            return line;
         }
 
         private static List<Position> CreateAllPositions(int boardSize)
@@ -146,6 +160,7 @@ namespace TicTacToe2D
         {
             return WinningLines;
         }
+
         public static bool OperatorOverride(Board obj1, Board obj2)
         {
             if (obj1.Width == obj2.Width && obj1.Height == obj2.Height)
@@ -158,26 +173,6 @@ namespace TicTacToe2D
         private List<Position> GetAllPositions()
         {
             return AllPositions;
-        }
-
-        public override bool Equals(object obj)
-        {
-            /*
-                obj Width == board.Width
-                obj Height == board.Height
-                obj AllPositions == board.AllPositions
-            */
-            return obj is Board board &&
-                   EqualityComparer<Dictionary<Position, FieldContents>>.Default.Equals(FieldDictionary, board.FieldDictionary) &&
-                   EqualityComparer<List<List<Position>>>.Default.Equals(WinningLines, board.WinningLines) &&
-                   EqualityComparer<List<Position>>.Default.Equals(AllPositions, board.AllPositions) &&
-                   Width == board.Width &&
-                   Height == board.Height;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
         }
 
         public static bool operator ==(Board obj1, Board obj2 )
@@ -196,6 +191,24 @@ namespace TicTacToe2D
                 return false;
             }
             return true;
+        }
+        
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            else
+            {
+                return OperatorOverride(this, (Board)obj);
+            }
+        }
+
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
         }
     }
 }

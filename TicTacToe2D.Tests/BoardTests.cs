@@ -73,8 +73,8 @@ namespace TicTacToe2D.Tests
         public void Board_is_initialized()
         {
             var board = new Board(SourceData.BoardIsInitialized());
-            //Assert.True(board == (new Board(3)));
-            Assert.True(board.Equals(new Board(3)));//TODO: failing
+            Assert.True(board == (new Board(3)));
+            Assert.True(board.Equals(new Board(3)));
         }
 
         [Fact]

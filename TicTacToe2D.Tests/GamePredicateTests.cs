@@ -7,8 +7,6 @@ namespace TicTacToe2D.Tests
     public class GamePredicateTests
     {
         [Theory] //TODO: update to new format
-        [InlineData(0, 0, 1, 0, 2, 0, true)]
-        [InlineData(0, 1, 1, 1, 2, 1, true)]
         [InlineData(0, 2, 1, 2, 2, 2, true)]
         public void GamePredicate_Is_a_winning_column_Player_X(int x1, int y1, int x2, int y2, int x3, int y3, bool expected)
         {
@@ -22,6 +20,23 @@ namespace TicTacToe2D.Tests
             board.SetField(pos3, FieldContents.x);
             var result = win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
             Assert.Equal(expected, result);
+        }
+        [Fact]
+        public void BoardYWinningCentreRow()
+        {
+            var board = new Board(SourceData.BoardYWinningCentreRow());
+            var win = new GamePredicate();
+            var result = win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y);
+            Assert.True(result);
+        }
+        
+        [Fact]
+        public void BoardXWinningTopRow()
+        {
+            var board = new Board(SourceData.BoardXWinningTopRow());
+            var win = new GamePredicate();
+            var result = win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
+            Assert.True(result);
         }
 
         [Fact]
