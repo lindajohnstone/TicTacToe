@@ -75,29 +75,28 @@ namespace TicTacToe2D
         private static List<List<Position>> CreateWinningLines(int boardSize)
         {
             var WinningLines = new List<List<Position>>();
-            // // add all winning rows
+            // add all winning rows
             for (var row = 0; row < boardSize; row++)
             {
-                var line = CreateWinningLine(new Position(0, row), new Position(0, 1), boardSize);
+                var line = CreateWinningLine(new Position(0, row), new Position(1, 0), boardSize);
                 WinningLines.Add(line);
             }
+
             // add all winning columns
             for (var column = 0; column < boardSize; column++)
             {
-                var line = CreateWinningLine(new Position(column, 0), new Position(1, 0), boardSize);
+                var line = CreateWinningLine(new Position(column, 0), new Position(0, 1), boardSize);
                 WinningLines.Add(line);
             }
+            
             // add all winning diagonals 
-            for (var row = 0; row < boardSize; row++)
-            {
-                var line = CreateWinningLine(new Position(0, row), new Position(1, 1), boardSize);
-                WinningLines.Add(line);
-            }
-            for (var row = 0; row < boardSize; row++)
-            {
-                var line = CreateWinningLine(new Position(0, row), new Position(-1, 1), boardSize);
-                WinningLines.Add(line);
-            }
+            
+            var line1 = CreateWinningLine(new Position(0, 0), new Position(1, 1), boardSize);
+            WinningLines.Add(line1);
+        
+            var line2 = CreateWinningLine(new Position((boardSize - 1), 0), new Position(-1, 1), boardSize);
+            WinningLines.Add(line2);
+           
             return WinningLines;
         }
 

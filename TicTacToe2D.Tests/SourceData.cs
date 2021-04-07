@@ -92,7 +92,7 @@ namespace TicTacToe2D.Tests
             var initData = new FieldContents[][]
             {
                 new [] {FieldContents.x,    FieldContents.y,    FieldContents.x},
-                new []{FieldContents.empty, FieldContents.x,        FieldContents.y},
+                new []{FieldContents.empty, FieldContents.x,    FieldContents.y},
                 new []{FieldContents.y,     FieldContents.x,    FieldContents.y}
             };
             return new Board(initData);
@@ -112,9 +112,42 @@ namespace TicTacToe2D.Tests
         {
             var initData = new FieldContents[][]
             {
-                new [] {FieldContents.y,    FieldContents.x,    FieldContents.x},
-                new []{FieldContents.y,     FieldContents.y,    FieldContents.y},
-                new []{FieldContents.x,     FieldContents.x,    FieldContents.empty}
+                new []  {FieldContents.y,   FieldContents.x,    FieldContents.x},
+                new []  {FieldContents.y,   FieldContents.y,    FieldContents.y},
+                new []  {FieldContents.x,   FieldContents.x,    FieldContents.empty}
+            };
+            return new Board(initData);
+        }
+
+        public static Board BoardWinningRow3()
+        {
+            var initData = new FieldContents[][]
+            {
+                new []  {FieldContents.empty, FieldContents.x,    FieldContents.empty},
+                new []  {FieldContents.y,     FieldContents.y,    FieldContents.y},
+                new []  {FieldContents.x,     FieldContents.x,    FieldContents.x}
+            };
+            return new Board(initData);
+        }
+
+        public static Board BoardWinningDiagonalLR()
+        {
+            var initData = new FieldContents[][]
+            {
+                new []  {FieldContents.x,   FieldContents.y,    FieldContents.empty},
+                new []  {FieldContents.y,   FieldContents.x,    FieldContents.y},
+                new []  {FieldContents.x,   FieldContents.y,    FieldContents.x}
+            };
+            return new Board(initData);
+        }
+
+        public static Board BoardWinningDiagonalRL()
+        {
+            var initData = new FieldContents[][]
+            {
+                new []  {FieldContents.empty,   FieldContents.y,    FieldContents.x},
+                new []  {FieldContents.y,   FieldContents.x,    FieldContents.y},
+                new []  {FieldContents.x,   FieldContents.y,    FieldContents.x}
             };
             return new Board(initData);
         }
