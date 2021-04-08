@@ -8,6 +8,7 @@ namespace TicTacToe2D
         // Controls the game. input == Gamecontext, returns Gamecontext
         public GameContext Game { get; set; }
         public List<Player> Players { get; private set; }
+        public Board GameBoard { get; private set; }
         public Controller()
         {
             var game = new GameContext();
@@ -16,6 +17,8 @@ namespace TicTacToe2D
         public void Initialize(GameContext game)
         {
             var players = new List<Player> { Player.X, Player.O };
+            var board = new Board(3);
+            GameBoard = board;
             Game = game;
             Players = players;
         }
