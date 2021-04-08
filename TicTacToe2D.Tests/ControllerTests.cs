@@ -16,11 +16,12 @@ namespace TicTacToe2D.Tests
         // }
 
         [Fact]
-        public void InputParser_PlayerPosition()
+        public void InputParser_GetPlayerMove()
         {
             var input = "0,0";
-            var result = InputParser.ValidatePlayerInput(input);
-            Assert.Equal(input, result);
+            var parser = new StubInputParser();
+            var result = parser.GetPlayerMove(input);
+            Assert.Equal(new Position(0,0), result);
         }
     }
 }

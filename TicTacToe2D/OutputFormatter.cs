@@ -2,7 +2,7 @@ using System;
 
 namespace TicTacToe2D
 {
-    public static class OutputFormatter
+    public static class OutputFormatter 
     {
         // print instructions to console
         // print board to console
@@ -15,7 +15,6 @@ namespace TicTacToe2D
 
         public static void PrintInstructions(ConsoleOutput output)
         {
-            output.ConsoleWriteLine("Welcome to Tic Tac Toe!");
             output.ConsoleWriteLine("Here's the current board:");
             //DrawBoard()
             output.ConsoleWrite("Player 1 enter a coord x,y to place your X or enter 'q' to give up: ");

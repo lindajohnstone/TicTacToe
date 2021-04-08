@@ -12,15 +12,15 @@ namespace TicTacToe2D
         {
             
         }
-        public bool IsValidTurn(GameContext game)
-        {
-            throw new NotImplementedException();
-        }
 
         public bool IsOccupied(GameContext game)
         {
             throw new NotImplementedException();
         }
-    
+
+        internal static void ValidTurn(Board board, Position playerMovePosition)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

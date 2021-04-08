@@ -1,28 +1,63 @@
 using System;
+using System.Collections.Generic;
 
 namespace TicTacToe2D
 {
     public class Controller
     {
         // Controls the game. input == Gamecontext, returns Gamecontext
-
+        public GameContext Game { get; set; }
+        public List<Player> Players { get; private set; }
         public Controller()
         {
-            
+            var game = new GameContext();
+            Initialize(game);
         }
-        public GameContext Initialize()
+        public void Initialize(GameContext game)
         {
-            throw new NotImplementedException();
+            var players = new List<Player> { Player.X, Player.O };
+            Game = game;
+            Players = players;
         }
 
         public GameContext ImplementTurn(in GameContext game) // in == constant input
         {
             var output = new ConsoleOutput();
-            OutputFormatter.PrintInstructions(output);
+
             var input = new ConsoleInput();
-            var playerInput = input.ConsoleReadLine();
-            var value = InputParser.ValidatePlayerInput(playerInput);
-            //game.GameBoard.MovePlayer(value, FieldContents.x);
+
+            // prompt for move...
+            OutputFormatter.PrintInstructions(output); // TODO: add WriteLine with extra parameters to allow string interpolation
+            
+            // get move
+            Position playerMovePosition = null;
+            do
+            {
+                try
+                {
+                    //. get player move
+                    playerMovePosition = InputParser.GetPlayerMove(input);  // may throw InvalidMoveSyntaxException
+                    //. validate move...
+                    //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
+
+                }
+                catch (InvalidMoveEntryException ex)
+                {
+                    //. display this move is not valid message and try again
+                    playerMovePosition = null;
+                }
+                catch (InvalidMoveSyntaxException ex)
+                {
+                    // display retry entering move message and try again...
+                }
+            }
+            while (playerMovePosition == null);
+
+            //. apply move to board.
+
+            //. do we have a winner?
+
+            //. is the board full?
 
             return game;
         }
@@ -34,9 +69,18 @@ namespace TicTacToe2D
 
         public GameContext PlayGame(GameContext game) // should this be in GameContext?
         {
-            ImplementTurn(game);
-            return game;
+            var output = new ConsoleOutput();
+            // display instructions
+            output.ConsoleWriteLine("Welcome to Tic Tac Toe!");
+            while (true)
+            {
+                foreach (var player in Players)
+                {
+                    ImplementTurn(game);
+                }
+                return game;
+            }
+            // EndGame
         }
-        // EndGame
     }
 }
