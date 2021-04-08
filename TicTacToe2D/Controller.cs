@@ -39,7 +39,6 @@ namespace TicTacToe2D
                     playerMovePosition = InputParser.GetPlayerMove(input);  // may throw InvalidMoveSyntaxException
                     //. validate move...
                     //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
-
                 }
                 catch (InvalidMoveEntryException ex)
                 {
@@ -54,7 +53,7 @@ namespace TicTacToe2D
             while (playerMovePosition == null);
 
             //. apply move to board.
-
+            game.GameBoard.MovePlayer(playerMovePosition, FieldContents.x);
             //. do we have a winner?
 
             //. is the board full?
