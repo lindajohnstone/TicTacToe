@@ -5,20 +5,26 @@ namespace TicTacToe2D
     public class Controller
     {
         // Controls the game. input == Gamecontext, returns Gamecontext
-        private GameContext _game;
 
-        public Controller(GameContext game)
+        public Controller()
         {
-            _game = game;
+            
         }
-        public GameContext Initialise()
+        public GameContext Initialize()
         {
             throw new NotImplementedException();
         }
 
         public GameContext ImplementTurn(in GameContext game) // in == constant input
         {
-            throw new NotImplementedException();
+            var output = new ConsoleOutput();
+            OutputFormatter.PrintInstructions(output);
+            var input = new ConsoleInput();
+            var playerInput = input.ConsoleReadLine();
+            var value = InputParser.ValidatePlayerInput(playerInput);
+            //game.GameBoard.MovePlayer(value, FieldContents.x);
+
+            return game;
         }
 
         private Validations ValidTurn()
@@ -28,7 +34,8 @@ namespace TicTacToe2D
 
         public GameContext PlayGame(GameContext game) // should this be in GameContext?
         {
-            throw new NotImplementedException();
+            ImplementTurn(game);
+            return game;
         }
         // EndGame
     }

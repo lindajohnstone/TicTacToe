@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace TicTacToe2D.Tests
@@ -6,16 +7,21 @@ namespace TicTacToe2D.Tests
     public class GameContextTests
     {
         [Fact]
+        public void GameContext_has_players()
+        {
+            var result = new GameContext().Players;
+            Assert.Equal(Player.X, result[0]);
+            Assert.Equal(Player.O, result[1]);
+        }
+
+        [Fact]
         public void GameContext_has_board()
         {
-            var player = new Player();
-            var board = new Board(3);
-            var validations = new Validations();
-            var conditions = new GamePredicate();
-            var result = new GameContext(player, board, validations, conditions);
-            Assert.Equal(player, result.Player);
-            Assert.Equal(3, board.Width);
-            Assert.Equal(3, board.Height);
+            var result = new GameContext().GameBoard;
+            Assert.Equal(3, result.Width);
+            Assert.Equal(3, result.Height);
         }
+
+
     }
 }

@@ -5,8 +5,8 @@ namespace TicTacToe2D
         // remove console output
         // stub used for testing
 
-        public string ConsoleWriteLine();
-        public string ConsoleWrite();
+        public void ConsoleWriteLine(string value);
+        public void ConsoleWrite(string value);
 
     }
 }

@@ -5,7 +5,7 @@ namespace TicTacToe2D
         /*
             TODO: should Controller be renamed to GameController? - possibly more than one controller required
             TODO: input from player comes in as a string...
-            TODO: input from player - responsibility of GameContext or Controller or ConsoleInput
+            TODO: input from player - responsibility of InputParser
             TODO: Should gamepredicate use board & player or gamecontext
             If predicate uses board & player & so does gamecontext - coupled? or cause stack overflow
             Validations 'linked' to ConsoleInput
@@ -48,9 +48,30 @@ namespace TicTacToe2D
                                     - property FieldContents
             13/ Turn                - property Player
                                     - property Position       
-            14/ Board               - property Dictionary                           - GamePredicate
+            14/ Board               - property Dictionary FieldDictionary                         - GamePredicate
                                     - property int Width
                                     - property int Height
+                                    - property List<List<Position>> WInningLines
+                                    - property List<Position> AllPositions
+                                    - Initialize
+                                    - BoardInitializer
+                                    - CreateWinningLines
+                                    - CreateWinningLine
+                                    - CreateAllPositions
+                                    - MovePlayer
+                                    - GetField
+                                    - SetField
+                                    - EnsureValidPosition
+                                    - GetWinningLines
+                                    - OperatorOverride
+                                    - GetAllPositions
+                                    - operator ==
+                                    - operator !=
+                                    - Equals
+                                    - GetHashCode
+            15/ InputParser
+            16/ OutputFormatter
+            17/ Program
         */
     }
 }

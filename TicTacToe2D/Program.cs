@@ -6,7 +6,9 @@ namespace TicTacToe2D
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var controller = new Controller();
+            var game = new GameContext();
+            controller.PlayGame(game);
         }
     }
 }

@@ -6,18 +6,15 @@ namespace TicTacToe2D
     {
         // returns console output
         // inherits from IOutput
-        public string ConsoleWrite()
+        public void ConsoleWrite(string value)
         {
-            throw new System.NotImplementedException();
+            Console.Write(value);
         }
 
-        public string ConsoleWriteLine()
+        public void ConsoleWriteLine(string value)
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine(value);
         }
-        public void DrawBoard(Board board)
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 }

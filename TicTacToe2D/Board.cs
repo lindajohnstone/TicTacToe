@@ -10,8 +10,11 @@ namespace TicTacToe2D
         private Dictionary<Position, FieldContents> FieldDictionary { get; set; }
 
         private List<List<Position>> WinningLines { get; set; }
+
         private List<Position> AllPositions { get; set; }
+
         public int Width { get; private set; }
+        
         public int Height { get; private set; }
 
         public Board(int boardSize)
@@ -24,6 +27,7 @@ namespace TicTacToe2D
         {
             Initialize(sourceData.Length, BoardInitializer(sourceData));
         }
+        
 
         public Board(Board sourceBoard)
         {
@@ -45,7 +49,7 @@ namespace TicTacToe2D
             var FieldDictionary = new Dictionary<Position, FieldContents>();
             for (int row = 0; row < boardSize; row++)
             {
-                if (sourceData[row].Length != boardSize) 
+                if (sourceData[row].Length != boardSize)
                 {
                     throw new ArgumentOutOfRangeException("sourceData should be a square array");
                 }
@@ -88,7 +92,7 @@ namespace TicTacToe2D
                 var line = CreateWinningLine(new Position(column, 0), new Position(0, 1), boardSize);
                 WinningLines.Add(line);
             }
-            
+
             // add all winning diagonals 
             
             var line1 = CreateWinningLine(new Position(0, 0), new Position(1, 1), boardSize);

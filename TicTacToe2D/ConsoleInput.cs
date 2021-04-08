@@ -8,10 +8,10 @@ namespace TicTacToe2D
         // inherits from IInput
         public string ConsoleReadLine()
         {
-            throw new NotImplementedException();
+            return Console.ReadLine();
         }
 
-        public ConsoleKeyInfo ConsolReadKey()
+        public ConsoleKeyInfo ConsoleReadKey()
         {
             throw new NotImplementedException();
         }

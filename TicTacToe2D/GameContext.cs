@@ -8,16 +8,22 @@ namespace TicTacToe2D
         // stores Board, Player, game state
         // accesses board, player, validations?, gamepredicate?
         public Board GameBoard { get; private set; }
-        public Player Player { get; private set; }
+        public List<Player> Players { get; private set; } 
         private Validations _validations;
-        private GamePredicate _conditions;
 
-        public GameContext(Player player, Board board, Validations validations, GamePredicate conditions)
+        
+        public GameContext()
+        {
+            var players = new List<Player> { Player.X, Player.O };
+            var board = new Board(3);
+            var validations = new Validations();
+            Initialize(players, board, validations);
+        }
+        public void Initialize(List<Player> players, Board board, Validations validations)
         {
             GameBoard = new Board(3);
-            Player = player;
+            Players = players;
             _validations = validations;
-            _conditions = conditions;
         }
         
         public Board GetGameBoard()
@@ -39,14 +45,13 @@ namespace TicTacToe2D
         {
             return obj is GameContext context &&
                    EqualityComparer<Board>.Default.Equals(GameBoard, context.GameBoard) &&
-                   Player == context.Player &&
-                   EqualityComparer<Validations>.Default.Equals(_validations, context._validations) &&
-                   EqualityComparer<GamePredicate>.Default.Equals(_conditions, context._conditions);
+                   Players == context.Players &&
+                   EqualityComparer<Validations>.Default.Equals(_validations, context._validations);
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(GameBoard, Player, _validations, _conditions);
+            return HashCode.Combine(GameBoard, Players, _validations);
         }
     }
 }

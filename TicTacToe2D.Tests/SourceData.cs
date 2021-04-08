@@ -151,5 +151,16 @@ namespace TicTacToe2D.Tests
             };
             return new Board(initData);
         }
+
+        public static Board BoardMovePlayer()
+        {
+            var initData = new FieldContents[][]
+            {
+                new []{FieldContents.x,     FieldContents.empty, FieldContents.empty},
+                new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+            };
+            return new Board(initData);
+        }
     }
 }

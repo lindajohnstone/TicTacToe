@@ -7,7 +7,7 @@ namespace TicTacToe2D.Tests
     public class GamePredicateTests
     {
         [Fact]
-        public void BoardWinningRow3() // TODO: failing - ROW - "Position X coordinate is out of range"
+        public void BoardWinningRow3() 
         {
             var win = new GamePredicate();
             var board = new Board(SourceData.BoardWinningRow3());
@@ -15,7 +15,7 @@ namespace TicTacToe2D.Tests
             Assert.True(result);
         }
         [Fact]
-        public void BoardYWinningCentreRow() // TODO: failing - ROW
+        public void BoardYWinningCentreRow() 
         {
             var board = new Board(SourceData.BoardYWinningCentreRow());
             var win = new GamePredicate();
@@ -24,7 +24,7 @@ namespace TicTacToe2D.Tests
         }
         
         [Fact]
-        public void BoardXWinningTopRow() // ROW
+        public void BoardXWinningTopRow() 
         {
             var board = new Board(SourceData.BoardXWinningTopRow());
             var win = new GamePredicate();
@@ -33,7 +33,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void IsWinningBoard_true() // TODO: - failing line 41 - COLUMN
+        public void IsWinningBoard_true() 
         {
             var board = new Board(SourceData.BoardIsWinningBoardTrue());
             var win = new GamePredicate();
@@ -42,7 +42,7 @@ namespace TicTacToe2D.Tests
         }
         
         [Fact]
-        public void GamePredicate_neither_player_wins() //TODO: failing
+        public void GamePredicate_neither_player_wins() 
         {
             var win = new GamePredicate();
             var board = new Board(SourceData.BoardNeitherXNorYWins());
@@ -51,7 +51,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void GamePredicate_Is_not_a_winning_column_3_PlayerX_3_PlayerY() // TODO: failing
+        public void GamePredicate_Is_not_a_winning_column_3_PlayerX_3_PlayerY() 
         {
             var win = new GamePredicate();
             var board = new Board(SourceData.BoardYWinsXWins());
@@ -60,7 +60,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void GamePredicate_Y_column3_wins_X_loses() // TODO: failing - COLUMN
+        public void GamePredicate_Y_column3_wins_X_loses() 
         {
             var win = new GamePredicate();
             var board = new Board(SourceData.BoardYWinsXLoses());
@@ -78,7 +78,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void IsWinningBoard_X_wins_column1() // COLUMN
+        public void IsWinningBoard_X_wins_column1() 
         {
             var board = new Board(SourceData.BoardIsWinningBoardXWinningColumn());
             var win = new GamePredicate();
@@ -86,7 +86,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void IsWinningBoard_Y_wins_Column3() // TODO: failing - COLUMN
+        public void IsWinningBoard_Y_wins_Column3() 
         {
             var board = new Board(SourceData.BoardIsWinningBoardYWinningColumn());
             var win = new GamePredicate();
@@ -94,7 +94,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void BoardWinningDiagonalLR() // TODO: failing 
+        public void BoardWinningDiagonalLR()  
         {
             var board = new Board(SourceData.BoardWinningDiagonalLR());
             var win = new GamePredicate();
@@ -102,7 +102,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void BoardWinningDiagonalRL() // TODO: failing 
+        public void BoardWinningDiagonalRL() 
         {
             var board = new Board(SourceData.BoardWinningDiagonalRL());
             var win = new GamePredicate();
