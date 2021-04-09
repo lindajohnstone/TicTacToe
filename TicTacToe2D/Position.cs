@@ -43,9 +43,12 @@ namespace TicTacToe2D
         
         public static bool OperatorOverride(Position obj1, Position obj2)
         {
-            if (obj1.X == obj2.X && obj1.Y == obj2.Y)
+            if (obj1 != null || obj2 != null)
             {
-                return true;
+                if (obj1.X == obj2.X && obj1.Y == obj2.Y)
+                {
+                    return true;
+                }
             }
             return false;
         }

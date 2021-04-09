@@ -17,6 +17,7 @@ namespace TicTacToe2D
         {
             output.ConsoleWriteLine("Here's the current board:");
             //DrawBoard()
+            
             output.ConsoleWrite("Player 1 enter a coord x,y to place your X or enter 'q' to give up: ");
         }
 

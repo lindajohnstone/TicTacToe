@@ -7,8 +7,6 @@ namespace TicTacToe2D
     {
         // Controls the game. input == Gamecontext, returns Gamecontext
         public GameContext Game { get; set; }
-        public List<Player> Players { get; private set; }
-        public Board GameBoard { get; private set; }
         public Controller()
         {
             var game = new GameContext();
@@ -16,14 +14,10 @@ namespace TicTacToe2D
         }
         public void Initialize(GameContext game)
         {
-            var players = new List<Player> { Player.X, Player.O };
-            var board = new Board(3);
-            GameBoard = board;
             Game = game;
-            Players = players;
         }
 
-        public GameContext ImplementTurn(in GameContext game) // in == constant input
+        public void ImplementTurn(Player player) 
         {
             var output = new ConsoleOutput();
 
@@ -31,15 +25,16 @@ namespace TicTacToe2D
 
             // prompt for move...
             OutputFormatter.PrintInstructions(output); // TODO: add WriteLine with extra parameters to allow string interpolation
-            
+            // OutputFormatter.DrawBoard(board, player, output);
             // get move
             Position playerMovePosition = null;
-            do
-            {
+            // do
+            // {
                 try
                 {
                     //. get player move
-                    playerMovePosition = InputParser.GetPlayerMove(input);  // may throw InvalidMoveSyntaxException
+                    var value = input.ConsoleReadLine();
+                    playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...
                     //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
                 }
@@ -52,16 +47,20 @@ namespace TicTacToe2D
                 {
                     // display retry entering move message and try again...
                 }
-            }
-            while (playerMovePosition == null);
+            //}
+            //while (playerMovePosition == null);
 
             //. apply move to board.
-            game.GameBoard.MovePlayer(playerMovePosition, FieldContents.x);
-            //. do we have a winner?
-
-            //. is the board full?
-
-            return game;
+            var fieldContents = new FieldContents();
+            if (player == Game.Players[0])
+            {
+                fieldContents = FieldContents.x;
+            }
+            else
+            {
+                fieldContents = FieldContents.y;
+            }
+            Game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }
 
         private Validations ValidTurn()
@@ -69,16 +68,20 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public GameContext PlayGame(GameContext game) // should this be in GameContext?
+        public GameContext PlayGame(GameContext game) 
         {
             var output = new ConsoleOutput();
             // display instructions
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!");
+            // TODO: ?? while(!EndGame) - board is not full, there is no win or player hasn't pressed 'q'
             while (true)
             {
-                foreach (var player in Players)
+                foreach (var player in game.Players)
                 {
-                    ImplementTurn(game);
+                    ImplementTurn(player);
+                    //. do we have a winner?
+
+                    //. is the board full?
                 }
                 return game;
             }
