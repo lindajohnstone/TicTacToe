@@ -7,6 +7,9 @@ namespace TicTacToe2D
     {
         // Controls the game. input == Gamecontext, returns Gamecontext
         public GameContext Game { get; set; }
+
+        public Board GameBoard { get; private set; }
+        public List<Player> Players { get; private set; }
         public Controller()
         {
             var game = new GameContext();
@@ -14,10 +17,14 @@ namespace TicTacToe2D
         }
         public void Initialize(GameContext game)
         {
+            var players = new List<Player> { Player.X, Player.O };
+            var board = new Board(3);
             Game = game;
+            Players = players;
+            GameBoard = board;
         }
 
-        public void ImplementTurn(Player player) 
+        public void ImplementTurn(Player player)
         {
             var output = new ConsoleOutput();
 
@@ -30,28 +37,36 @@ namespace TicTacToe2D
             Position playerMovePosition = null;
             // do
             // {
-                try
-                {
-                    //. get player move
-                    var value = input.ConsoleReadLine();
-                    playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
-                    //. validate move...
-                    //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
-                }
-                catch (InvalidMoveEntryException ex)
-                {
-                    //. display this move is not valid message and try again
-                    playerMovePosition = null;
-                }
-                catch (InvalidMoveSyntaxException ex)
-                {
-                    // display retry entering move message and try again...
-                }
+            try
+            {
+                //. get player move
+                var value = input.ConsoleReadLine();
+                playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
+                                                                        //. validate move...
+                                                                        //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
+            }
+            catch (InvalidMoveEntryException ex)
+            {
+                //. display this move is not valid message and try again
+                playerMovePosition = null;
+            }
+            catch (InvalidMoveSyntaxException ex)
+            {
+                // display retry entering move message and try again...
+            }
             //}
             //while (playerMovePosition == null);
 
             //. apply move to board.
             var fieldContents = new FieldContents();
+            fieldContents = PlayerFieldContents(player);
+            Game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
+        }
+
+
+        private FieldContents PlayerFieldContents(Player player)
+        {
+            FieldContents fieldContents;
             if (player == Game.Players[0])
             {
                 fieldContents = FieldContents.x;
@@ -60,8 +75,11 @@ namespace TicTacToe2D
             {
                 fieldContents = FieldContents.y;
             }
-            Game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
+
+            return fieldContents;
         }
+
+        
 
         private Validations ValidTurn()
         {
@@ -79,13 +97,23 @@ namespace TicTacToe2D
                 foreach (var player in game.Players)
                 {
                     ImplementTurn(player);
-                    //. do we have a winner?
 
+                    //. is there a winner
+                    var winner = new GamePredicate();
+                    IsWinningBoard(player, winner);
                     //. is the board full?
+
                 }
                 return game;
             }
+
+            
             // EndGame
+        }
+
+        public bool IsWinningBoard(Player player, GamePredicate winner)
+        {
+            return winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));
         }
     }
 }

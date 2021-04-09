@@ -22,9 +22,46 @@ namespace TicTacToe2D.Tests
         // }
 
         [Fact]
-        public void testName()
+        public void PlayGame_move_player()
         {
-            throw new NotImplementedException();
+            var board = new Board(SourceData.BoardIsInitialized());
+            var input = "0,1";
+            var parser = new StubInputParser();
+            var fieldContents = FieldContents.x;
+            var result = board.MovePlayer(parser.GetPlayerMove(input), fieldContents);
+            var expected = (SourceData.BoardXFirstMove() == result);
+            Assert.True(expected);
+        }
+
+        [Fact]
+        public void Controller_has_board_players()
+        {
+            var controller = new Controller();
+            var game = new GameContext();
+            Assert.Equal(controller.GameBoard, new Board(3));
+            Assert.Equal(controller.Players[0], Player.X);
+            Assert.Equal(controller.Players[1], Player.O);
+        }
+
+        [Fact]
+        public void WinningRow()
+        {
+            var win = new GamePredicate();
+            var controller = new Controller();
+            var player = controller.Game.Players[0];
+            FieldContents fieldContents;
+            if (player == controller.Players[0])
+            {
+                fieldContents = FieldContents.x;
+            }
+            else
+            {
+                fieldContents = FieldContents.y;
+            }
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var result = win.IsWinningBoard(board, board.GetWinningLines(), fieldContents);
+            // var result = controller.IsWinningBoard(player, win); // fails
+            Assert.True(result);
         }
     }
 }
