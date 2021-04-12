@@ -195,5 +195,16 @@ namespace TicTacToe2D.Tests
             };
             return new Board(initData);
         }
+
+        public static Board BoardValidTurn()
+        {
+            var initData = new FieldContents[][]
+            {
+                new [] { FieldContents.x,       FieldContents.empty,    FieldContents.y},
+                new [] { FieldContents.empty,   FieldContents.empty,    FieldContents.empty},
+                new [] { FieldContents.y,       FieldContents.empty,    FieldContents.x}
+            };
+            return new Board(initData);
+        }
     }
 }

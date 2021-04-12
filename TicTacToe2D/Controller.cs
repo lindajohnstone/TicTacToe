@@ -24,6 +24,32 @@ namespace TicTacToe2D
             GameBoard = board;
         }
 
+        public GameContext PlayGame(GameContext game)
+        {
+            var output = new ConsoleOutput();
+            // display instructions
+            output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
+
+            while (true)
+            {
+                foreach (var player in game.Players) // TODO: loop should not be a foreach - only loops once for each player
+                {
+                    ImplementTurn(game);
+
+                    //. is there a winner
+                    var winner = new GamePredicate();
+                    IsWinningBoard(player, winner);
+                    // winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player))
+                    //. is the board full?
+                    winner.IsADraw(game.GameBoard);
+                }
+            }
+            return game;
+
+
+            // EndGame
+        }
+
         public void ImplementTurn(GameContext game)
         {
             var output = new ConsoleOutput();
@@ -31,30 +57,30 @@ namespace TicTacToe2D
             var input = new ConsoleInput();
 
             // prompt for move...
+            OutputFormatter.PrintBoard(game.GameBoard, output);
             OutputFormatter.PrintInstructions(game.GetCurrentPlayer(game));
-            OutputFormatter.DrawBoard(game.GameBoard, output);
-            // OutputFormatter.DrawBoard(board, player, output);
+
             // get move
             Position playerMovePosition = null;
             do
             {
-            try
-            {
-                //. get player move
-                var value = input.ConsoleReadLine();
-                playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
-                //. validate move...
-                //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
-            }
-            catch (InvalidMoveEntryException ex)
-            {
-                //. display this move is not valid message and try again
-                playerMovePosition = null;
-            }
-            catch (InvalidMoveSyntaxException ex)
-            {
-                // display retry entering move message and try again...
-            }
+                try
+                {
+                    //. get player move
+                    var value = input.ConsoleReadLine();
+                    playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
+                    //. validate move...
+                    Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException
+                }
+                catch (InvalidMoveEntryException ex)
+                {
+                    //. display this move is not valid message and try again
+                    playerMovePosition = null;
+                }
+                catch (InvalidMoveSyntaxException ex)
+                {
+                    // display retry entering move message and try again...
+                }
             }
             while (playerMovePosition == null);
 
@@ -87,31 +113,7 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public GameContext PlayGame(GameContext game) 
-        {
-            var output = new ConsoleOutput();
-            // display instructions
-            output.ConsoleWriteLine("Welcome to Tic Tac Toe!");
-            // TODO: ?? while(!EndGame) - board is not full, there is no win or player hasn't pressed 'q'
-            while (true)
-            {
-                foreach (var player in game.Players) // TODO: loop should not be a foreach - only loops once for each player
-                {
-                    ImplementTurn(game);
-
-                    //. is there a winner
-                    var winner = new GamePredicate();
-                    IsWinningBoard(player, winner);
-                    // winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player))
-                    //. is the board full?
-                    winner.IsADraw(game.GameBoard);
-                }
-            }
-            return game;
-
-            
-            // EndGame
-        }
+        
 
         public bool IsWinningBoard(Player player, GamePredicate winner)// TODO: should this method be private?
         {

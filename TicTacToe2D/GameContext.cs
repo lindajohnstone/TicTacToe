@@ -36,16 +36,16 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public Player GetCurrentPlayer(GameContext game) // TODO: 
+        public Player GetCurrentPlayer(GameContext game) // TODO: only the player is in the 'else' statement shows in the terminal
         {
             var player = new Player();
-            if (player == Players[0])
+            if (player == Players[1])
             {
-                return Player.X;
+                return Player.O;
             }
             else
             {
-                return Player.O;
+                return Player.X;
             }
         }
 

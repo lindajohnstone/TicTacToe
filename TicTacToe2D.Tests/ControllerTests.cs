@@ -39,8 +39,8 @@ namespace TicTacToe2D.Tests
             var controller = new Controller();
             var game = new GameContext();
             Assert.Equal(controller.GameBoard, new Board(3));
-            Assert.Equal(controller.Players[0], Player.X);
-            Assert.Equal(controller.Players[1], Player.O);
+            Assert.Equal(Player.X, controller.Players[0]);
+            Assert.Equal(Player.O, controller.Players[1]);
         }
 
         [Fact]

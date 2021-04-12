@@ -28,7 +28,6 @@ namespace TicTacToe2D
 
         public bool IsADraw(Board board)
         {
-            // loop through fields (board.GetField) & count empty fields
             return board.GetAllPositions().All((x) => board.GetField(x) != FieldContents.empty);
         }
     }

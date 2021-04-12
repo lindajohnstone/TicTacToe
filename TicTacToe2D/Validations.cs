@@ -18,9 +18,9 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        internal static void ValidTurn(Board board, Position playerMovePosition)
+        public static bool ValidTurn(Board board, Position playerMovePosition)
         {
-            throw new NotImplementedException();
+            return board.GetField(playerMovePosition) == FieldContents.empty;
         }
     }
 }

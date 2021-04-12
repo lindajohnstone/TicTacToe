@@ -23,7 +23,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void GameContext_get_current_player()
+        public void GameContext_get_current_player() // TODO: failing. NB running game in terminal only shows player 2 (O)
         {
             var game = new GameContext();
             var result = game.GetCurrentPlayer(game);

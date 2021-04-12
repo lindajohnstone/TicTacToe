@@ -34,12 +34,12 @@ namespace TicTacToe2D
 
         public static void PrintBoard(Board board, ConsoleOutput output)
         {
+            output.ConsoleWriteLine("Here's the current board:");
             DrawBoard(board, output);
         }
         public static void PrintInstructions(Player player)
         {
             var output = new ConsoleOutput();
-            output.ConsoleWriteLine("Here's the current board:");
             var playerId = (int)player;
             var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", playerId, player);
             output.ConsoleWrite(message); 
