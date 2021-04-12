@@ -7,21 +7,41 @@ namespace TicTacToe2D
         // print instructions to console
         // print board to console
         // print win (which player) or draw 
-
-        public static Board DrawBoard(Board board, Player player, ConsoleOutput output)
+        public static void DrawBoard()
         {
-            throw new NotImplementedException();
+            var board = new Board(3);
+            var output = new ConsoleOutput();
+           
+            for (var column = 0; column < board.Width; column++)
+            {
+                for (var row = 0; row < board.Width; row++)
+                {
+                    var position = board.GetField(new Position(column, row));
+                    if (position == FieldContents.y)
+                    {
+                        output.ConsoleWrite("O  ");
+                    }
+                    if (position == FieldContents.x)
+                    {
+                        output.ConsoleWrite("X  ");
+                    }
+                    else
+                    {
+                        output.ConsoleWrite(".  ");
+                    }
+                }
+                output.ConsoleWriteLine("");
+            }
         }
 
-        public static void PrintInstructions(ConsoleOutput output, Player player)
+        public static void PrintInstructions(Player player)
         {
+            var output = new ConsoleOutput();
             output.ConsoleWriteLine("Here's the current board:");
-            //DrawBoard()
+            DrawBoard();
             var playerId = (int)player;
-            var playerToken = player;
-            var message = "Player {playerId} enter a coord x,y to place your {player} or enter 'q' to give up: ";
-            output.ConsoleWrite("Player 1 enter a coord x,y to place your X or enter 'q' to give up: "); 
-            // TODO: string interpolation so becomes dynamic for each player 
+            var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", playerId, player);
+            output.ConsoleWrite(message); 
         }
 
         public static string PrintGameEnd(ConsoleOutput output)

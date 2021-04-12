@@ -173,7 +173,7 @@ namespace TicTacToe2D
             return false;
         }
 
-        private List<Position> GetAllPositions()
+        public List<Position> GetAllPositions()
         {
             return AllPositions;
         }

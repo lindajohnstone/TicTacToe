@@ -31,12 +31,12 @@ namespace TicTacToe2D
             var input = new ConsoleInput();
 
             // prompt for move...
-            OutputFormatter.PrintInstructions(output, player);
+            OutputFormatter.PrintInstructions(player);
             // OutputFormatter.DrawBoard(board, player, output);
             // get move
             Position playerMovePosition = null;
-            // do
-            // {
+            do
+            {
             try
             {
                 //. get player move
@@ -54,8 +54,8 @@ namespace TicTacToe2D
             {
                 // display retry entering move message and try again...
             }
-            //}
-            //while (playerMovePosition == null);
+            }
+            while (playerMovePosition == null);
 
             //. apply move to board.
             var fieldContents = new FieldContents();
@@ -105,8 +105,8 @@ namespace TicTacToe2D
                     //. is the board full?
                     winner.IsADraw(game.GameBoard);
                 }
-                return game;
             }
+            return game;
 
             
             // EndGame

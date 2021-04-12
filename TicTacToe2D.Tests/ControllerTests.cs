@@ -18,7 +18,7 @@ namespace TicTacToe2D.Tests
         public void testName()
         {
             Position playerMovePosition = null;
-            Assert.True(playerMovePosition.Equals(null));
+            Assert.True(playerMovePosition == null);
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace TicTacToe2D.Tests
             }
             var board = new Board(SourceData.BoardWinningDiagonalLR());
             var result = win.IsWinningBoard(board, board.GetWinningLines(), fieldContents);
-            // var result = controller.IsWinningBoard(player, win); // fails
+            //var result = controller.IsWinningBoard(player, win); // fails
             Assert.True(result);
         }
     }
