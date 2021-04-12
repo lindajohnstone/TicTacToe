@@ -7,10 +7,8 @@ namespace TicTacToe2D
         // print instructions to console
         // print board to console
         // print win (which player) or draw 
-        public static void DrawBoard()
+        public static void DrawBoard(Board board, ConsoleOutput output)
         {
-            var board = new Board(3);
-            var output = new ConsoleOutput();
            
             for (var column = 0; column < board.Width; column++)
             {
@@ -34,11 +32,14 @@ namespace TicTacToe2D
             }
         }
 
+        public static void PrintBoard(Board board, ConsoleOutput output)
+        {
+            DrawBoard(board, output);
+        }
         public static void PrintInstructions(Player player)
         {
             var output = new ConsoleOutput();
             output.ConsoleWriteLine("Here's the current board:");
-            DrawBoard();
             var playerId = (int)player;
             var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", playerId, player);
             output.ConsoleWrite(message); 

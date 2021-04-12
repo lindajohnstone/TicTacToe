@@ -10,7 +10,8 @@ namespace TicTacToe2D
         public Board GameBoard { get; private set; }
         public List<Player> Players { get; private set; } 
         private Validations _validations;
-
+        public IInput ConsoleInput { get; private set; }
+        public IOutput ConsoleOutput { get; private set; }
         
         public GameContext()
         {
@@ -21,14 +22,31 @@ namespace TicTacToe2D
         }
         public void Initialize(List<Player> players, Board board, Validations validations)
         {
-            GameBoard = new Board(3);
+            var input = new ConsoleInput();
+            var output = new ConsoleOutput();
+            GameBoard = board;
             Players = players;
             _validations = validations;
+            ConsoleInput = input;
+            ConsoleOutput = output;
         }
         
         public Board GetGameBoard()
         {
             throw new NotImplementedException();
+        }
+
+        public Player GetCurrentPlayer(GameContext game) // TODO: 
+        {
+            var player = new Player();
+            if (player == Players[0])
+            {
+                return Player.X;
+            }
+            else
+            {
+                return Player.O;
+            }
         }
 
         public Player GetPlayers()

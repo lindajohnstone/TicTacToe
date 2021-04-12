@@ -24,14 +24,15 @@ namespace TicTacToe2D
             GameBoard = board;
         }
 
-        public void ImplementTurn(Player player)
+        public void ImplementTurn(GameContext game)
         {
             var output = new ConsoleOutput();
 
             var input = new ConsoleInput();
 
             // prompt for move...
-            OutputFormatter.PrintInstructions(player);
+            OutputFormatter.PrintInstructions(game.GetCurrentPlayer(game));
+            OutputFormatter.DrawBoard(game.GameBoard, output);
             // OutputFormatter.DrawBoard(board, player, output);
             // get move
             Position playerMovePosition = null;
@@ -59,7 +60,7 @@ namespace TicTacToe2D
 
             //. apply move to board.
             var fieldContents = new FieldContents();
-            fieldContents = PlayerFieldContents(player);
+            fieldContents = PlayerFieldContents(game.GetCurrentPlayer(game));
             Game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }
 
@@ -96,7 +97,7 @@ namespace TicTacToe2D
             {
                 foreach (var player in game.Players) // TODO: loop should not be a foreach - only loops once for each player
                 {
-                    ImplementTurn(player);
+                    ImplementTurn(game);
 
                     //. is there a winner
                     var winner = new GamePredicate();

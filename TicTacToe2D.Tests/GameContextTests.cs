@@ -22,6 +22,13 @@ namespace TicTacToe2D.Tests
             Assert.Equal(3, result.Height);
         }
 
-
+        [Fact]
+        public void GameContext_get_current_player()
+        {
+            var game = new GameContext();
+            var result = game.GetCurrentPlayer(game);
+            var expected = Player.X;
+            Assert.Equal(expected, result);
+        }
     }
 }
