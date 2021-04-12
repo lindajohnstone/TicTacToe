@@ -14,12 +14,12 @@ namespace TicTacToe2D.Tests
             Assert.Equal(new Position(0,0), result);
         }
 
-        // [Fact]
-        // public void testName()
-        // {
-        //     Position playerMovePosition = null;
-        //     Assert.True(playerMovePosition.Equals(null));
-        // }
+        [Fact]
+        public void testName()
+        {
+            Position playerMovePosition = null;
+            Assert.True(playerMovePosition.Equals(null));
+        }
 
         [Fact]
         public void PlayGame_move_player()

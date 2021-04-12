@@ -162,5 +162,38 @@ namespace TicTacToe2D.Tests
             };
             return new Board(initData);
         }
+
+        public static Board BoardIsADraw()
+        {
+            var initData = new FieldContents[][]
+            {
+                new [] { FieldContents.x,   FieldContents.y,    FieldContents.x},
+                new [] { FieldContents.x,   FieldContents.y,    FieldContents.y},
+                new [] { FieldContents.y,   FieldContents.x,    FieldContents.x}
+            };
+            return new Board(initData);
+        }
+        
+        public static Board BoardIsNotADraw()// next move is a draw
+        {
+            var initData = new FieldContents[][]
+            {
+                new [] { FieldContents.x,       FieldContents.y,    FieldContents.x},
+                new [] { FieldContents.empty,   FieldContents.y,    FieldContents.y},
+                new [] { FieldContents.y,       FieldContents.x,    FieldContents.x}
+            };
+            return new Board(initData);
+        }
+
+        public static Board BoardIsNotADrawV2()// next move is a win
+        {
+            var initData = new FieldContents[][]
+            {
+                new [] { FieldContents.x,       FieldContents.y,    FieldContents.y},
+                new [] { FieldContents.empty,   FieldContents.x,    FieldContents.x},
+                new [] { FieldContents.y,       FieldContents.y,    FieldContents.x}
+            };
+            return new Board(initData);
+        }
     }
 }

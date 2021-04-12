@@ -108,5 +108,29 @@ namespace TicTacToe2D.Tests
             var win = new GamePredicate();
             Assert.True(win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
         }
+
+        [Fact]
+        public void BoardIsADraw()
+        {
+            var board = new Board(SourceData.BoardIsADraw());
+            var condition = new GamePredicate();
+            Assert.True(condition.IsADraw(board));
+        }
+
+        [Fact]
+        public void BoardIsNotADraw()
+        {
+            var board = new Board(SourceData.BoardIsNotADraw());
+            var condition = new GamePredicate();
+            Assert.False(condition.IsADraw(board));
+        }
+
+        [Fact]
+        public void BoardIsNotADrawV2()
+        {
+            var board = new Board(SourceData.BoardIsNotADrawV2());
+            var condition = new GamePredicate();
+            Assert.False(condition.IsADraw(board));
+        }
     }
 }

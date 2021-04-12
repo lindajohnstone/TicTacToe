@@ -26,9 +26,29 @@ namespace TicTacToe2D
             return positions.All((x) => board.GetField(x) == fieldContents);
         }
 
-        public GameContext IsADraw(bool draw)
+        public bool IsADraw(Board board)
         {
-            throw new NotImplementedException();
+            // loop through fields (board.GetField) & count empty fields
+            // use 
+            var count = 0;
+            for (int column = 0; column < board.Width; column++)
+            {
+                for (int row = 0; row < board.Width; row++)
+                {
+                    if (board.GetField(new Position(column, row)) ==  FieldContents.empty)
+                    {
+                        count++;
+                    }
+                }
+            }
+            if (count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

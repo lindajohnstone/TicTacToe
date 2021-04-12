@@ -13,12 +13,15 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public static void PrintInstructions(ConsoleOutput output)
+        public static void PrintInstructions(ConsoleOutput output, Player player)
         {
             output.ConsoleWriteLine("Here's the current board:");
             //DrawBoard()
-            
-            output.ConsoleWrite("Player 1 enter a coord x,y to place your X or enter 'q' to give up: ");
+            var playerId = (int)player;
+            var playerToken = player;
+            var message = "Player {playerId} enter a coord x,y to place your {player} or enter 'q' to give up: ";
+            output.ConsoleWrite("Player 1 enter a coord x,y to place your X or enter 'q' to give up: "); 
+            // TODO: string interpolation so becomes dynamic for each player 
         }
 
         public static string PrintGameEnd(ConsoleOutput output)

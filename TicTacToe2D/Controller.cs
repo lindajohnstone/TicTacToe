@@ -31,7 +31,7 @@ namespace TicTacToe2D
             var input = new ConsoleInput();
 
             // prompt for move...
-            OutputFormatter.PrintInstructions(output); // TODO: add WriteLine with extra parameters to allow string interpolation
+            OutputFormatter.PrintInstructions(output, player);
             // OutputFormatter.DrawBoard(board, player, output);
             // get move
             Position playerMovePosition = null;
@@ -42,8 +42,8 @@ namespace TicTacToe2D
                 //. get player move
                 var value = input.ConsoleReadLine();
                 playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
-                                                                        //. validate move...
-                                                                        //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
+                //. validate move...
+                //Validations.ValidTurn(board, playerMovePosition);  // may throw InvalidMoveEntryException
             }
             catch (InvalidMoveEntryException ex)
             {
@@ -94,15 +94,16 @@ namespace TicTacToe2D
             // TODO: ?? while(!EndGame) - board is not full, there is no win or player hasn't pressed 'q'
             while (true)
             {
-                foreach (var player in game.Players)
+                foreach (var player in game.Players) // TODO: loop should not be a foreach - only loops once for each player
                 {
                     ImplementTurn(player);
 
                     //. is there a winner
                     var winner = new GamePredicate();
                     IsWinningBoard(player, winner);
+                    // winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player))
                     //. is the board full?
-
+                    winner.IsADraw(game.GameBoard);
                 }
                 return game;
             }
@@ -111,7 +112,7 @@ namespace TicTacToe2D
             // EndGame
         }
 
-        public bool IsWinningBoard(Player player, GamePredicate winner)
+        public bool IsWinningBoard(Player player, GamePredicate winner)// TODO: should this method be private?
         {
             return winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));
         }

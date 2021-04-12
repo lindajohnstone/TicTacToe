@@ -93,7 +93,7 @@ namespace TicTacToe2D
                 WinningLines.Add(line);
             }
 
-            // add all winning diagonals 
+            // add winning diagonals 
             
             var line1 = CreateWinningLine(new Position(0, 0), new Position(1, 1), boardSize);
             WinningLines.Add(line1);
