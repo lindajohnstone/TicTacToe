@@ -7,7 +7,7 @@ namespace TicTacToe2D
         // print instructions to console
         // print board to console
         // print win (which player) or draw 
-        public static void DrawBoard(Board board, ConsoleOutput output) // TODO: does this actually work or is it defaulting to 'else' condition
+        public static void DrawBoard(Board board, ConsoleOutput output) // TODO: adding Noughts ('O') value adds extra column
         {
            
             for (var column = 0; column < board.Width; column++)
