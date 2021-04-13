@@ -12,7 +12,7 @@ namespace TicTacToe2D
         public List<Player> Players { get; private set; }
         public Controller()
         {
-            var game = new GameContext();
+            var game = new GameContext(GameBoard, Players);
             Initialize(game);
         }
         public void Initialize(GameContext game)
@@ -34,6 +34,7 @@ namespace TicTacToe2D
             {
                 foreach (var player in game.Players) // TODO: loop should not be a foreach - only loops once for each player
                 {
+    
                     ImplementTurn(game);
 
                     //. is there a winner
@@ -68,9 +69,11 @@ namespace TicTacToe2D
                 {
                     //. get player move
                     var value = input.ConsoleReadLine();
+                    output.ConsoleWriteLine("");
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...
-                    Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException
+                    Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException 
+                    // TODO: ValidTurn does not do anything
                 }
                 catch (InvalidMoveEntryException ex)
                 {
@@ -87,7 +90,7 @@ namespace TicTacToe2D
             //. apply move to board.
             var fieldContents = new FieldContents();
             fieldContents = PlayerFieldContents(game.GetCurrentPlayer(game));
-            Game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
+            game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }
 
 

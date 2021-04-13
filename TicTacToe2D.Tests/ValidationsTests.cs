@@ -28,8 +28,8 @@ namespace TicTacToe2D.Tests
         {
             var board = SourceData.BoardValidTurn();
             var position = new Position(x, y);
-            var result = Validations.ValidTurn(board, position);
-            Assert.False(result);
+            var result = Assert.Throws<InvalidMoveEntryException>(() => Validations.ValidTurn(board, position));
+            Assert.Equal("Oh no, a piece is already at this place! Try again...", result.Message);
         }
     }
 }

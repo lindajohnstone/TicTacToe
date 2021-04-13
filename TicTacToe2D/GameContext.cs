@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToe2D
 {
@@ -13,13 +14,12 @@ namespace TicTacToe2D
         public IInput ConsoleInput { get; private set; }
         public IOutput ConsoleOutput { get; private set; }
         
-        public GameContext()
+        public GameContext(Board board, List<Player> players)
         {
-            var players = new List<Player> { Player.X, Player.O };
-            var board = new Board(3);
             var validations = new Validations();
             Initialize(players, board, validations);
         }
+        
         public void Initialize(List<Player> players, Board board, Validations validations)
         {
             var input = new ConsoleInput();
@@ -36,17 +36,15 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public Player GetCurrentPlayer(GameContext game) // TODO: only the player is in the 'else' statement shows in the terminal
+        public Player GetCurrentPlayer(GameContext game) // TODO: only the player is in the 'else' condition shows in the terminal
         {
-            var player = new Player();
-            if (player == Players[1])
+            // check how many empty fields in board
+            // if modulus == 1, Player == X, else Y
+            if (GameBoard.GetAllPositions().Where((x) => GameBoard.GetField(x) == FieldContents.empty).Count() % 2 == 1)
             {
-                return Player.O;
+                return Players[0];
             }
-            else
-            {
-                return Player.X;
-            }
+            return Players[1];
         }
 
         public Player GetPlayers()

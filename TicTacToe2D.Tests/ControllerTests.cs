@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace TicTacToe2D.Tests
@@ -37,18 +38,20 @@ namespace TicTacToe2D.Tests
         public void Controller_has_board_players()
         {
             var controller = new Controller();
-            var game = new GameContext();
+            var board = new Board(3);
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
             Assert.Equal(controller.GameBoard, new Board(3));
             Assert.Equal(Player.X, controller.Players[0]);
             Assert.Equal(Player.O, controller.Players[1]);
         }
 
         [Fact]
-        public void WinningRow()
+        public void WinningRow() 
         {
             var win = new GamePredicate();
             var controller = new Controller();
-            var player = controller.Game.Players[0];
+            var player = controller.Players[0]; 
             FieldContents fieldContents;
             if (player == controller.Players[0])
             {

@@ -20,6 +20,10 @@ namespace TicTacToe2D
 
         public static bool ValidTurn(Board board, Position playerMovePosition)
         {
+            if(board.GetField(playerMovePosition) != FieldContents.empty)
+            {
+                throw new InvalidMoveEntryException();
+            }
             return board.GetField(playerMovePosition) == FieldContents.empty;
         }
     }

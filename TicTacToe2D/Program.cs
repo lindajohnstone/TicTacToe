@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace TicTacToe2D
 {
@@ -7,7 +8,9 @@ namespace TicTacToe2D
         static void Main(string[] args)
         {
             var controller = new Controller();
-            var game = new GameContext();
+            var board = new Board(3);
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
             controller.PlayGame(game);
         }
     }
