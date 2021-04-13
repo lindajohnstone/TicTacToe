@@ -23,7 +23,7 @@ namespace TicTacToe2D
                     {
                         output.ConsoleWrite("X  ");
                     }
-                    else
+                    if (position == FieldContents.empty)
                     {
                         output.ConsoleWrite(".  ");
                     }

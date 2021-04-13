@@ -1,12 +1,13 @@
 using System;
+using System.Collections.Generic;
 
 namespace TicTacToe2D.Tests
 {
     public class StubOutputFormatter : IOutputFormatter
     {
-        public string DrawBoard(Board board, IOutput output)
+        public List<string> DrawBoard(Board board, IOutput output)
         {
-            var boardOutput = "";
+            var boardList = new List<string>();
             for (var column = 0; column < board.Width; column++)
             {
                 for (var row = 0; row < board.Width; row++)
@@ -20,14 +21,14 @@ namespace TicTacToe2D.Tests
                     {
                         output.ConsoleWrite("X  ");
                     }
-                    else
+                    if (position == FieldContents.empty)
                     {
                         output.ConsoleWrite(".  ");
                     }
                 }
                 output.ConsoleWrite(Environment.NewLine);
             }
-            return boardOutput;
+            return boardList;
         }
 
         public string PrintInstructions(Player player)

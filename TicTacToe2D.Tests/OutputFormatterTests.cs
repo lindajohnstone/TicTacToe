@@ -21,9 +21,31 @@ namespace TicTacToe2D.Tests
             var output = new StubOutput();
             var outputFormatter = new StubOutputFormatter();
             var board = new Board(SourceData.BoardIsInitialized());
-            var expected = ".  .  .\n.  .  .\n.  .  .";
+            var expected = ".  .  .  \n.  .  .  \n.  .  .  \n";
             var result = outputFormatter.DrawBoard(board, output);
-            Assert.Equal(expected, result);
+            Assert.Equal(expected, output.GetWriteLine(result));
+        }
+
+        [Fact]
+        public void DrawGame_as_string_playerX()
+        {
+            var output = new StubOutput();
+            var outputFormatter = new StubOutputFormatter();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var expected = "X  .  .  \n.  .  .  \n.  .  .  \n";
+            var result = outputFormatter.DrawBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine(result));
+        }
+
+        [Fact]
+        public void DrawGame_as_string_playerY()
+        {
+            var output = new StubOutput();
+            var outputFormatter = new StubOutputFormatter();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var expected = "X  O  .  \n.  .  .  \n.  .  .  \n";
+            var result = outputFormatter.DrawBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine(result));
         }
     }
 }
