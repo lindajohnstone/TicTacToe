@@ -1,15 +1,17 @@
+using System;
+
 namespace TicTacToe2D.Tests
 {
     public class StubOutput : IOutput
     {
         public void ConsoleWrite(string value)
         {
-            throw new System.NotImplementedException();
+            Console.Write(value);
         }
 
         public void ConsoleWriteLine(string value)
         {
-            throw new System.NotImplementedException();
+            Console.WriteLine(value);
         }
     }
 }

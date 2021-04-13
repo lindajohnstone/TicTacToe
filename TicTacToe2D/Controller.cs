@@ -45,7 +45,7 @@ namespace TicTacToe2D
                     winner.IsADraw(game.GameBoard);
                 }
             }
-            return game;
+            //return game;
 
 
             // EndGame
@@ -73,7 +73,6 @@ namespace TicTacToe2D
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...
                     Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException 
-                    // TODO: ValidTurn does not do anything
                 }
                 catch (InvalidMoveEntryException ex)
                 {

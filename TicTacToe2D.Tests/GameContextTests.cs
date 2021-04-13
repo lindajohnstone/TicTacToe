@@ -28,13 +28,24 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void GameContext_get_current_player() // TODO: failing. NB running game in terminal only shows player in 'GetCurrentPlayer' else 
+        public void GameContext_get_current_player()  
         {
             var board = new Board(3);
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             var result = game.GetCurrentPlayer(game);
             var expected = Player.X;
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void GameContext_get_current_player_BoardXFirstMove() 
+        {
+            var board = new Board(SourceData.BoardXFirstMove());
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            var result = game.GetCurrentPlayer(game);
+            var expected = Player.O;
             Assert.Equal(expected, result);
         }
 

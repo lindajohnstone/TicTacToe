@@ -36,7 +36,7 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public Player GetCurrentPlayer(GameContext game) // TODO: only the player is in the 'else' condition shows in the terminal
+        public Player GetCurrentPlayer(GameContext game) 
         {
             // check how many empty fields in board
             // if modulus == 1, Player == X, else Y

@@ -4,9 +4,30 @@ namespace TicTacToe2D.Tests
 {
     public class StubOutputFormatter : IOutputFormatter
     {
-        public void DrawBoard(Board board, ConsoleOutput output)
+        public string DrawBoard(Board board, IOutput output)
         {
-            throw new System.NotImplementedException();
+            var boardOutput = "";
+            for (var column = 0; column < board.Width; column++)
+            {
+                for (var row = 0; row < board.Width; row++)
+                {
+                    var position = board.GetField(new Position(column, row));
+                    if (position == FieldContents.y)
+                    {
+                        output.ConsoleWrite("O  ");
+                    }
+                    if (position == FieldContents.x)
+                    {
+                        output.ConsoleWrite("X  ");
+                    }
+                    else
+                    {
+                        output.ConsoleWrite(".  ");
+                    }
+                }
+                output.ConsoleWrite(Environment.NewLine);
+            }
+            return boardOutput;
         }
 
         public string PrintInstructions(Player player)

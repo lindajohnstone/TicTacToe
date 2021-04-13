@@ -18,7 +18,12 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void DrawGame_as_string()
         {
-            throw new NotImplementedException();
+            var output = new StubOutput();
+            var outputFormatter = new StubOutputFormatter();
+            var board = new Board(SourceData.BoardIsInitialized());
+            var expected = ".  .  .\n.  .  .\n.  .  .";
+            var result = outputFormatter.DrawBoard(board, output);
+            Assert.Equal(expected, result);
         }
     }
 }

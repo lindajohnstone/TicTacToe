@@ -7,7 +7,7 @@ namespace TicTacToe2D
         // print instructions to console
         // print board to console
         // print win (which player) or draw 
-        public static void DrawBoard(Board board, ConsoleOutput output) // TODO: adding Noughts ('O') value adds extra column
+        public static void DrawBoard(Board board, IOutput output) // TODO: adding Noughts ('O') value adds extra column
         {
            
             for (var column = 0; column < board.Width; column++)
@@ -32,7 +32,7 @@ namespace TicTacToe2D
             }
         }
 
-        public static void PrintBoard(Board board, ConsoleOutput output)
+        public static void PrintBoard(Board board, IOutput output)
         {
             output.ConsoleWriteLine("Here's the current board:");
             DrawBoard(board, output);
