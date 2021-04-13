@@ -47,7 +47,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void WinningRow() // TODO: if line 65 commented out & line 66 uncommented, fails - board referring to GameBoard. Also, nullreferenceexception.
+        public void WinningRow() // TODO: if line 65 commented out & line 66 uncommented, fails - board referring to GameBoard. Also, nullreferenceexception
         {
             var win = new GamePredicate();
             var controller = new Controller();
