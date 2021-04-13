@@ -39,9 +39,20 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void GameContext_get_current_player_BoardXFirstMove() 
+        public void GameContext_get_current_player_BoardXFirstMove() //TODO: expected to fail but didn't
         {
             var board = new Board(SourceData.BoardXFirstMove());
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            var result = game.GetCurrentPlayer(game);
+            var expected = Player.O;
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void GameContext_get_current_player_BoardIsADraw()
+        {
+            var board = new Board(SourceData.BoardIsADraw());
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             var result = game.GetCurrentPlayer(game);

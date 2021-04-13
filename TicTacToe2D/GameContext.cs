@@ -36,10 +36,11 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public Player GetCurrentPlayer(GameContext game) // TODO: only the player is in the 'else' condition shows in the terminal
+        public Player GetCurrentPlayer(GameContext game) // TODO: nullreferenceexception in controller.cs line 91 - refers to here
         {
             // check how many empty fields in board
             // if modulus == 1, Player == X, else Y
+            // TODO: if board is full, still returns a value 
             if (GameBoard.GetAllPositions().Where((x) => GameBoard.GetField(x) == FieldContents.empty).Count() % 2 == 1)
             {
                 return Players[0];
