@@ -10,16 +10,9 @@ namespace TicTacToe2D.Tests
             var inputArray = SplitInput(input);
                 if (IsValidInput(inputArray))
                 {
-                    try
-                    {
-                        return new Position(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
-                    }
-                    catch
-                    {
-                        throw new InvalidMoveSyntaxException();
-                    }
+                    return new Position(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
                 }
-            return null;
+                throw new InvalidMoveSyntaxException();    
         }
 
         private string[] SplitInput(string input)
@@ -30,13 +23,18 @@ namespace TicTacToe2D.Tests
         private bool IsValidInput(string[] input)
         {
             var list = new List<int>();
+            var count = 0;
             foreach (var value in input)
             {
                 bool success = Int32.TryParse(value, out var number);
                 if (success)
                 {
-                    return true;
+                    count++;
                 }
+            }
+            if (count == 2)
+            {
+                return true;
             }
             return false;
         }

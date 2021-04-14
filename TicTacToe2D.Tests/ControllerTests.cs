@@ -35,7 +35,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Theory]
-        [InlineData("0,b")]// TODO: why does this line throw but line 39 doesn't?
+        [InlineData("0,b")]
         [InlineData("l,m")] 
         [InlineData("b,0")]
         public void GetPlayerMove_throws_exception_with_invalid_format(string input)

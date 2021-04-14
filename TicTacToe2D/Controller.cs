@@ -80,7 +80,7 @@ namespace TicTacToe2D
                 }
                 catch (InvalidMoveSyntaxException ex)// TODO: where to use 'ex'
                 {
-                    // display retry entering move message and try again...
+                    output.ConsoleWriteLine("Invalid format. Please try again...");
                 }
             }
             while (playerMovePosition == null);
