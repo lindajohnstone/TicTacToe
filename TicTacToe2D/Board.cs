@@ -147,7 +147,7 @@ namespace TicTacToe2D
             this.FieldDictionary[position] = fieldContents;
         }
 
-        private void EnsureValidPosition(Position position) // TODO: how to handle input that does not include an integer
+        private void EnsureValidPosition(Position position) 
         {
             if (position.X < 0 || position.X >= Width)
             {

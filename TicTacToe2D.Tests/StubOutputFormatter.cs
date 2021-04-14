@@ -31,9 +31,13 @@ namespace TicTacToe2D.Tests
             return boardList;
         }
 
+        public string PrintEndGame(IOutput output)
+        {
+            throw new NotImplementedException();
+        }
+
         public string PrintInstructions(Player player)
         {
-            //var output = new StubOutput();
             var playerId = (int)player;
             var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", playerId, player);
             return message;

@@ -38,5 +38,10 @@ namespace TicTacToe2D.Tests
             }
             return false;
         }
+
+        public bool PlayerEndsGame(char input)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

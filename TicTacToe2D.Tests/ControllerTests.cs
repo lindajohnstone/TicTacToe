@@ -78,5 +78,15 @@ namespace TicTacToe2D.Tests
             //var result = controller.IsWinningBoard(player, win); // fails
             Assert.True(result);
         }
+
+        [Fact]
+        public void EndGame_if_win()
+        {
+            var win = new GamePredicate();
+            var controller = new Controller();
+            var player = controller.Players[0];
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            
+        }
     }
 }
