@@ -13,10 +13,16 @@ namespace TicTacToe2D
             var inputArray = SplitInput(input);
             if (IsValidInput(inputArray))
             {
-                return new Position(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
+                try
+                {
+                    return new Position(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
+                }
+                catch
+                {
+                    throw new InvalidMoveSyntaxException();
+                }
             }
-            throw new InvalidMoveSyntaxException();
-
+            return null;
         }
         private static string[] SplitInput(string input)
         {

@@ -56,6 +56,7 @@ namespace TicTacToe2D
             var input = new ConsoleInput();
             // prompt for move...
             OutputFormatter.PrintBoard(game.GameBoard, output);
+            output.ConsoleWriteLine("");
             OutputFormatter.PrintInstructions(game.GetCurrentPlayer(game));
 
             // get move
@@ -71,12 +72,13 @@ namespace TicTacToe2D
                     //. validate move...
                     Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException 
                 }
-                catch (InvalidMoveEntryException ex)
+                catch (InvalidMoveEntryException ex) // TODO: where to use 'ex'
                 {
                     //. display this move is not valid message and try again
+                    output.ConsoleWriteLine("Oh no, a piece is already at this place! Try again...");
                     playerMovePosition = null;
                 }
-                catch (InvalidMoveSyntaxException ex)
+                catch (InvalidMoveSyntaxException ex)// TODO: where to use 'ex'
                 {
                     // display retry entering move message and try again...
                 }
@@ -86,9 +88,7 @@ namespace TicTacToe2D
             //. apply move to board.
             var fieldContents = new FieldContents();
             var player = game.GetCurrentPlayer(game);
-            output.ConsoleWriteLine(player.ToString());
             fieldContents = PlayerFieldContents(player);
-            output.ConsoleWriteLine(fieldContents.ToString());
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }
 
@@ -99,7 +99,6 @@ namespace TicTacToe2D
             if (player == Players[0]) 
             {
                 fieldContents = FieldContents.x;
-                Console.WriteLine(fieldContents);
             }
             else
             {

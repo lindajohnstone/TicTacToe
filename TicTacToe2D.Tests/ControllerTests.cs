@@ -22,16 +22,28 @@ namespace TicTacToe2D.Tests
             Assert.True(playerMovePosition == null);
         }
 
-        [Fact]
-        public void PlayGame_move_player()
+        [Theory]
+        [InlineData("0,1")]
+        public void PlayGame_move_player(string input)
         {
             var board = new Board(SourceData.BoardIsInitialized());
-            var input = "0,1";
             var parser = new StubInputParser();
             var fieldContents = FieldContents.x;
             var result = board.MovePlayer(parser.GetPlayerMove(input), fieldContents);
             var expected = (SourceData.BoardXFirstMove() == result);
             Assert.True(expected);
+        }
+
+        [Theory]
+        [InlineData("0,b")]// TODO: why does this line throw but line 39 doesn't?
+        [InlineData("l,m")] 
+        [InlineData("b,0")]
+        public void GetPlayerMove_throws_exception_with_invalid_format(string input)
+        {
+            var board = new Board(SourceData.BoardIsInitialized());
+            var parser = new StubInputParser();
+            var result = Assert.Throws<InvalidMoveSyntaxException>(() => parser.GetPlayerMove(input));
+            Assert.Equal("Invalid format. Please try again...", result.Message);
         }
 
         [Fact]

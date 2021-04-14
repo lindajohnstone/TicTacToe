@@ -8,11 +8,18 @@ namespace TicTacToe2D.Tests
         public Position GetPlayerMove(string input)
         {
             var inputArray = SplitInput(input);
-            if (IsValidInput(inputArray))
-            {
-                return new Position(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
-            }
-            throw new InvalidMoveSyntaxException();
+                if (IsValidInput(inputArray))
+                {
+                    try
+                    {
+                        return new Position(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
+                    }
+                    catch
+                    {
+                        throw new InvalidMoveSyntaxException();
+                    }
+                }
+            return null;
         }
 
         private string[] SplitInput(string input)
