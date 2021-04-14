@@ -31,7 +31,7 @@ namespace TicTacToe2D.Tests
         {
             var output = new StubOutput();
             var outputFormatter = new StubOutputFormatter();
-            var board = new Board(SourceData.BoardMovePlayerY());
+            var board = new Board(SourceData.BoardMovePlayer());
             var expected = "X  .  .  \n.  .  .  \n.  .  .  \n";
             var result = outputFormatter.DrawBoard(board, output);
             Assert.Equal(expected, output.GetWriteLine(result));
