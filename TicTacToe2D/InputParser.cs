@@ -24,15 +24,21 @@ namespace TicTacToe2D
 
         private static bool IsValidInput(string[] input)
         {
+            var list = new List<int>();
+            var count = 0;
             foreach (var value in input)
             {
                 bool success = Int32.TryParse(value, out var number);
-                if (!success)
+                if (success)
                 {
-                    return false;
+                    count++;
                 }
             }
-            return true;
+            if (count == 2)
+            {
+                return true;
+            }
+            return false;
         }
 
         public static void PlayerEndsGame(ConsoleInput input)
