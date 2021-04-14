@@ -13,17 +13,17 @@ namespace TicTacToe2D.Tests
                 for (var row = 0; row < board.Width; row++)
                 {
                     var position = board.GetField(new Position(column, row));
-                    if (position == FieldContents.y)
+                    switch(position)
                     {
-                        output.ConsoleWrite("O  ");
-                    }
-                    if (position == FieldContents.x)
-                    {
-                        output.ConsoleWrite("X  ");
-                    }
-                    if (position == FieldContents.empty)
-                    {
-                        output.ConsoleWrite(".  ");
+                        case (FieldContents.y):
+                            output.ConsoleWrite("O  ");
+                            break;
+                        case (FieldContents.x):
+                            output.ConsoleWrite("X  ");
+                            break;
+                        case (FieldContents.empty):
+                            output.ConsoleWrite(".  ");
+                            break;
                     }
                 }
                 output.ConsoleWrite(Environment.NewLine);
