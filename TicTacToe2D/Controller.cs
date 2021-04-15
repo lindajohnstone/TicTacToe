@@ -54,10 +54,12 @@ namespace TicTacToe2D
             var output = new ConsoleOutput();
 
             var input = new ConsoleInput();
+
+            var player = game.GetCurrentPlayer(game);
             // prompt for move...
             OutputFormatter.PrintBoard(game.GameBoard, output);
             output.ConsoleWriteLine("");
-            OutputFormatter.PrintInstructions(game.GetCurrentPlayer(game), output);
+            OutputFormatter.PrintInstructions(player, output);
 
             // get move
             Position playerMovePosition = null;
@@ -88,7 +90,7 @@ namespace TicTacToe2D
 
             //. apply move to board.
             var fieldContents = new FieldContents();
-            var player = game.GetCurrentPlayer(game);
+            
             fieldContents = PlayerFieldContents(player);
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }

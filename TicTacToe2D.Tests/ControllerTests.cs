@@ -90,7 +90,6 @@ namespace TicTacToe2D.Tests
         public void EndGame_user_ends_game_output_message()
         {
             var output = new StubOutput();
-            var input = new StubConsoleInput();
             var player = Player.X;
             var expected = "Player X has ended the game.";
             OutputFormatter.PrintEndGame(player, output);
@@ -104,7 +103,9 @@ namespace TicTacToe2D.Tests
             var player = Player.X;
             var playerInput = "q";
             var expected = "Player X has ended the game.";
-            //Assert.Equal(expected, output.GetWriteLine(InputParser.PlayerEndsGame(player, playerInput, output)));
+            InputParser.PlayerEndsGame(player, playerInput, output);
+            Assert.Equal(expected, output.GetWriteLine());
+            Assert.True(InputParser.PlayerEndsGame(player, playerInput, output));
         }
     }
 }
