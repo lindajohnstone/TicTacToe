@@ -61,17 +61,8 @@ namespace TicTacToe2D.Tests
             var win = new GamePredicate();
             var controller = new Controller();
             var player = controller.Players[0]; 
-            FieldContents fieldContents;
-            if (player == controller.Players[0])
-            {
-                fieldContents = FieldContents.x;
-            }
-            else
-            {
-                fieldContents = FieldContents.y;
-            }
             var board = new Board(SourceData.BoardWinningDiagonalLR());
-            var result = win.IsWinningBoard(board, board.GetWinningLines(), fieldContents);
+            var result = win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
             //var result = controller.IsWinningBoard(player, win); // fails
             Assert.True(result);
         }

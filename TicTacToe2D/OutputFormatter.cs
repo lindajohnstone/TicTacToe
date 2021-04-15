@@ -38,21 +38,17 @@ namespace TicTacToe2D
             DrawBoard(board, output);
         }
 
-        public static List<string> PrintInstructions(Player player, IOutput output)
+        public static void PrintInstructions(Player player, IOutput output)
         {
-            var instructions = new List<string>();
             var playerId = (int)player;
             var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", playerId, player);
             output.ConsoleWrite(message);
-            return instructions;
         }
 
-        public static List<string> PrintEndGame(Player player, IOutput output)
+        public static void PrintEndGame(Player player, IOutput output)
         {
-            var list = new List<string>();
             var message = String.Format("Player {0} has ended the game.", player);
             output.ConsoleWriteLine(message);
-            return list;
         }
 
         private static void PrintPlayerMove(ConsoleOutput output)
