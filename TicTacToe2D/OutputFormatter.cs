@@ -45,9 +45,10 @@ namespace TicTacToe2D
             output.ConsoleWrite(message); 
         }
 
-        public static string PrintGameEnd(ConsoleOutput output)
+        public static void PrintEndGame(Player player, ConsoleOutput output)
         {
-            throw new NotImplementedException();
+            var message = String.Format("Player {0} has ended the game.", player);
+            output.ConsoleWriteLine(message);
         }
 
         private static void PrintPlayerMove(ConsoleOutput output)

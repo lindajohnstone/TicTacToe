@@ -6,7 +6,7 @@ namespace TicTacToe2D
     {
         public List<string> DrawBoard(Board board, IOutput output);
         public string PrintInstructions(Player player);
-        public string PrintEndGame(IOutput output);
+        public List<string> PrintEndGame(Player player, IOutput output);
         
     }
 }

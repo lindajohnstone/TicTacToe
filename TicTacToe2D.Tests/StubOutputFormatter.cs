@@ -31,9 +31,12 @@ namespace TicTacToe2D.Tests
             return boardList;
         }
 
-        public string PrintEndGame(IOutput output)
+        public List<string> PrintEndGame(Player player, IOutput output)
         {
-            throw new NotImplementedException();
+            var list = new List<string>();
+            var message =  String.Format("Player {0} has ended the game.", player);
+            output.ConsoleWriteLine(message);
+            return list;
         }
 
         public string PrintInstructions(Player player)

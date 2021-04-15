@@ -7,6 +7,6 @@ namespace TicTacToe2D
         // remove console input
         // stub used for testing
         public string ConsoleReadLine();
-        public ConsoleKeyInfo ConsoleReadKey(); // q for quit
+        public ConsoleKeyInfo ConsoleReadKey(bool value); // q for quit
     }
 }

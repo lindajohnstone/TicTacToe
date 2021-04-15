@@ -16,7 +16,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void testName()
+        public void Player_position_is_null()
         {
             Position playerMovePosition = null;
             Assert.True(playerMovePosition == null);
@@ -79,14 +79,39 @@ namespace TicTacToe2D.Tests
             Assert.True(result);
         }
 
+        // [Fact]
+        // public void EndGame_if_win()
+        // {
+        //     var win = new GamePredicate();
+        //     var controller = new Controller();
+        //     var player = controller.Players[0];
+        //     var board = new Board(SourceData.BoardWinningDiagonalLR());
+
+        // }
+
         [Fact]
-        public void EndGame_if_win()
+        public void EndGame_user_ends_game_output_message()
         {
-            var win = new GamePredicate();
-            var controller = new Controller();
-            var player = controller.Players[0];
-            var board = new Board(SourceData.BoardWinningDiagonalLR());
-            
+            var output = new StubOutput();
+            var input = new StubConsoleInput();
+            var outputFormatter = new StubOutputFormatter();
+            var player = Player.X;
+            var expected = "Player X has ended the game.";
+            var result = outputFormatter.PrintEndGame(player, output);
+            Assert.Equal(expected, output.GetWriteLine(result));
+        }
+
+        [Fact]
+        public void EndGame_user_input_q_ends_game_output_message()
+        {
+            var output = new StubOutput();
+            var parser = new StubInputParser();
+            var input = new StubConsoleInput();
+            var outputFormatter = new StubOutputFormatter();
+            var player = Player.X;
+            var expected = "Player X has ended the game.";
+            var result = outputFormatter.PrintEndGame(player, output);
+            Assert.Equal(expected, output.GetWriteLine(result));
         }
     }
 }

@@ -2,7 +2,7 @@ using System;
 
 namespace TicTacToe2D.Tests
 {
-    public class StubConsoleInput : IInput
+    public class StubInput : IInput
     {
         public ConsoleKeyInfo ConsoleReadKey(bool value)
         {

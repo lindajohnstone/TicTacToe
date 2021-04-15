@@ -113,8 +113,6 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        
-
         public bool IsWinningBoard(Player player, GamePredicate winner)// TODO: should this method be private?
         {
             return winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));

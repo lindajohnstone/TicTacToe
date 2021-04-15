@@ -11,9 +11,9 @@ namespace TicTacToe2D
             return Console.ReadLine();
         }
 
-        public ConsoleKeyInfo ConsoleReadKey()
+        public ConsoleKeyInfo ConsoleReadKey(bool value)
         {
-            throw new NotImplementedException();
+            return ConsoleReadKey(value);
         }
 
         
