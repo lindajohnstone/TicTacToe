@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace TicTacToe2D
 {
@@ -7,9 +8,8 @@ namespace TicTacToe2D
         // print instructions to console
         // print board to console
         // print win (which player) or draw 
-        public static void DrawBoard(Board board, IOutput output) // TODO: adding Noughts ('O') value adds extra column
+        public static void DrawBoard(Board board, IOutput output)
         {
-           
             for (var column = 0; column < board.Width; column++)
             {
                 for (var row = 0; row < board.Width; row++)
@@ -28,7 +28,7 @@ namespace TicTacToe2D
                             break;
                     }
                 }
-                output.ConsoleWriteLine("");
+                output.ConsoleWrite(Environment.NewLine);
             }
         }
 
@@ -37,18 +37,22 @@ namespace TicTacToe2D
             output.ConsoleWriteLine("Here's the current board:");
             DrawBoard(board, output);
         }
-        public static void PrintInstructions(Player player)
+
+        public static List<string> PrintInstructions(Player player, IOutput output)
         {
-            var output = new ConsoleOutput();
+            var instructions = new List<string>();
             var playerId = (int)player;
             var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", playerId, player);
-            output.ConsoleWrite(message); 
+            output.ConsoleWrite(message);
+            return instructions;
         }
 
-        public static void PrintEndGame(Player player, ConsoleOutput output)
+        public static List<string> PrintEndGame(Player player, IOutput output)
         {
+            var list = new List<string>();
             var message = String.Format("Player {0} has ended the game.", player);
             output.ConsoleWriteLine(message);
+            return list;
         }
 
         private static void PrintPlayerMove(ConsoleOutput output)

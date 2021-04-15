@@ -57,7 +57,7 @@ namespace TicTacToe2D
             // prompt for move...
             OutputFormatter.PrintBoard(game.GameBoard, output);
             output.ConsoleWriteLine("");
-            OutputFormatter.PrintInstructions(game.GetCurrentPlayer(game));
+            OutputFormatter.PrintInstructions(game.GetCurrentPlayer(game), output);
 
             // get move
             Position playerMovePosition = null;
@@ -67,6 +67,7 @@ namespace TicTacToe2D
                 {
                     //. get player move
                     var value = input.ConsoleReadLine();
+                    
                     output.ConsoleWriteLine("");
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...

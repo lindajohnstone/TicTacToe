@@ -10,8 +10,7 @@ namespace TicTacToe2D.Tests
         public void InputParser_GetPlayerMove()
         {
             var input = "0,0";
-            var parser = new StubInputParser();
-            var result = parser.GetPlayerMove(input);
+            var result = InputParser.GetPlayerMove(input);
             Assert.Equal(new Position(0,0), result);
         }
 
@@ -27,9 +26,8 @@ namespace TicTacToe2D.Tests
         public void PlayGame_move_player(string input)
         {
             var board = new Board(SourceData.BoardIsInitialized());
-            var parser = new StubInputParser();
             var fieldContents = FieldContents.x;
-            var result = board.MovePlayer(parser.GetPlayerMove(input), fieldContents);
+            var result = board.MovePlayer(InputParser.GetPlayerMove(input), fieldContents);
             var expected = (SourceData.BoardXFirstMove() == result);
             Assert.True(expected);
         }
@@ -41,8 +39,7 @@ namespace TicTacToe2D.Tests
         public void GetPlayerMove_throws_exception_with_invalid_format(string input)
         {
             var board = new Board(SourceData.BoardIsInitialized());
-            var parser = new StubInputParser();
-            var result = Assert.Throws<InvalidMoveSyntaxException>(() => parser.GetPlayerMove(input));
+            var result = Assert.Throws<InvalidMoveSyntaxException>(() => InputParser.GetPlayerMove(input));
             Assert.Equal("Invalid format. Please try again...", result.Message);
         }
 
@@ -94,24 +91,20 @@ namespace TicTacToe2D.Tests
         {
             var output = new StubOutput();
             var input = new StubConsoleInput();
-            var outputFormatter = new StubOutputFormatter();
             var player = Player.X;
             var expected = "Player X has ended the game.";
-            var result = outputFormatter.PrintEndGame(player, output);
-            Assert.Equal(expected, output.GetWriteLine(result));
+            OutputFormatter.PrintEndGame(player, output);
+            Assert.Equal(expected, output.GetWriteLine());
         }
 
         [Fact]
         public void EndGame_user_input_q_ends_game_output_message()
         {
             var output = new StubOutput();
-            var parser = new StubInputParser();
-            var input = new StubConsoleInput();
-            var outputFormatter = new StubOutputFormatter();
             var player = Player.X;
+            var playerInput = "q";
             var expected = "Player X has ended the game.";
-            var result = outputFormatter.PrintEndGame(player, output);
-            Assert.Equal(expected, output.GetWriteLine(result));
+            //Assert.Equal(expected, output.GetWriteLine(InputParser.PlayerEndsGame(player, playerInput, output)));
         }
     }
 }

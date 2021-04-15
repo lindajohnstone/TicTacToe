@@ -41,11 +41,15 @@ namespace TicTacToe2D
             return false;
         }
 
-        public static void PlayerEndsGame(ConsoleInput input)
+        public static string PlayerEndsGame(Player player, string playerInput, IOutput output)
         {
             throw new NotImplementedException();
         }
 
-        
+        // if (value == "q")
+        //             {
+        //                 OutputFormatter.PrintEndGame(game.GetCurrentPlayer(game), output);
+        //                 break;
+        //             }
     }
 }

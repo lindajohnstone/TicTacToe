@@ -21,7 +21,7 @@ namespace TicTacToe2D.Tests
             _outputList.Add(value);
         }
 
-        public string GetWriteLine(List<string> value)
+        public string GetWriteLine()
         {
             return String.Join("", _outputList);
         }
