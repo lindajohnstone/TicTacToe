@@ -17,6 +17,7 @@ namespace TicTacToe2D
         
         public int Height { get; private set; }
 
+        private IOutput _output;
         public Board(int boardSize)
         {
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
@@ -151,10 +152,12 @@ namespace TicTacToe2D
         {
             if (position.X < 0 || position.X >= Width)
             {
+                //_output.ConsoleWriteLine("Position X coordinate is out of range. Please try again...");
                 throw new ArgumentException("Position X coordinate is out of range");
             }
             if (position.Y < 0 || position.Y >= Height)
             {
+                //_output.ConsoleWriteLine("Position Y coordinate is out of range. Please try again...")
                 throw new ArgumentException("Position Y coordinate is out of range");
             }
         }

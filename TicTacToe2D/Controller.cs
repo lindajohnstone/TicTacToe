@@ -49,15 +49,6 @@ namespace TicTacToe2D
             // EndGame
         }
 
-        // public bool EndGame(string playerInput, IOutput output, Player player, IInput input)
-        // {
-        //     string value = NewMethod(output, input);
-        //     if (InputParser.PlayerEndsGame(player, playerInput, output))
-        //     {
-        //         return true;
-        //     }
-        //     return false;
-        // }
 
         public void ImplementTurn(GameContext game)
         {
@@ -78,7 +69,7 @@ namespace TicTacToe2D
                 try
                 {
                     //. get player move
-                    string value = NewMethod(output, input);
+                    var value = input.ConsoleReadLine();
                     output.ConsoleWriteLine("");
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...
@@ -104,12 +95,6 @@ namespace TicTacToe2D
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }
 
-        private static string NewMethod(IOutput output, IInput input)
-        {
-            var value = input.ConsoleReadLine();
-            return value;
-        }
-
         private FieldContents PlayerFieldContents(Player player)
         {
             FieldContents fieldContents;
@@ -125,10 +110,19 @@ namespace TicTacToe2D
             return fieldContents;
         }
 
-        public bool EndGame(string playerInput, IOutput output, Player player, IInput input)
+        public bool EndGame(string playerInput, IOutput output, Player player, IInput input, bool isWinningGame, bool isDrawnGame) 
+        // TODO: too many parameters? 
+        //  adding playerInput to PlayGame while loop?
         {
-            string value = NewMethod(output, input);
             if (InputParser.PlayerEndsGame(player, playerInput, output))
+            {
+                return true;
+            }
+            if (isWinningGame)
+            {
+                return true;
+            }
+            if (isDrawnGame)
             {
                 return true;
             }

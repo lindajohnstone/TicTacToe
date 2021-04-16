@@ -68,10 +68,9 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void EndGame_win_output_message()
+        public void EndGame_win_output_message() //TODO: valid test? check if a win before printing?
         {
             var output = new StubOutput();
-            var win = new GamePredicate();
             var controller = new Controller();
             var player = controller.Players[0];
             var board = new Board(SourceData.BoardWinningDiagonalLR());
@@ -87,6 +86,17 @@ namespace TicTacToe2D.Tests
             var player = Player.X;
             var expected = "Player X has ended the game.";
             OutputFormatter.PrintEndGame(player, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
+
+        [Fact]
+        public void EndGame_drawn_game_output_message()
+        {
+            var output = new StubOutput();
+            var draw = new GamePredicate();
+            var board = new Board(SourceData.BoardIsADraw());
+            var expected = "Game is drawn. Better luck next time.";
+            OutputFormatter.PrintDrawnGame(board, draw, output);
             Assert.Equal(expected, output.GetWriteLine());
         }
 
@@ -110,7 +120,35 @@ namespace TicTacToe2D.Tests
             var input = new StubConsoleInput();
             var playerInput = "q";
             var player = Player.X;
-            var result = controller.EndGame(playerInput, output, player, input);
+            var result = controller.EndGame(playerInput, output, player, input, false, false);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void EndGame_method_is_winning_game()
+        {
+            var controller = new Controller();
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var isWinningGame = new GamePredicate().IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
+            var output = new StubOutput();
+            var input = new StubConsoleInput();
+            var playerInput = "";
+            var player = controller.Players[0];
+            var result = controller.EndGame(playerInput, output, player, input, isWinningGame, false);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void EndGame_method_is_drawn_game()
+        {
+            var controller = new Controller();
+            var board = new Board(SourceData.BoardIsADraw());
+            var isDrawnGame = new GamePredicate().IsADraw(board);
+            var output = new StubOutput();
+            var input = new StubConsoleInput();
+            var playerInput = "";
+            var player = controller.Players[0];
+            var result = controller.EndGame(playerInput, output, player, input, false, isDrawnGame);
             Assert.True(result);
         }
     }
