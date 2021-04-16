@@ -4,6 +4,8 @@ namespace TicTacToe2D.Tests
 {
     public class StubConsoleInput : IInput
     {
+        private string _readLine;
+
         public ConsoleKeyInfo ConsoleReadKey(bool value)
         {
             throw new NotImplementedException();
@@ -11,7 +13,7 @@ namespace TicTacToe2D.Tests
 
         public string ConsoleReadLine()
         {
-            throw new NotImplementedException();
+            return _readLine;
         }
     }
 }

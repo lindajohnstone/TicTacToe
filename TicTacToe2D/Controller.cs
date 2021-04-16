@@ -29,16 +29,16 @@ namespace TicTacToe2D
             var output = new ConsoleOutput();
             // display instructions
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
-
+            
             while (true)
             {
-                foreach (var player in game.Players) // TODO: loop should not be a foreach - only loops once for each player
+                foreach (var player in game.Players) 
                 {
                     ImplementTurn(game);
                     //. is there a winner
                     var winner = new GamePredicate();
-                    IsWinningBoard(player, winner);
-                    // winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player))
+                    //IsWinningBoard(player, winner);
+                    winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));
                     //. is the board full?
                     winner.IsADraw(game.GameBoard);
                 }
@@ -48,6 +48,16 @@ namespace TicTacToe2D
 
             // EndGame
         }
+
+        // public bool EndGame(string playerInput, IOutput output, Player player, IInput input)
+        // {
+        //     string value = NewMethod(output, input);
+        //     if (InputParser.PlayerEndsGame(player, playerInput, output))
+        //     {
+        //         return true;
+        //     }
+        //     return false;
+        // }
 
         public void ImplementTurn(GameContext game)
         {
@@ -68,8 +78,7 @@ namespace TicTacToe2D
                 try
                 {
                     //. get player move
-                    var value = input.ConsoleReadLine();
-                    
+                    string value = NewMethod(output, input);
                     output.ConsoleWriteLine("");
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...
@@ -95,6 +104,11 @@ namespace TicTacToe2D
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }
 
+        private static string NewMethod(IOutput output, IInput input)
+        {
+            var value = input.ConsoleReadLine();
+            return value;
+        }
 
         private FieldContents PlayerFieldContents(Player player)
         {
@@ -109,6 +123,16 @@ namespace TicTacToe2D
             }
 
             return fieldContents;
+        }
+
+        public bool EndGame(string playerInput, IOutput output, Player player, IInput input)
+        {
+            string value = NewMethod(output, input);
+            if (InputParser.PlayerEndsGame(player, playerInput, output))
+            {
+                return true;
+            }
+            return false;
         }
 
         private Validations ValidTurn()

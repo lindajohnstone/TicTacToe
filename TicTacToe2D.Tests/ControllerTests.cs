@@ -91,7 +91,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void EndGame_user_input_q_ends_game_output_message()
+        public void EndGame_user_input_q_ends_game_outputs_message()
         {
             var output = new StubOutput();
             var player = Player.X;
@@ -100,6 +100,18 @@ namespace TicTacToe2D.Tests
             InputParser.PlayerEndsGame(player, playerInput, output);
             Assert.Equal(expected, output.GetWriteLine());
             Assert.True(InputParser.PlayerEndsGame(player, playerInput, output));
+        }
+
+        [Fact]
+        public void EndGame_method_PlayerEndsGame()
+        {
+            var controller = new Controller();
+            var output = new StubOutput();
+            var input = new StubConsoleInput();
+            var playerInput = "q";
+            var player = Player.X;
+            var result = controller.EndGame(playerInput, output, player, input);
+            Assert.True(result);
         }
     }
 }

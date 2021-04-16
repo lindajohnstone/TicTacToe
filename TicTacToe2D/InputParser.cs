@@ -50,7 +50,5 @@ namespace TicTacToe2D
             }
             return false;
         }
-
-        
     }
 }
