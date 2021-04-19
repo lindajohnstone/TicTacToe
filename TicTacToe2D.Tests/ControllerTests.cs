@@ -112,46 +112,5 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, output.GetWriteLine());
             Assert.True(InputParser.PlayerEndsGame(player, playerInput, output));
         }
-
-        [Fact]
-        public void EndGame_method_PlayerEndsGame() // TODO: is this a valid test?
-        {
-            var controller = new Controller();
-            var output = new StubOutput();
-            var input = new StubConsoleInput();
-            var playerInput = "q";
-            var player = Player.X;
-            var result = controller.EndGame(playerInput, output, player, input, false, false);
-            Assert.True(result);
-        }
-
-        // [Fact]
-        // public void EndGame_method_is_winning_game() // TODO: don't think this is a valid test
-        // {
-        //     var controller = new Controller();
-        //     var board = new Board(SourceData.BoardWinningDiagonalLR());
-        //     var condition = new GamePredicate();
-        //     var isWinningGame = condition.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
-        //     var output = new StubOutput();
-        //     var input = new StubConsoleInput();
-        //     var playerInput = "";
-        //     var player = controller.Players[0];
-        //     var result = controller.EndGame(playerInput, output, player, input, isWinningGame, false);
-        //     Assert.True(result);
-        // }
-
-        [Fact]
-        public void EndGame_method_is_drawn_game()
-        {
-            var controller = new Controller();
-            var board = new Board(SourceData.BoardIsADraw());
-            var isDrawnGame = new GamePredicate().IsADraw(board);
-            var output = new StubOutput();
-            var input = new StubConsoleInput();
-            var playerInput = "";
-            var player = controller.Players[0];
-            var result = controller.EndGame(playerInput, output, player, input, false, isDrawnGame);
-            Assert.True(result);
-        }
     }
 }

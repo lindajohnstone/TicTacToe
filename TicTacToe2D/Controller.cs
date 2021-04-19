@@ -110,27 +110,6 @@ namespace TicTacToe2D
             return fieldContents;
         }
 
-        public bool EndGame(string playerInput, IOutput output, Player player, IInput input, bool isWinningGame, bool isDrawnGame) 
-        // TODO: too many parameters? 
-        //  adding playerInput to PlayGame while loop
-        {
-            var condition = new GamePredicate();
-            isWinningGame = condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));
-            if (InputParser.PlayerEndsGame(player, playerInput, output))
-            {
-                return true;
-            }
-            if (isWinningGame)
-            {
-                return true;
-            }
-            if (isDrawnGame)
-            {
-                return true;
-            }
-            return false;
-        }
-
         private Validations ValidTurn()
         {
             throw new NotImplementedException();
