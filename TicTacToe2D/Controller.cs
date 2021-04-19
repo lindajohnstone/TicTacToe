@@ -29,7 +29,7 @@ namespace TicTacToe2D
             var output = new ConsoleOutput();
             // display instructions
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
-            
+            // TODO: adding consolereadline here causes program to wait
             while (true)
             {
                 foreach (var player in game.Players) 
@@ -71,6 +71,8 @@ namespace TicTacToe2D
                     //. get player move
                     var value = input.ConsoleReadLine();
                     output.ConsoleWriteLine("");
+                    // TODO: calling InputParser.PlayerEndsGame here only breaks out of try
+                    // where to place it to end game?
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...
                     Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException 
@@ -115,7 +117,7 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public bool IsWinningBoard(Player player, GamePredicate winner)// TODO: should this method be private?
+        public bool IsWinningBoard(Player player, GamePredicate winner)// TODO: should this method be private? does it work? (tests pass from GameContex class, not Controller)
         {
             return winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));
         }

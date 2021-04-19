@@ -50,12 +50,12 @@ namespace TicTacToe2D
             return Players[1];
         }
 
-        public Player GetPlayers()
+        public Player GetPlayers()// TODO: how to return player/s
         {
             throw new NotImplementedException();
         }
 
-        public void GameState()
+        public void GameState()// TODO: win, draw, ended by player
         {
             throw new NotImplementedException();
         }
