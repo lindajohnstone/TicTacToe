@@ -67,5 +67,16 @@ namespace TicTacToe2D.Tests
             var result = board.GetAllPositions().Where((x) => board.GetField(x) == FieldContents.empty);
             Assert.Equal(9, result.Count());
         }
+
+        [Fact]
+        public void GetPlayers_from_Player_enum()
+        {
+            var board = new Board(3);
+            var players = new List<Player>();
+            var game = new GameContext(board, players);
+            var result = game.GetPlayers();
+            var expected = new List<Player>() { Player.X, Player.O };
+            Assert.Equal(expected, result);
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace TicTacToe2D
     public class GameContext
     {
         // stores Board, Player, game state
-        // accesses board, player, validations?, gamepredicate?
+        // accesses board, player, validations?
         public Board GameBoard { get; private set; }
         public List<Player> Players { get; private set; } 
         private Validations _validations;
@@ -50,9 +50,14 @@ namespace TicTacToe2D
             return Players[1];
         }
 
-        public Player GetPlayers()// TODO: how to return player/s
+        public List<Player> GetPlayers()
         {
-            throw new NotImplementedException();
+            Players = new List<Player>();
+            foreach(Player player in Enum.GetValues(typeof(Player)))
+            {
+                Players.Add(player);
+            }
+            return Players;
         }
 
         public void GameState()// TODO: win, draw, ended by player
