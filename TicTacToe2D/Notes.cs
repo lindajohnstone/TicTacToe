@@ -4,9 +4,6 @@ namespace TicTacToe2D
     {
         /*
             TODO: should Controller be renamed to GameController? - possibly more than one controller required
-            TODO: input from player comes in as a string...
-            TODO: input from player - responsibility of InputParser
-            TODO: Should gamepredicate use board & player or gamecontext
             If predicate uses board & player & so does gamecontext - coupled? or cause stack overflow
             Validations 'linked' to ConsoleInput
             Is Turn class named correctly?

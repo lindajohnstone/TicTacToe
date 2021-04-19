@@ -14,7 +14,7 @@ namespace TicTacToe2D
         public IInput ConsoleInput { get; private set; }
         public IOutput ConsoleOutput { get; private set; }
         
-        public GameContext(Board board, List<Player> players) //TODO: to get game to run again, remove parameters & add to constructor as per GameContext commit 4/13/21 @ 11:23am
+        public GameContext(Board board, List<Player> players) 
         {
             var validations = new Validations();
             Initialize(players, board, validations);
@@ -36,7 +36,9 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public Player GetCurrentPlayer(GameContext game) // TODO: nullreferenceexception in controller.cs line 91 - refers to here
+        
+
+        public Player GetCurrentPlayer(GameContext game)
         {
             // check how many empty fields in board
             // if modulus == 1, Player == X, else Y

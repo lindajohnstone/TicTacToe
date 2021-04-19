@@ -13,7 +13,7 @@ namespace TicTacToe2D
 
         public ConsoleKeyInfo ConsoleReadKey(bool value)
         {
-            return ConsoleReadKey(value);
+            return Console.ReadKey(value);
         }
 
         

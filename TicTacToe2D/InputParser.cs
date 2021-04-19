@@ -8,7 +8,7 @@ namespace TicTacToe2D
         // receive player position
         // end game if player presses 'q'
 
-        public static Position GetPlayerMove(String input)
+        public static Position GetPlayerMove(String input) // TODO: is this written correctly?
         {
             var inputArray = SplitInput(input);
             if (IsValidInput(inputArray))
