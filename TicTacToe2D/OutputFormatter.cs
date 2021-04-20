@@ -69,7 +69,7 @@ namespace TicTacToe2D
             if (draw.IsADraw(board))
             {
                 output.ConsoleWriteLine("Game is drawn. Better luck next time.");
-                Environment.Exit(0);
+                //Environment.Exit(0);
             }
         }
     }
