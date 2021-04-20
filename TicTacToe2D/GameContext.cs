@@ -73,7 +73,7 @@ namespace TicTacToe2D
             return fieldContents;
         }
 
-        public bool GameState(Player player)// TODO: win, draw, ended by player // enum? // switch?? // rewrite tests
+        public bool GameState(Player player)
         {
             var condition = new GamePredicate();
             if (condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player)))

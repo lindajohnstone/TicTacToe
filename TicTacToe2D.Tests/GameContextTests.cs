@@ -79,52 +79,52 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, result);
         }
 
-        // [Fact]
-        // public void GetState_winning()
-        // {
-        //     var board = SourceData.BoardXWinningTopRow();
-        //     var output = new StubOutput();
-        //     var players = new List<Player> { Player.X, Player.O };
-        //     var game = new GameContext(board, players);
-        //     var player = Player.X;
-        //     game.GameState(player);
-        //     Assert.True(game.GameState(player));
-        // }
+        [Fact]
+        public void GetState_winning()
+        {
+            var board = SourceData.BoardXWinningTopRow();
+            var output = new StubOutput();
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            var player = Player.X;
+            game.GameState(player);
+            Assert.True(game.GameState(player));
+        }
 
-        // [Fact]
-        // public void GetState_not_winning()
-        // {
-        //     var board = SourceData.BoardIsWinningBoardFalse();
-        //     var output = new StubOutput();
-        //     var players = new List<Player> { Player.X, Player.O };
-        //     var game = new GameContext(board, players);
-        //     var player = Player.X;
-        //     game.GameState(player);
-        //     Assert.False(game.GameState(player));
-        // }
+        [Fact]
+        public void GetState_not_winning()
+        {
+            var board = SourceData.BoardIsWinningBoardFalse();
+            var output = new StubOutput();
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            var player = Player.X;
+            game.GameState(player);
+            Assert.False(game.GameState(player));
+        }
 
-        // [Fact]
-        // public void GetState_draw()
-        // {
-        //     var board = SourceData.BoardIsADraw();
-        //     var output = new StubOutput();
-        //     var players = new List<Player> { Player.X, Player.O };
-        //     var game = new GameContext(board, players);
-        //     var player = Player.X;
-        //     game.GameState(player);
-        //     Assert.True(game.GameState(player));
-        // }
+        [Fact]
+        public void GetState_draw()
+        {
+            var board = SourceData.BoardIsADraw();
+            var output = new StubOutput();
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            var player = Player.X;
+            game.GameState(player);
+            Assert.True(game.GameState(player));
+        }
 
-        // [Fact]
-        // public void GetState_not_draw()
-        // {
-        //     var board = SourceData.BoardIsNotADraw();
-        //     var output = new StubOutput();
-        //     var players = new List<Player> { Player.X, Player.O };
-        //     var game = new GameContext(board, players);
-        //     var player = Player.X;
-        //     game.GameState(player);
-        //     Assert.False(game.GameState(player));
-        // }
+        [Fact]
+        public void GetState_not_draw()
+        {
+            var board = SourceData.BoardIsNotADraw();
+            var output = new StubOutput();
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            var player = Player.X;
+            game.GameState(player);
+            Assert.False(game.GameState(player));
+        }
     }
 }
