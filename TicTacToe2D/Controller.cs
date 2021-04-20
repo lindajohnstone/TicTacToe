@@ -29,18 +29,15 @@ namespace TicTacToe2D
             var output = new ConsoleOutput();
             // display instructions
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
-            // TODO: adding consolereadline here causes program to wait
             while (true)
             {
-                foreach (var player in game.Players) 
+                foreach (var player in game.Players)
                 {
                     ImplementTurn(game);
-                    //. is there a winner
-                    var winner = new GamePredicate();
-                    //IsWinningBoard(player, winner);
-                    winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));
-                    //. is the board full?
-                    winner.IsADraw(game.GameBoard);
+                    if (EndGame(game, output, player))
+                    {
+                        break;
+                    }
                 }
             }
             //return game;
@@ -49,6 +46,23 @@ namespace TicTacToe2D
             // EndGame
         }
 
+        private bool EndGame(GameContext game, ConsoleOutput output, Player player)
+        {
+            //. is there a winner
+            var condition = new GamePredicate();
+            if (condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), game.PlayerFieldContents(player)))
+            {
+                OutputFormatter.PrintWinGame(player, output);
+                return true;
+            }
+            //. is the board full?
+            if (condition.IsADraw(game.GameBoard))
+            {
+                OutputFormatter.PrintDrawnGame(GameBoard, condition, output);
+                return true;
+            }
+            return false;
+        }
 
         public void ImplementTurn(GameContext game)
         {
@@ -56,7 +70,7 @@ namespace TicTacToe2D
 
             var input = new ConsoleInput();
 
-            var player = game.GetCurrentPlayer(game);
+            var player = game.GetCurrentPlayer();
             // prompt for move...
             OutputFormatter.PrintBoard(game.GameBoard, output);
             output.ConsoleWriteLine("");
@@ -71,21 +85,23 @@ namespace TicTacToe2D
                     //. get player move
                     var value = input.ConsoleReadLine();
                     output.ConsoleWriteLine("");
-                    // TODO: calling InputParser.PlayerEndsGame here only breaks out of try
-                    // where to place it to end game?
+                    if(InputParser.PlayerEndsGame(player, value, output))
+                    {
+                        Environment.Exit(0);
+                    }
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
                     //. validate move...
                     Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException 
                 }
-                catch (InvalidMoveEntryException ex) // TODO: where to use 'ex'
+                catch (InvalidMoveEntryException ex) 
                 {
                     //. display this move is not valid message and try again
-                    output.ConsoleWriteLine("Oh no, a piece is already at this place! Try again...");
+                    output.ConsoleWriteLine(ex.Message);
                     playerMovePosition = null;
                 }
-                catch (InvalidMoveSyntaxException ex)// TODO: where to use 'ex'
+                catch (InvalidMoveSyntaxException ex)
                 {
-                    output.ConsoleWriteLine("Invalid format. Please try again...");
+                    output.ConsoleWriteLine(ex.Message);
                 }
             }
             while (playerMovePosition == null);
@@ -93,33 +109,13 @@ namespace TicTacToe2D
             //. apply move to board.
             var fieldContents = new FieldContents();
             
-            fieldContents = PlayerFieldContents(player);
+            fieldContents = game.PlayerFieldContents(player);
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
-        }
-
-        private FieldContents PlayerFieldContents(Player player)
-        {
-            FieldContents fieldContents;
-            if (player == Players[0]) 
-            {
-                fieldContents = FieldContents.x;
-            }
-            else
-            {
-                fieldContents = FieldContents.y;
-            }
-
-            return fieldContents;
         }
 
         private Validations ValidTurn()
         {
             throw new NotImplementedException();
-        }
-
-        public bool IsWinningBoard(Player player, GamePredicate winner)// TODO: should this method be private? does it work? (tests pass from GameContex class, not Controller)
-        {
-            return winner.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player));
         }
     }
 }

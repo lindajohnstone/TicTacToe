@@ -56,10 +56,10 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        public static void PrintWin(Player player, IOutput output)
+        public static void PrintWinGame(Player player, IOutput output)
         {
             var playerId = (int)player;
-            var message = String.Format("Hooray! Player 1 has won the game!", playerId);
+            var message = String.Format("Hooray! Player {0} has won the game!", playerId);
             output.ConsoleWriteLine(message);
         }
 

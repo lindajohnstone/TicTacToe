@@ -56,14 +56,13 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void WinningRow() // TODO: if line 65 commented out & line 66 uncommented, fails - board referring to GameBoard. Also, nullreferenceexception
+        public void WinningRow() 
         {
             var win = new GamePredicate();
             var controller = new Controller();
             var player = controller.Players[0]; 
             var board = new Board(SourceData.BoardWinningDiagonalLR());
             var result = win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
-            //var result = controller.IsWinningBoard(player, win); // fails
             Assert.True(result);
         }
 
@@ -75,7 +74,7 @@ namespace TicTacToe2D.Tests
             var player = controller.Players[0];
             var board = new Board(SourceData.BoardWinningDiagonalLR());
             var expected = "Hooray! Player 1 has won the game!";
-            OutputFormatter.PrintWin(player, output);
+            OutputFormatter.PrintWinGame(player, output);
             Assert.Equal(expected, output.GetWriteLine());
         }
 

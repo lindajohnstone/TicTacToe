@@ -36,9 +36,7 @@ namespace TicTacToe2D
             throw new NotImplementedException();
         }
 
-        
-
-        public Player GetCurrentPlayer(GameContext game)
+        public Player GetCurrentPlayer()
         {
             // check how many empty fields in board
             // if modulus == 1, Player == X, else Y
@@ -60,7 +58,22 @@ namespace TicTacToe2D
             return Players;
         }
 
-        public void GameState()// TODO: win, draw, ended by player
+        public FieldContents PlayerFieldContents(Player player)
+        {
+            FieldContents fieldContents;
+            if (player == Players[0])
+            {
+                fieldContents = FieldContents.x;
+            }
+            else
+            {
+                fieldContents = FieldContents.y;
+            }
+
+            return fieldContents;
+        }
+
+        public void GameState(Player player)// TODO: win, draw, ended by player // enum? // switch??
         {
             throw new NotImplementedException();
         }
