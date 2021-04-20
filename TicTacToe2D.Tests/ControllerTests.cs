@@ -71,6 +71,7 @@ namespace TicTacToe2D.Tests
         {
             var output = new StubOutput();
             var controller = new Controller();
+            var condition = new GamePredicate();
             var player = controller.Players[0];
             var board = new Board(SourceData.BoardWinningDiagonalLR());
             var expected = "Hooray! Player 1 has won the game!";

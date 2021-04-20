@@ -34,10 +34,10 @@ namespace TicTacToe2D
                 foreach (var player in game.Players)
                 {
                     ImplementTurn(game);
-                    if (EndGame(game, output, player))
-                    {
-                        break;
-                    }
+                    // if (EndGame(game, output, player))
+                    // {
+                    //     break;
+                    // }
                 }
             }
             //return game;
@@ -46,23 +46,23 @@ namespace TicTacToe2D
             // EndGame
         }
 
-        private bool EndGame(GameContext game, ConsoleOutput output, Player player)
-        {
-            //. is there a winner
-            var condition = new GamePredicate();
-            if (condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), game.PlayerFieldContents(player)))
-            {
-                OutputFormatter.PrintWinGame(player, output);
-                return true;
-            }
-            //. is the board full?
-            if (condition.IsADraw(game.GameBoard))
-            {
-                OutputFormatter.PrintDrawnGame(GameBoard, condition, output);
-                return true;
-            }
-            return false;
-        }
+        // private bool EndGame(GameContext game, ConsoleOutput output, Player player)
+        // {
+        //     //. is there a winner
+        //     var condition = new GamePredicate();
+        //     if (condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), game.PlayerFieldContents(player)))
+        //     {
+        //         OutputFormatter.PrintWinGame(player, output);
+        //         return true;
+        //     }
+        //     //. is the board full?
+        //     if (condition.IsADraw(game.GameBoard))
+        //     {
+        //         OutputFormatter.PrintDrawnGame(GameBoard, condition, output);
+        //         return true;
+        //     }
+        //     return false;
+        // }
 
         public void ImplementTurn(GameContext game)
         {
