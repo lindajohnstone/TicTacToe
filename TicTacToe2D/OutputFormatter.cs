@@ -61,7 +61,7 @@ namespace TicTacToe2D
             var playerId = (int)player;
             var message = String.Format("Hooray! Player {0} has won the game!", playerId);
             output.ConsoleWriteLine(message);
-            //Environment.Exit(0);
+            Environment.Exit(0);
         }
 
         public static void PrintDrawnGame(Board board, GamePredicate draw, IOutput output)
@@ -69,7 +69,7 @@ namespace TicTacToe2D
             if (draw.IsADraw(board))
             {
                 output.ConsoleWriteLine("Game is drawn. Better luck next time.");
-                //Environment.Exit(0);
+                Environment.Exit(0);
             }
         }
     }

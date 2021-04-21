@@ -34,7 +34,7 @@ namespace TicTacToe2D
                 foreach (var player in game.Players)
                 {
                     ImplementTurn(game);
-                    game.GameState();
+                    game.GameState(); //TODO: where to place so next players' instructions don't display
                 }
             }
 
