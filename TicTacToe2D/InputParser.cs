@@ -8,9 +8,9 @@ namespace TicTacToe2D
         // receive player position
         // end game if player presses 'q'
 
-        public static Position GetPlayerMove(String input) // TODO: is this written correctly?
+        public static Position GetPlayerMove(string playerInput) // TODO: is this written correctly?
         {
-            var inputArray = SplitInput(input);
+            var inputArray = SplitInput(playerInput);
             if (IsValidInput(inputArray))
             {
                 return new Position(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
@@ -36,6 +36,17 @@ namespace TicTacToe2D
             }
             if (count == 2)
             {
+                return true;
+            }
+            return false;
+        }
+
+        public static bool PlayerEndsGame(Player player, IInput input, IOutput output)
+        {
+            var playerInput = "q";
+            if (playerInput == "q")
+            {
+                OutputFormatter.PrintEndGame(player, output);
                 return true;
             }
             return false;

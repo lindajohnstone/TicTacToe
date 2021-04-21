@@ -15,7 +15,5 @@ namespace TicTacToe2D
         {
             return Console.ReadKey(value);
         }
-
-        
     }
 }
