@@ -47,7 +47,7 @@ namespace TicTacToe2D
 
         public static void PrintEndGame(Player player, IOutput output)
         {
-            var message = String.Format("Player {0} has ended the game.", player);
+            var message = String.Format("Player {0} has ended the game.", (int)player);
             output.ConsoleWriteLine(message);
         }
 

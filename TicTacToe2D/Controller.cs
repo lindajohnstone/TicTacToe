@@ -81,7 +81,7 @@ namespace TicTacToe2D
                     //. get player move
                     var value = input.ConsoleReadLine();
                     output.ConsoleWriteLine("");
-                    if(InputParser.PlayerEndsGame(player, input, output))
+                    if(InputParser.PlayerEndsGame(player, value, output))
                     {
                         Environment.Exit(0);
                     }
