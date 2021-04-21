@@ -73,8 +73,9 @@ namespace TicTacToe2D
             return fieldContents;
         }
 
-        public bool GameState(Player player)
+        public bool GameState()
         {
+            var player = GetCurrentPlayer();
             var condition = new GamePredicate();
             if (condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player)))
             {

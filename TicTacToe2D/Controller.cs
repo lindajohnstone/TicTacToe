@@ -34,13 +34,9 @@ namespace TicTacToe2D
                 foreach (var player in game.Players)
                 {
                     ImplementTurn(game);
-                    // if (EndGame(game, output, player))
-                    // {
-                    //     break;
-                    // }
                 }
             }
-            //return game;
+            // return game;
 
 
             // EndGame
@@ -102,6 +98,11 @@ namespace TicTacToe2D
                 catch (InvalidMoveSyntaxException ex)
                 {
                     output.ConsoleWriteLine(ex.Message);
+                }
+                catch (ArgumentException ex)
+                {
+                    output.ConsoleWriteLine(ex.Message);
+                    playerMovePosition = null;
                 }
             }
             while (playerMovePosition == null);

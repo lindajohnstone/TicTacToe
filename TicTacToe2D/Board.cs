@@ -151,15 +151,11 @@ namespace TicTacToe2D
         {
             if (position.X < 0 || position.X >= Width)
             {
-                //Console.WriteLine("Position X coordinate is out of range. Please try again...");
-                // var value = Console.ReadLine();
-                // InputParser.GetPlayerMove(value);
-                throw new ArgumentException("Position X coordinate is out of range");
+                throw new ArgumentException("Position X coordinate is out of range. Please try again...");
             }
             if (position.Y < 0 || position.Y >= Height)
             {
-                //Console.WriteLine("Position Y coordinate is out of range. Please try again...");
-                throw new ArgumentException("Position Y coordinate is out of range");
+                throw new ArgumentException("Position Y coordinate is out of range. Please try again...");
             }
         }
 
