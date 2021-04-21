@@ -24,7 +24,7 @@ namespace TicTacToe2D
             GameBoard = board;
         }
 
-        public GameContext PlayGame(GameContext game)
+        public void PlayGame(GameContext game)
         {
             var output = new ConsoleOutput();
             // display instructions
@@ -34,9 +34,9 @@ namespace TicTacToe2D
                 foreach (var player in game.Players)
                 {
                     ImplementTurn(game);
+                    game.GameState();
                 }
             }
-            // return game;
 
 
             // EndGame
