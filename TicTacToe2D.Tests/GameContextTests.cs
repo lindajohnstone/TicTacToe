@@ -86,7 +86,6 @@ namespace TicTacToe2D.Tests
             var output = new StubOutput();
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
-            var player = Player.X;
             game.GameState();
             Assert.True(game.GameState());
         }
@@ -98,7 +97,6 @@ namespace TicTacToe2D.Tests
             var output = new StubOutput();
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
-            var player = Player.X;
             game.GameState();
             Assert.False(game.GameState());
         }
@@ -110,7 +108,6 @@ namespace TicTacToe2D.Tests
             var output = new StubOutput();
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
-            var player = Player.X;
             game.GameState();
             Assert.True(game.GameState());
         }
@@ -122,7 +119,6 @@ namespace TicTacToe2D.Tests
             var output = new StubOutput();
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
-            var player = Player.X;
             game.GameState();
             Assert.False(game.GameState());
         }

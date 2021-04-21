@@ -38,7 +38,7 @@ namespace TicTacToe2D.Tests
             var position = new Position(1, 3);
             var board = new Board(3);
             var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
-            Assert.Equal("Position Y coordinate is out of range", result.Message);
+            Assert.Equal("Position Y coordinate is out of range. Please try again...", result.Message);
         }
 
         [Fact]
@@ -47,7 +47,7 @@ namespace TicTacToe2D.Tests
             var position = new Position(6, 0);
             var board = new Board(3);
             var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
-            Assert.Equal("Position X coordinate is out of range", result.Message);
+            Assert.Equal("Position X coordinate is out of range. Please try again...", result.Message);
         }
 
         [Fact]//TODO: update to new format or delete or keep??
