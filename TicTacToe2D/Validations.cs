@@ -13,11 +13,6 @@ namespace TicTacToe2D
             
         }
 
-        public bool IsOccupied(GameContext game)
-        {
-            throw new NotImplementedException();
-        }
-
         public static bool ValidTurn(Board board, Position playerMovePosition)
         {
             if(board.GetField(playerMovePosition) != FieldContents.empty)

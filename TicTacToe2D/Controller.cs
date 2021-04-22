@@ -100,10 +100,5 @@ namespace TicTacToe2D
             fieldContents = game.PlayerFieldContents(player);
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
         }
-
-        private Validations ValidTurn()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

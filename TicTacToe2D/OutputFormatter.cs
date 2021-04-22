@@ -50,11 +50,6 @@ namespace TicTacToe2D
             output.ConsoleWriteLine(message);
         }
 
-        private static void PrintPlayerMove(ConsoleOutput output)
-        {
-            throw new NotImplementedException();
-        }
-
         public static void PrintWinGame(Player player, IOutput output)
         {
             var message = String.Format("Hooray! Player {0} has won the game!", (int)player + 1);

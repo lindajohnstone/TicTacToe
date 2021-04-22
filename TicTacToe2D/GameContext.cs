@@ -30,17 +30,11 @@ namespace TicTacToe2D
             ConsoleInput = input;
             ConsoleOutput = output;
         }
-        
-        public Board GetGameBoard()
-        {
-            throw new NotImplementedException();
-        }
 
         public Player GetCurrentPlayer()
         {
             // check how many empty fields in board
-            // if modulus == 1, Player == X, else Y
-            // TODO: if board is full, still returns a value 
+            // if modulus == 1, Player == X, else Y 
             if (GameBoard.GetAllPositions().Where((x) => GameBoard.GetField(x) == FieldContents.empty).Count() % 2 == 1)
             {
                 return Players[0];
