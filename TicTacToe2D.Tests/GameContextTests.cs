@@ -87,7 +87,7 @@ namespace TicTacToe2D.Tests
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             game.GameState();
-            Assert.True(game.GameState());
+            Assert.True(game.GameState() == 0);
         }
 
         [Fact]
@@ -98,7 +98,7 @@ namespace TicTacToe2D.Tests
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             game.GameState();
-            Assert.False(game.GameState());
+            Assert.False(game.GameState() == 0);
         }
 
         [Fact]
@@ -109,7 +109,7 @@ namespace TicTacToe2D.Tests
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             game.GameState();
-            Assert.True(game.GameState());
+            Assert.True(game.GameState() == 0);
         }
 
         [Fact]
@@ -120,7 +120,7 @@ namespace TicTacToe2D.Tests
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             game.GameState();
-            Assert.False(game.GameState());
+            Assert.False(game.GameState() == 0);
         }
     }
 }

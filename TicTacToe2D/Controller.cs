@@ -33,8 +33,11 @@ namespace TicTacToe2D
             {
                 foreach (var player in game.Players)
                 {
+                    if (game.GameState() == 0) //TODO: where to place so next players' instructions don't display
+                    {
+                        Environment.Exit(0);
+                    }
                     ImplementTurn(game);
-                    game.GameState(); //TODO: where to place so next players' instructions don't display
                 }
             }
 

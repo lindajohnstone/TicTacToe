@@ -73,21 +73,21 @@ namespace TicTacToe2D
             return fieldContents;
         }
 
-        public bool GameState()
+        public int GameState()
         {
             var player = GetCurrentPlayer();
             var condition = new GamePredicate();
             if (condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), PlayerFieldContents(player)))
             {
                 OutputFormatter.PrintWinGame(player, ConsoleOutput);
-                return true;
+                return 0;
             }
             if (condition.IsADraw(GameBoard))
             {
-                OutputFormatter.PrintDrawnGame(GameBoard, condition, ConsoleOutput);
-                return true;
+                OutputFormatter.PrintDrawnGame(ConsoleOutput);
+                return 0;
             }
-            return false;
+            return 1;
         }
 
         public override bool Equals(object obj)

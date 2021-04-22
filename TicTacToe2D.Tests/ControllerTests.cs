@@ -67,7 +67,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void EndGame_win_output_message() //TODO: valid test? check if a win before printing?
+        public void EndGame_win_output_message() //TODO: valid test? check if a win before printing? 
         {
             var output = new StubOutput();
             var controller = new Controller();
@@ -96,7 +96,7 @@ namespace TicTacToe2D.Tests
             var draw = new GamePredicate();
             var board = new Board(SourceData.BoardIsADraw());
             var expected = "Game is drawn. Better luck next time.";
-            OutputFormatter.PrintDrawnGame(board, draw, output);
+            OutputFormatter.PrintDrawnGame(output);
             Assert.Equal(expected, output.GetWriteLine());
         }
 
