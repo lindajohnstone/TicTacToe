@@ -31,15 +31,12 @@ namespace TicTacToe2D
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
             while (true)
             {
-                foreach (var player in game.Players)
-                {
                     // TODO: player change state?
                     if (game.GameState() == 0) //TODO: where to place so next players' instructions don't display
                     {
                         Environment.Exit(0);
                     }
                     ImplementTurn(game);
-                }
             }
 
 
