@@ -33,6 +33,7 @@ namespace TicTacToe2D
             {
                 foreach (var player in game.Players)
                 {
+                    // TODO: player change state?
                     if (game.GameState() == 0) //TODO: where to place so next players' instructions don't display
                     {
                         Environment.Exit(0);
@@ -45,24 +46,6 @@ namespace TicTacToe2D
             // EndGame
         }
 
-        // private bool EndGame(GameContext game, ConsoleOutput output, Player player)
-        // {
-        //     //. is there a winner
-        //     var condition = new GamePredicate();
-        //     if (condition.IsWinningBoard(GameBoard, GameBoard.GetWinningLines(), game.PlayerFieldContents(player)))
-        //     {
-        //         OutputFormatter.PrintWinGame(player, output);
-        //         return true;
-        //     }
-        //     //. is the board full?
-        //     if (condition.IsADraw(game.GameBoard))
-        //     {
-        //         OutputFormatter.PrintDrawnGame(GameBoard, condition, output);
-        //         return true;
-        //     }
-        //     return false;
-        // }
-
         public void ImplementTurn(GameContext game)
         {
             var output = new ConsoleOutput();
@@ -73,6 +56,7 @@ namespace TicTacToe2D
             // prompt for move...
             OutputFormatter.PrintBoard(game.GameBoard, output);
             output.ConsoleWriteLine("");
+            // game.GameState(); // doesn't fix problem here
             OutputFormatter.PrintInstructions(player, output);
 
             // get move

@@ -40,14 +40,13 @@ namespace TicTacToe2D
 
         public static void PrintInstructions(Player player, IOutput output)
         {
-            var playerId = (int)player;
-            var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", playerId, player);
+            var message = String.Format("Player {0} enter a coord x,y to place your {1} or enter 'q' to give up: ", (int)player + 1, player);
             output.ConsoleWrite(message);
         }
 
         public static void PrintEndGame(Player player, IOutput output)
         {
-            var message = String.Format("Player {0} has ended the game.", (int)player);
+            var message = String.Format("Player {0} has ended the game.", (int)player + 1);
             output.ConsoleWriteLine(message);
         }
 
@@ -58,8 +57,7 @@ namespace TicTacToe2D
 
         public static void PrintWinGame(Player player, IOutput output)
         {
-            var playerId = (int)player;
-            var message = String.Format("Hooray! Player {0} has won the game!", playerId);
+            var message = String.Format("Hooray! Player {0} has won the game!", (int)player + 1);
             output.ConsoleWriteLine(message);
         }
 
