@@ -41,7 +41,7 @@ namespace TicTacToe2D
             return false;
         }
 
-        public static bool PlayerEndsGame(Player player, IInput input, IOutput output)
+        public static bool PlayerEndsGame(Player player, IInput input, IOutput output) // TODO: which method (this one or line 55 is correct one to use. NB this one causes issues running the program)
         {
             var playerInput = "q";
             if (playerInput == "q")

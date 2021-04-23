@@ -116,6 +116,11 @@ namespace TicTacToe2D
             return line;
         }
 
+        public List<List<Position>> GetWinningLines()
+        {
+            return WinningLines;
+        }
+
         private static List<Position> CreateAllPositions(int boardSize)
         {
             var AllPositions = new List<Position>();
@@ -128,6 +133,12 @@ namespace TicTacToe2D
             }
             return AllPositions; 
         }
+
+        public List<Position> GetAllPositions()
+        {
+            return AllPositions;
+        }
+
         public Board MovePlayer(Position position, FieldContents fieldContents)
         {
             var board = new Board(this);
@@ -159,11 +170,6 @@ namespace TicTacToe2D
             }
         }
 
-        public List<List<Position>> GetWinningLines()
-        {
-            return WinningLines;
-        }
-
         public static bool OperatorOverride(Board obj1, Board obj2)
         {
             if (obj1.Width == obj2.Width && obj1.Height == obj2.Height)
@@ -171,11 +177,6 @@ namespace TicTacToe2D
                 return obj1.GetAllPositions().All((x) => obj1.GetField(x) == obj2.GetField(x));
             }
             return false;
-        }
-
-        public List<Position> GetAllPositions()
-        {
-            return AllPositions;
         }
 
         public static bool operator ==(Board obj1, Board obj2 )
@@ -207,7 +208,6 @@ namespace TicTacToe2D
                 return OperatorOverride(this, (Board)obj);
             }
         }
-
 
         public override int GetHashCode()
         {

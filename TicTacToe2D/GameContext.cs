@@ -70,7 +70,7 @@ namespace TicTacToe2D
             return fieldContents;
         }
 
-        public int GameState()
+        public int GameState() // used int 0 & 1 - may need to use flags from Player
         {
             var player = GetCurrentPlayer();
             var condition = new GamePredicate();

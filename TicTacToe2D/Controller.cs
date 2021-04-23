@@ -27,16 +27,13 @@ namespace TicTacToe2D
         public void PlayGame(GameContext game)
         {
             var output = new ConsoleOutput();
-            // display instructions
             OutputFormatter.PrintWelcome(game.GameBoard, output);
             while (true)
             {
-                // TODO: player change state?
                 if (game.GameState() == 0) 
                 {
                     Environment.Exit(0);
                 }
-                // game.GameState(); // doesn't fix problem here
                 else
                 {
                     OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
@@ -44,9 +41,6 @@ namespace TicTacToe2D
                     OutputFormatter.PrintNewBoard(game.GameBoard, output);
                 }
             }
-
-
-            // EndGame
         }
 
         public void ImplementTurn(GameContext game)
@@ -73,7 +67,6 @@ namespace TicTacToe2D
                 }
                 catch (InvalidMoveEntryException ex) 
                 {
-                    //. display this move is not valid message and try again
                     output.ConsoleWriteLine(ex.Message);
                     playerMovePosition = null;
                 }
@@ -89,15 +82,9 @@ namespace TicTacToe2D
             }
             while (playerMovePosition == null);
 
-            //. apply move to board.
             var fieldContents = new FieldContents();
-            
             fieldContents = game.PlayerFieldContents(player);
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
-            // if (game.GameState() == 0) // returns next players instructions
-            // {
-            //     Environment.Exit(0);
-            // }
         }
     }
 }

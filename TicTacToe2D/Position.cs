@@ -66,8 +66,7 @@ namespace TicTacToe2D
             return false;
         }
 
-        // TODO: method Compare to do all calcs, checks, edge cases
-        // TODO: merge operator methods - one calls other
+        // TODO: method Compare to do all calcs, checks, edge cases ??
         public static bool operator != (Position obj1, Position obj2)
         {
             if (!OperatorOverride(obj1, obj2))
