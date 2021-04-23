@@ -28,13 +28,11 @@ namespace TicTacToe2D
         {
             var output = new ConsoleOutput();
             // display instructions
-            output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
+            OutputFormatter.PrintWelcome(game.GameBoard, output);
             while (true)
             {
                 // TODO: player change state?
-                OutputFormatter.PrintBoard(game.GameBoard, output);
-                output.ConsoleWriteLine("");
-                if (game.GameState() == 0) //TODO: where to place so next players' instructions don't display
+                if (game.GameState() == 0) 
                 {
                     Environment.Exit(0);
                 }
@@ -43,6 +41,7 @@ namespace TicTacToe2D
                 {
                     OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
                     ImplementTurn(game);
+                    OutputFormatter.PrintNewBoard(game.GameBoard, output);
                 }
             }
 

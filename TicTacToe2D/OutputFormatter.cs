@@ -32,10 +32,24 @@ namespace TicTacToe2D
             }
         }
 
+        public static void PrintWelcome(Board board, IOutput output)
+        {
+            output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
+            PrintBoard(board, output);
+            output.ConsoleWriteLine("");
+        }
+
         public static void PrintBoard(Board board, IOutput output)
         {
             output.ConsoleWriteLine("Here's the current board:");
             DrawBoard(board, output);
+        }
+
+        public static void PrintNewBoard(Board board, IOutput output)
+        {
+            output.ConsoleWriteLine("Move accepted. Here's the current board: ");
+            DrawBoard(board, output);
+            output.ConsoleWriteLine("");
         }
 
         public static void PrintInstructions(Player player, IOutput output)
