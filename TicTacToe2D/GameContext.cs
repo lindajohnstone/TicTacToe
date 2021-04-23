@@ -39,7 +39,10 @@ namespace TicTacToe2D
             {
                 return Players[0];
             }
-            return Players[1];
+            else 
+            {
+                return Players[1];
+            }
         }
 
         public List<Player> GetPlayers()

@@ -31,12 +31,19 @@ namespace TicTacToe2D
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
             while (true)
             {
-                    // TODO: player change state?
-                    if (game.GameState() == 0) //TODO: where to place so next players' instructions don't display
-                    {
-                        Environment.Exit(0);
-                    }
+                // TODO: player change state?
+                OutputFormatter.PrintBoard(game.GameBoard, output);
+                output.ConsoleWriteLine("");
+                if (game.GameState() == 0) //TODO: where to place so next players' instructions don't display
+                {
+                    Environment.Exit(0);
+                }
+                // game.GameState(); // doesn't fix problem here
+                else
+                {
+                    OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
                     ImplementTurn(game);
+                }
             }
 
 
@@ -50,19 +57,12 @@ namespace TicTacToe2D
             var input = new ConsoleInput();
 
             var player = game.GetCurrentPlayer();
-            // prompt for move...
-            OutputFormatter.PrintBoard(game.GameBoard, output);
-            output.ConsoleWriteLine("");
-            // game.GameState(); // doesn't fix problem here
-            OutputFormatter.PrintInstructions(player, output);
-
-            // get move
+            
             Position playerMovePosition = null;
             do
             {
                 try
                 {
-                    //. get player move
                     var value = input.ConsoleReadLine();
                     output.ConsoleWriteLine("");
                     if(InputParser.PlayerEndsGame(player, value, output))
@@ -70,7 +70,6 @@ namespace TicTacToe2D
                         Environment.Exit(0);
                     }
                     playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
-                    //. validate move...
                     Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException 
                 }
                 catch (InvalidMoveEntryException ex) 
@@ -96,6 +95,10 @@ namespace TicTacToe2D
             
             fieldContents = game.PlayerFieldContents(player);
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
+            // if (game.GameState() == 0) // returns next players instructions
+            // {
+            //     Environment.Exit(0);
+            // }
         }
     }
 }
