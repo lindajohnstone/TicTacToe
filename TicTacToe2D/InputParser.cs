@@ -8,7 +8,7 @@ namespace TicTacToe2D
         // receive player position
         // end game if player presses 'q'
 
-        public static Position GetPlayerMove(string playerInput) // TODO: is this written correctly?
+        public static Position GetPlayerMove(string playerInput) 
         {
             var inputArray = SplitInput(playerInput);
             if (IsValidInput(inputArray))
@@ -36,17 +36,6 @@ namespace TicTacToe2D
             }
             if (count == 2)
             {
-                return true;
-            }
-            return false;
-        }
-
-        public static bool PlayerEndsGame(Player player, IInput input, IOutput output) // TODO: which method (this one or line 55 is correct one to use. NB this one causes issues running the program)
-        {
-            var playerInput = "q";
-            if (playerInput == "q")
-            {
-                OutputFormatter.PrintEndGame(player, output);
                 return true;
             }
             return false;

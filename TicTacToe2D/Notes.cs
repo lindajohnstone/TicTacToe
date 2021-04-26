@@ -3,12 +3,6 @@ namespace TicTacToe2D
     public class Notes
     {
         /*
-            TODO: should Controller be renamed to GameController? - possibly more than one controller required
-            If predicate uses board & player & so does gamecontext - coupled? or cause stack overflow
-            Validations 'linked' to ConsoleInput
-            Is Turn class named correctly?
-            Does GameContext need Validations & GamePredicate?
-
                 Class               Methods / Properties                            Used by
             1/  Player              - enum of Player values                         - GamePredicate
                                                                                     - GameContext

@@ -39,28 +39,6 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void GameContext_get_current_player_BoardXFirstMove() 
-        {
-            var board = new Board(SourceData.BoardXFirstMove());
-            var players = new List<Player> { Player.X, Player.O };
-            var game = new GameContext(board, players);
-            var result = game.GetCurrentPlayer();
-            var expected = Player.O;
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void GameContext_get_current_player_BoardIsADraw()
-        {
-            var board = new Board(SourceData.BoardIsADraw());
-            var players = new List<Player> { Player.X, Player.O };
-            var game = new GameContext(board, players);
-            var result = game.GetCurrentPlayer();
-            var expected = Player.O;
-            Assert.Equal(expected, result);
-        }
-
-        [Fact]
         public void Check_count_of_empty_fields()
         {
             var board = SourceData.BoardIsInitialized();
@@ -77,50 +55,6 @@ namespace TicTacToe2D.Tests
             var result = game.GetPlayers();
             var expected = new List<Player>() { Player.X, Player.O };
             Assert.Equal(expected, result);
-        }
-
-        [Fact]
-        public void GetState_winning()
-        {
-            var board = SourceData.BoardXWinningTopRow();
-            var output = new StubOutput();
-            var players = new List<Player> { Player.X, Player.O };
-            var game = new GameContext(board, players);
-            game.GameState();
-            Assert.True(game.GameState() == 0);
-        }
-
-        [Fact]
-        public void GetState_not_winning()
-        {
-            var board = SourceData.BoardIsWinningBoardFalse();
-            var output = new StubOutput();
-            var players = new List<Player> { Player.X, Player.O };
-            var game = new GameContext(board, players);
-            game.GameState();
-            Assert.False(game.GameState() == 0);
-        }
-
-        [Fact]
-        public void GetState_draw()
-        {
-            var board = SourceData.BoardIsADraw();
-            var output = new StubOutput();
-            var players = new List<Player> { Player.X, Player.O };
-            var game = new GameContext(board, players);
-            game.GameState();
-            Assert.True(game.GameState() == 0);
-        }
-
-        [Fact]
-        public void GetState_not_draw()
-        {
-            var board = SourceData.BoardIsNotADraw();
-            var output = new StubOutput();
-            var players = new List<Player> { Player.X, Player.O };
-            var game = new GameContext(board, players);
-            game.GameState();
-            Assert.False(game.GameState() == 0);
         }
     }
 }

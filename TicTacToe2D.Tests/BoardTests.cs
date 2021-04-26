@@ -50,25 +50,6 @@ namespace TicTacToe2D.Tests
             Assert.Equal("Position X coordinate is out of range. Please try again...", result.Message);
         }
 
-        [Fact]//TODO: update to new format or delete or keep??
-        public void Board_position_Y()
-        {
-            var pos1 = new Position(0, 0);
-            var pos2 = new Position(1, 0);
-            var pos3 = new Position(2, 0);
-            var positions = new[] { new Position(0, 0), pos2, pos3 };
-            var count = 0;
-            Assert.Equal(pos1.Y, pos2.Y);
-            foreach (var position in positions)
-            {
-                if (position.Y == 0)
-                {
-                    count++;
-                }
-            }
-            Assert.Equal(3, count);
-        }
-
         [Fact]
         public void Board_is_initialized()
         {

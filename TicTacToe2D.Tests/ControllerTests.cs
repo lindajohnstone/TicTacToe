@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Xunit;
 
@@ -58,20 +59,18 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void WinningRow() 
         {
-            var win = new GamePredicate();
             var controller = new Controller();
             var player = controller.Players[0]; 
             var board = new Board(SourceData.BoardWinningDiagonalLR());
-            var result = win.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
+            var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
             Assert.True(result);
         }
 
         [Fact]
-        public void EndGame_win_output_message() //TODO: valid test? check if a win before printing? 
+        public void EndGame_win_output_message() 
         {
             var output = new StubOutput();
             var controller = new Controller();
-            var condition = new GamePredicate();
             var player = controller.Players[0];
             var board = new Board(SourceData.BoardWinningDiagonalLR());
             var expected = "Hooray! Player 1 has won the game!";
@@ -93,7 +92,6 @@ namespace TicTacToe2D.Tests
         public void EndGame_drawn_game_output_message()
         {
             var output = new StubOutput();
-            var draw = new GamePredicate();
             var board = new Board(SourceData.BoardIsADraw());
             var expected = "Game is drawn. Better luck next time.";
             OutputFormatter.PrintDrawnGame(output);
@@ -113,16 +111,39 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayerEndsGame_user_input_q_ends_game_outputs_message()
+        public void TurnQueue_GetCurrentPlayer_true()
         {
-            var output = new StubOutput();
-            var player = Player.X;
-            var playerInput = "q";
-            var input = new StubConsoleInput().WithReadLine(playerInput);
-            var expected = "Player 1 has ended the game.";
-            InputParser.PlayerEndsGame(player, input, output);
-            Assert.Equal(expected, output.GetWriteLine());
-            Assert.True(InputParser.PlayerEndsGame(player, input, output));
+            var players = new List<Player>() { Player.X, Player.O };
+            var turnQueue = new TurnQueue(players);
+            var result = turnQueue.GetCurrentPlayer();
+            Assert.Equal(Player.X, result);
         }
+
+        [Fact]
+        public void TurnQueue_GetCurrentPlayer_false()
+        {
+            var players = new List<Player>() { Player.X, Player.O };
+            var turnQueue = new TurnQueue(players);
+            var result = turnQueue.GetCurrentPlayer();
+            Assert.NotEqual(Player.O, result);
+        }
+
+        [Fact]
+        public void TurnQueue_SetNextPlayer_true()
+        {
+            var players = new List<Player>() { Player.X, Player.O };
+            var turnQueue = new TurnQueue(players);
+            var result = turnQueue.SetNextPlayer();
+            Assert.Equal(Player.O, result);
+        }
+
+        [Fact]
+        public void TurnQueue_SetNextPlayer_false()
+        {
+            var players = new List<Player>() { Player.X, Player.O };
+            var turnQueue = new TurnQueue(players);
+            var result = turnQueue.GetCurrentPlayer();
+            Assert.NotEqual(Player.O, result);
+        }        
     }
 }

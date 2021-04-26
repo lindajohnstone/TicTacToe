@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace TicTacToe2D
@@ -10,45 +11,40 @@ namespace TicTacToe2D
 
         public Board GameBoard { get; private set; }
         public List<Player> Players { get; private set; }
+
+        public Queue TurnQueue { get; set; }
         public Controller()
         {
-            var game = new GameContext(GameBoard, Players);
-            Initialize(game);
+            Initialize();
         }
-        public void Initialize(GameContext game)
+        public void Initialize()
         {
-            var players = new List<Player> { Player.X, Player.O };
-            var board = new Board(3);
-            Game = game;
-            Players = players;
-            GameBoard = board;
+            Players = new List<Player> { Player.X, Player.O };
+            GameBoard = new Board(3);
+            Game = new GameContext(GameBoard, Players);
         }
 
         public void PlayGame(GameContext game)
         {
             var output = new ConsoleOutput();
-            // display instructions
             OutputFormatter.PrintWelcome(game.GameBoard, output);
             while (true)
             {
-                
-                // TODO: player change state?
-                if (game.GameState() == 0) //TODO: where to place so next players' instructions don't display
+                OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
+                ImplementTurn(game);
+                OutputFormatter.PrintNewBoard(game.GameBoard, output);
+                if (GamePredicate.IsWinningBoard(game)) 
                 {
+                    OutputFormatter.PrintWinGame(game.GetCurrentPlayer(), output);
                     Environment.Exit(0);
                 }
-                
-                // game.GameState(); // doesn't fix problem here
-                else
+                if (GamePredicate.IsADraw(game))
                 {
-                    OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
-                    ImplementTurn(game);
-                    OutputFormatter.PrintNewBoard(game.GameBoard, output);
+                    OutputFormatter.PrintDrawnGame(output);
+                    Environment.Exit(0);
                 }
+                game.SetNextPlayer();
             }
-
-
-            // EndGame
         }
 
         public void ImplementTurn(GameContext game)
@@ -70,12 +66,11 @@ namespace TicTacToe2D
                     {
                         Environment.Exit(0);
                     }
-                    playerMovePosition = InputParser.GetPlayerMove(value);  // may throw InvalidMoveSyntaxException
-                    Validations.ValidTurn(game.GameBoard, playerMovePosition);  // may throw InvalidMoveEntryException 
+                    playerMovePosition = InputParser.GetPlayerMove(value);  
+                    Validations.ValidTurn(game.GameBoard, playerMovePosition);  
                 }
                 catch (InvalidMoveEntryException ex) 
                 {
-                    //. display this move is not valid message and try again
                     output.ConsoleWriteLine(ex.Message);
                     playerMovePosition = null;
                 }
@@ -91,15 +86,10 @@ namespace TicTacToe2D
             }
             while (playerMovePosition == null);
 
-            //. apply move to board.
             var fieldContents = new FieldContents();
             
             fieldContents = game.PlayerFieldContents(player);
             game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
-            // if (game.GameState() == 0) // returns next players instructions
-            // {
-            //     Environment.Exit(0);
-            // }
         }
     }
 }
