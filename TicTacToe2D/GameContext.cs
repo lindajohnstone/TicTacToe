@@ -11,8 +11,7 @@ namespace TicTacToe2D
         public Board GameBoard { get; private set; }
         public List<Player> Players { get; private set; } 
         private Validations _validations;
-        public IInput ConsoleInput { get; private set; }
-        public IOutput ConsoleOutput { get; private set; }
+        
         public TurnQueue TurnQueue { get; set; }
         
         public GameContext(Board board, List<Player> players) 
@@ -23,13 +22,9 @@ namespace TicTacToe2D
         
         public void Initialize(List<Player> players, Board board, Validations validations)
         {
-            var input = new ConsoleInput();
-            var output = new ConsoleOutput();
             GameBoard = board;
             Players = players;
             _validations = validations;
-            ConsoleInput = input;
-            ConsoleOutput = output;
             TurnQueue = new TurnQueue(players);
         }
 
@@ -68,17 +63,17 @@ namespace TicTacToe2D
             return fieldContents;
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is GameContext context &&
-                   EqualityComparer<Board>.Default.Equals(GameBoard, context.GameBoard) &&
-                   Players == context.Players &&
-                   EqualityComparer<Validations>.Default.Equals(_validations, context._validations);
-        }
+        // public override bool Equals(object obj)
+        // {
+        //     return obj is GameContext context &&
+        //            EqualityComparer<Board>.Default.Equals(GameBoard, context.GameBoard) &&
+        //            Players == context.Players &&
+        //            EqualityComparer<Validations>.Default.Equals(_validations, context._validations);
+        // }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(GameBoard, Players, _validations);
-        }
+        // public override int GetHashCode()
+        // {
+        //     return HashCode.Combine(GameBoard, Players, _validations);
+        // }
     }
 }

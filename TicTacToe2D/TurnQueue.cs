@@ -5,7 +5,7 @@ namespace TicTacToe2D
 {
     public class TurnQueue
     {
-        // stores queue of players
+        // stores queue of player turns
         Queue<Player> _queue = new Queue<Player>();
 
         public TurnQueue(List<Player> players)

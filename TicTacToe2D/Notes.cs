@@ -35,11 +35,7 @@ namespace TicTacToe2D
                                     - IsAWinningRow                               
                                     - IsAWinningDiagonal                          
                                     - IsADraw              
-            12/ Field               - property Position
-                                    - property FieldContents
-            13/ Turn                - property Player
-                                    - property Position       
-            14/ Board               - property Dictionary FieldDictionary                         - GamePredicate
+            12/ Board               - property Dictionary FieldDictionary                         - GamePredicate
                                     - property int Width
                                     - property int Height
                                     - property List<List<Position>> WInningLines
@@ -60,9 +56,10 @@ namespace TicTacToe2D
                                     - operator !=
                                     - Equals
                                     - GetHashCode
-            15/ InputParser
-            16/ OutputFormatter
-            17/ Program
+            13/ InputParser
+            14/ OutputFormatter
+            15/ Program
+            16/ TurnQueue
         */
     }
 }

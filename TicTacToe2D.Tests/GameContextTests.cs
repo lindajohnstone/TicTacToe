@@ -56,5 +56,31 @@ namespace TicTacToe2D.Tests
             var expected = new List<Player>() { Player.X, Player.O };
             Assert.Equal(expected, result);
         }
+
+        [Fact]
+        public void PlayerFieldContents_player_x_fieldcontents_x()
+        {
+            var board = new Board(3);
+            var players = new List<Player>() { Player.X, Player.O };
+            var player = players[0];
+            var game = new GameContext(board, players);
+            var result = game.PlayerFieldContents(player);
+            Assert.Equal(FieldContents.x, result);
+            Assert.DoesNotMatch(FieldContents.y.ToString(), result.ToString());
+            Assert.IsType<FieldContents>(result);
+        }
+
+        [Fact]
+        public void PlayerFieldContents_player_o_fieldcontents_y()
+        {
+            var board = new Board(3);
+            var players = new List<Player>() { Player.X, Player.O };
+            var player = players[1];
+            var game = new GameContext(board, players);
+            var result = game.PlayerFieldContents(player);
+            Assert.Equal(FieldContents.y, result);
+            Assert.DoesNotMatch(FieldContents.x.ToString(), result.ToString());
+            Assert.IsType<FieldContents>(result);
+        }
     }
 }
