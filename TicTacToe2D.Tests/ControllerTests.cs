@@ -171,13 +171,15 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayGame()
+        public void PlayGame() // TODO: how to set user input??
         {
             var input = new StubConsoleInput();
-            //var playerInput = input.WithReadLine("0,1");
+            var playerInput = input.WithReadLine("0,1");
+            var position = InputParser.GetPlayerMove(playerInput);
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardWinningDiagonalRL());
+            var board = new Board(3);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            board.MovePlayer(position, FieldContents.x);
             var controller = new Controller(board);
             controller.PlayGame(game, output, input);
             Assert.Equal("Hooray! Player 1 has won the game!", output.GetWriteLine());
