@@ -13,7 +13,7 @@ namespace TicTacToe2D
         public List<Player> Players { get; private set; }
 
         public Queue TurnQueue { get; set; }
-        public Controller()
+        public Controller(Board board)
         {
             Initialize();
         }
@@ -24,14 +24,13 @@ namespace TicTacToe2D
             Game = new GameContext(GameBoard, Players);
         }
 
-        public void PlayGame(GameContext game)
+        public void PlayGame(GameContext game, IOutput output, IInput input)
         {
-            var output = new ConsoleOutput();
             OutputFormatter.PrintWelcome(game.GameBoard, output);
             while (true)
             {
                 OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
-                ImplementTurn(game);
+                ImplementTurn(game, output, input);
                 OutputFormatter.PrintNewBoard(game.GameBoard, output);
                 if (GamePredicate.IsWinningBoard(game)) 
                 {
@@ -47,12 +46,8 @@ namespace TicTacToe2D
             }
         }
 
-        public void ImplementTurn(GameContext game)
+        public void ImplementTurn(GameContext game, IOutput output, IInput input)
         {
-            var output = new ConsoleOutput();
-
-            var input = new ConsoleInput();
-
             var player = game.GetCurrentPlayer();
             
             Position playerMovePosition = null;

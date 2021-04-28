@@ -16,10 +16,10 @@ namespace TicTacToe2D.Tests
             return _readLine;
         }
 
-        public StubConsoleInput WithReadLine(string value)
+        public string WithReadLine(string value)
         {
-            _readLine = value;
-            return this;
+            //_readLine = value;
+            return value;
         }
     }
 }

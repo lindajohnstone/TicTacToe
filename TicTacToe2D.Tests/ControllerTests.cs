@@ -47,8 +47,8 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void Controller_has_board_players()
         {
-            var controller = new Controller();
             var board = new Board(3);
+            var controller = new Controller(board);
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             Assert.Equal(controller.GameBoard, new Board(3));
@@ -59,9 +59,9 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void WinningRow() 
         {
-            var controller = new Controller();
-            var player = controller.Players[0]; 
             var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var controller = new Controller(board);
+            var player = controller.Players[0]; 
             var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
             Assert.True(result);
         }
@@ -70,9 +70,9 @@ namespace TicTacToe2D.Tests
         public void EndGame_win_output_message() 
         {
             var output = new StubOutput();
-            var controller = new Controller();
-            var player = controller.Players[0];
             var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var controller = new Controller(board);
+            var player = controller.Players[0];
             var expected = "Hooray! Player 1 has won the game!";
             OutputFormatter.PrintWinGame(player, output);
             Assert.Equal(expected, output.GetWriteLine());
@@ -145,5 +145,56 @@ namespace TicTacToe2D.Tests
             var result = turnQueue.GetCurrentPlayer();
             Assert.NotEqual(Player.O, result);
         }        
+        
+        [Theory]
+        [InlineData("0,2")]
+        [InlineData("q")]
+        public void Input_WithReadLine(string value)
+        {
+            var input = new StubConsoleInput();
+            Assert.Equal(value, input.WithReadLine(value));
+        }
+
+        [Fact]
+        public void ImplementTurn() // TODO: is this a valid test - doesn't use PlayGame or ImplementTurn
+        {
+            var board = new Board(3);
+            var input = new StubConsoleInput();
+            var output = new StubOutput();
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var position = new Position(0, 1);
+            var fieldContents = FieldContents.x;
+            var result = controller.GameBoard.MovePlayer(position, fieldContents);
+            var expected = (SourceData.BoardXFirstMove() == result);
+            Assert.True(expected);
+        }
+
+        [Fact]
+        public void PlayGame()
+        {
+            var input = new StubConsoleInput();
+            //var playerInput = input.WithReadLine("0,1");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardWinningDiagonalRL());
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            controller.PlayGame(game, output, input);
+            Assert.Equal("Hooray! Player 1 has won the game!", output.GetWriteLine());
+        }
+        /*
+            TicTacToe2D.Tests.ControllerTests.PlayGame:
+    Outcome: Failed
+    Error Message:
+    System.NullReferenceException : Object reference not set to an instance of an object.
+    Stack Trace:
+       at TicTacToe2D.InputParser.SplitInput(String input) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/InputParser.cs:line 22
+   at TicTacToe2D.InputParser.GetPlayerMove(String playerInput) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/InputParser.cs:line 13
+   at TicTacToe2D.Controller.ImplementTurn(GameContext game, IOutput output, IInput input) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/Controller.cs:line 64
+   at TicTacToe2D.Controller.PlayGame(GameContext game, IOutput output, IInput input) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/Controller.cs:line 33
+   at TicTacToe2D.Tests.ControllerTests.PlayGame() in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D.Tests/ControllerTests.cs:line 182
+    
+    Total tests: 1. Passed: 0. Failed: 1. Skipped: 0
+        */
     }
 }

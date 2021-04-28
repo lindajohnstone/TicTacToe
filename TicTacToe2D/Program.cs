@@ -9,11 +9,13 @@ namespace TicTacToe2D
     {
         static void Main(string[] args)
         {
-            var controller = new Controller();
+            var input = new ConsoleInput();
+            var output = new ConsoleOutput();
             var board = new Board(3);
+            var controller = new Controller(board);
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
-            controller.PlayGame(game);
+            controller.PlayGame(game, output, input);
         }
     }
 }
