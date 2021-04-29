@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
 
 namespace TicTacToe2D.Tests
 {
     public class StubConsoleInput : IInput
     {
-        private string _readLine;
-
+        private Queue<string> _queue;
+        public StubConsoleInput()
+        {
+            _queue = new Queue<string>();
+        }
         public ConsoleKeyInfo ConsoleReadKey(bool value)
         {
             throw new NotImplementedException();
@@ -13,13 +17,11 @@ namespace TicTacToe2D.Tests
 
         public string ConsoleReadLine()
         {
-            return _readLine;
+            return _queue.Dequeue();
         }
-
-        public string WithReadLine(string value)
+        public void WithReadLine(string value)
         {
-            _readLine = value;
-            return _readLine;
+            _queue.Enqueue(value);
         }
     }
 }

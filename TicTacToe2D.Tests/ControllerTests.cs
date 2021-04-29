@@ -145,18 +145,9 @@ namespace TicTacToe2D.Tests
             var result = turnQueue.GetCurrentPlayer();
             Assert.NotEqual(Player.O, result);
         }        
-        
-        [Theory]
-        [InlineData("0,2")]
-        [InlineData("q")]
-        public void Input_WithReadLine(string value)
-        {
-            var input = new StubConsoleInput();
-            Assert.Equal(value, input.WithReadLine(value));
-        }
 
         [Fact]
-        public void ImplementTurn() // TODO: is this a valid test - doesn't use PlayGame or ImplementTurn
+        public void Controller_check_move_player() // TODO: is this a valid test - doesn't use PlayGame or ImplementTurn
         {
             var board = new Board(3);
             var input = new StubConsoleInput();
@@ -181,6 +172,71 @@ namespace TicTacToe2D.Tests
             Assert.Equal(FieldContents.x, result);
         }
 
-        
+        [Theory]
+        [InlineData("0,2")]
+        [InlineData("q")]
+        public void Input_ConsoleReadLine(string value)
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine(value);
+            Assert.Equal(value, input.ConsoleReadLine());
+        }
+
+        [Fact]
+        public void ImplementTurn_player_move_position()
+        {
+            var input = new StubConsoleInput();
+            var playerInput = "0,1";
+            input.WithReadLine(playerInput);
+            var output = new StubOutput();
+            var board = new Board(3);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            controller.ImplementTurn(game, output, input);
+            Assert.Equal(Player.X, game.GetCurrentPlayer());
+            Assert.Equal(Player.O, game.SetNextPlayer());
+        }
+
+        [Fact]
+        public void ImplementTurn_player_ends_game_output() // TODO: is this a valid test for line 60-63?
+        {
+            var input = new StubConsoleInput();
+            var playerInput = "q";
+            input.WithReadLine(playerInput);
+            var output = new StubOutput();
+            var board = new Board(3);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            Assert.Equal("", output.GetWriteLine());
+        }
+
+        // [Fact]
+        // public void ImplementTurn_throws_InvalidMoveEntryException()
+        // {
+        //     var input = new StubConsoleInput();
+        //     var playerInput = "0,1";
+        //     input.WithReadLine(playerInput);
+        //     var output = new StubOutput();
+        //     var board = new Board(SourceData.BoardMovePlayerY());
+        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+        //     var controller = new Controller(board);
+        //     var result = Assert.Throws<InvalidMoveEntryException>(() => controller.ImplementTurn(game, output, input));
+        //     Assert.Equal("Oh no, a piece is already at this place! Try again...", result.Message);
+        // }
+
+        [Fact]
+        public void PlayGame_player_move_position()
+        {
+            var input = new StubConsoleInput();
+            var playerInput = "0,1";
+            input.WithReadLine(playerInput);
+            var output = new StubOutput();
+            var board = new Board(3);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            controller.PlayGame(game, output, input);
+            Assert.Equal(Player.X, game.GetCurrentPlayer());
+            Assert.Equal(Player.O, game.SetNextPlayer());
+        }
     }
 }
