@@ -15,12 +15,12 @@ namespace TicTacToe2D
         public Queue TurnQueue { get; set; }
         public Controller(Board board)
         {
-            Initialize();
+            Initialize(board);
         }
-        public void Initialize()
+        public void Initialize(Board board)
         {
             Players = new List<Player> { Player.X, Player.O };
-            GameBoard = new Board(3);
+            GameBoard = board;
             Game = new GameContext(GameBoard, Players);
         }
 

@@ -67,7 +67,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void EndGame_win_output_message() 
+        public void End_game_win_output_message() 
         {
             var output = new StubOutput();
             var board = new Board(SourceData.BoardWinningDiagonalLR());
@@ -79,7 +79,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void EndGame_user_ends_game_output_message()
+        public void End_game_user_ends_game_output_message()
         {
             var output = new StubOutput();
             var player = Player.X;
@@ -89,7 +89,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void EndGame_drawn_game_output_message()
+        public void End_game_drawn_game_output_message()
         {
             var output = new StubOutput();
             var board = new Board(SourceData.BoardIsADraw());
@@ -162,7 +162,6 @@ namespace TicTacToe2D.Tests
             var input = new StubConsoleInput();
             var output = new StubOutput();
             var controller = new Controller(board);
-            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var position = new Position(0, 1);
             var fieldContents = FieldContents.x;
             var result = controller.GameBoard.MovePlayer(position, fieldContents);
@@ -171,32 +170,17 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayGame() // TODO: how to set user input??
+        public void Controller_position_field_contents() // TODO: is this a valid test - doesn't use PlayGame or ImplementTurn
         {
             var input = new StubConsoleInput();
-            var playerInput = input.WithReadLine("0,1");
-            var position = InputParser.GetPlayerMove(playerInput);
             var output = new StubOutput();
-            var board = new Board(3);
-            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            board.MovePlayer(position, FieldContents.x);
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
             var controller = new Controller(board);
-            controller.PlayGame(game, output, input);
-            Assert.Equal("Hooray! Player 1 has won the game!", output.GetWriteLine());
+            var position = new Position(0, 0);
+            var result = controller.Game.GameBoard.GetField(position);
+            Assert.Equal(FieldContents.x, result);
         }
-        /*
-            TicTacToe2D.Tests.ControllerTests.PlayGame:
-    Outcome: Failed
-    Error Message:
-    System.NullReferenceException : Object reference not set to an instance of an object.
-    Stack Trace:
-       at TicTacToe2D.InputParser.SplitInput(String input) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/InputParser.cs:line 22
-   at TicTacToe2D.InputParser.GetPlayerMove(String playerInput) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/InputParser.cs:line 13
-   at TicTacToe2D.Controller.ImplementTurn(GameContext game, IOutput output, IInput input) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/Controller.cs:line 64
-   at TicTacToe2D.Controller.PlayGame(GameContext game, IOutput output, IInput input) in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D/Controller.cs:line 33
-   at TicTacToe2D.Tests.ControllerTests.PlayGame() in /Users/Linda.Johnstone/Documents/fma/TicTacToe2D/TicTacToe2D.Tests/ControllerTests.cs:line 182
-    
-    Total tests: 1. Passed: 0. Failed: 1. Skipped: 0
-        */
+
+        
     }
 }

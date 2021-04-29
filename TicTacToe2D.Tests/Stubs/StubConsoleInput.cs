@@ -18,8 +18,8 @@ namespace TicTacToe2D.Tests
 
         public string WithReadLine(string value)
         {
-            //_readLine = value;
-            return value;
+            _readLine = value;
+            return _readLine;
         }
     }
 }
