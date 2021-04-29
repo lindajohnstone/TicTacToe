@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TicTacToe2D.Exceptions;
 using Xunit;
 
 namespace TicTacToe2D.Tests
@@ -12,7 +13,7 @@ namespace TicTacToe2D.Tests
         {
             var input = "0,0";
             var result = InputParser.GetPlayerMove(input);
-            Assert.Equal(new Position(0,0), result);
+            Assert.Equal(new Position(0, 0), result);
         }
 
         [Fact]
@@ -35,7 +36,7 @@ namespace TicTacToe2D.Tests
 
         [Theory]
         [InlineData("0,b")]
-        [InlineData("l,m")] 
+        [InlineData("l,m")]
         [InlineData("b,0")]
         public void GetPlayerMove_throws_exception_with_invalid_format(string input)
         {
@@ -57,17 +58,17 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void WinningRow() 
+        public void WinningRow()
         {
             var board = new Board(SourceData.BoardWinningDiagonalLR());
             var controller = new Controller(board);
-            var player = controller.Players[0]; 
+            var player = controller.Players[0];
             var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
             Assert.True(result);
         }
 
         [Fact]
-        public void End_game_win_output_message() 
+        public void End_game_win_output_message()
         {
             var output = new StubOutput();
             var board = new Board(SourceData.BoardWinningDiagonalLR());
@@ -99,15 +100,13 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayerEndsGame_user_input_as_string_q_ends_game_outputs_message()
+        public void PlayerEndsGame_user_input_as_string_q_ends_game_outputs_message()//TODO: fix test
         {
             var output = new StubOutput();
             var player = Player.X;
             var playerInput = "q";
-            var expected = "Player 1 has ended the game.";
-            InputParser.PlayerEndsGame(player, playerInput, output);
-            Assert.Equal(expected, output.GetWriteLine());
-            Assert.True(InputParser.PlayerEndsGame(player, playerInput, output));
+            //var expected = "Player 1 has ended the game.";
+            Assert.Throws<PlayerAbortsGameException>(() => InputParser.PlayerEndsGame(player, playerInput));
         }
 
         [Fact]
@@ -144,7 +143,7 @@ namespace TicTacToe2D.Tests
             var turnQueue = new TurnQueue(players);
             var result = turnQueue.GetCurrentPlayer();
             Assert.NotEqual(Player.O, result);
-        }        
+        }
 
         [Fact]
         public void Controller_check_move_player() // TODO: is this a valid test - doesn't use PlayGame or ImplementTurn
@@ -198,45 +197,36 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void ImplementTurn_player_ends_game_output() // TODO: is this a valid test for line 60-63?
+        public void ImplementTurn_throws_InvalidMoveEntryException()
         {
             var input = new StubConsoleInput();
-            var playerInput = "q";
-            input.WithReadLine(playerInput);
+            input.WithReadLine("0,1");
+            input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board(SourceData.BoardMovePlayerY());
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
-            Assert.Equal("", output.GetWriteLine());
+            var result = Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Equal("Oh no, a piece is already at this place! Try again...", output.GetWriteLine(1));
         }
 
         // [Fact]
-        // public void ImplementTurn_throws_InvalidMoveEntryException()
+        // public void PlayGame_write_welcome()
         // {
         //     var input = new StubConsoleInput();
-        //     var playerInput = "0,1";
+        //     var playerInput = "0,0";
         //     input.WithReadLine(playerInput);
         //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardMovePlayerY());
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+        //     var board = new Board(3);
         //     var controller = new Controller(board);
-        //     var result = Assert.Throws<InvalidMoveEntryException>(() => controller.ImplementTurn(game, output, input));
-        //     Assert.Equal("Oh no, a piece is already at this place! Try again...", result.Message);
+        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+        //     controller.PlayGame(game, output, input);
+        //     Assert.Equal("Welcome to Tic Tac Toe!\nHere's the current board:.  .  .  \n.  .  .  \n.  .  .  \n", output.GetWriteLine());
         // }
-
-        [Fact]
-        public void PlayGame_player_move_position()
-        {
-            var input = new StubConsoleInput();
-            var playerInput = "0,1";
-            input.WithReadLine(playerInput);
-            var output = new StubOutput();
-            var board = new Board(3);
-            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            var controller = new Controller(board);
-            controller.PlayGame(game, output, input);
-            Assert.Equal(Player.X, game.GetCurrentPlayer());
-            Assert.Equal(Player.O, game.SetNextPlayer());
-        }
+        /*
+            Tests required for Implementturn;
+                line 62 - Environment.Exit(0)
+                catch InvalidMoveEntryExce
+        */
     }
 }

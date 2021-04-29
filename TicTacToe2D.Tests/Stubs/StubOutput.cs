@@ -25,5 +25,10 @@ namespace TicTacToe2D.Tests
         {
             return String.Join("", _outputList);
         }
+
+        public string GetWriteLine(int i)
+        {
+            return _outputList[i];
+        }
     }
 }

@@ -30,13 +30,14 @@ namespace TicTacToe2D
             return positions.All((x) => board.GetField(x) == fieldContents);
         }
 
-        public static bool IsADraw(Board board)
-        {
-            return board.GetAllPositions().All((x) => board.GetField(x) != FieldContents.empty);
-        }
         public static bool IsADraw(GameContext game)
         {
             return IsADraw(game.GameBoard);
+        }
+
+        public static bool IsADraw(Board board)
+        {
+            return board.GetAllPositions().All((x) => board.GetField(x) != FieldContents.empty);
         }
     }
 }

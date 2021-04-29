@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TicTacToe2D.Exceptions;
 
 namespace TicTacToe2D
 {
@@ -30,17 +31,25 @@ namespace TicTacToe2D
             while (true)
             {
                 OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
-                ImplementTurn(game, output, input);
+                try
+                {
+                    ImplementTurn(game, output, input);
+                }
+                catch(PlayerAbortsGameException ex)
+                {
+                    OutputFormatter.PrintEndGame(game.GetCurrentPlayer(), output);
+                    break;
+                }
                 OutputFormatter.PrintNewBoard(game.GameBoard, output);
                 if (GamePredicate.IsWinningBoard(game)) 
                 {
                     OutputFormatter.PrintWinGame(game.GetCurrentPlayer(), output);
-                    Environment.Exit(0);
+                    break;
                 }
                 if (GamePredicate.IsADraw(game))
                 {
                     OutputFormatter.PrintDrawnGame(output);
-                    Environment.Exit(0);
+                    break;
                 }
                 game.SetNextPlayer();
             }
@@ -57,10 +66,8 @@ namespace TicTacToe2D
                 {
                     var value = input.ConsoleReadLine();
                     output.ConsoleWriteLine("");
-                    if(InputParser.PlayerEndsGame(player, value, output))
-                    {
-                        Environment.Exit(0);
-                    }
+                    InputParser.PlayerEndsGame(player, value);
+                    
                     playerMovePosition = InputParser.GetPlayerMove(value);  
                     Validations.ValidTurn(game.GameBoard, playerMovePosition);  
                 }

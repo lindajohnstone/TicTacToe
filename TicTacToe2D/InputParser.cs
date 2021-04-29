@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TicTacToe2D.Exceptions;
 
 namespace TicTacToe2D
 {
@@ -41,14 +42,12 @@ namespace TicTacToe2D
             return false;
         }
 
-        public static bool PlayerEndsGame(Player player, string playerInput, IOutput output)
+        public static void PlayerEndsGame(Player player, string playerInput)
         {
             if (playerInput == "q")
             {
-                OutputFormatter.PrintEndGame(player, output);
-                return true;
+                throw new PlayerAbortsGameException();
             }
-            return false;
         }
     }
 }
