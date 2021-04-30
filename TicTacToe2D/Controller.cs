@@ -73,7 +73,7 @@ namespace TicTacToe2D
                 }
                 catch (InvalidMoveEntryException ex) 
                 {
-                    output.ConsoleWriteLine(ex.Message);
+                    output.ConsoleWriteLine(ex.Message);// TODO: for all exceptions - 
                     playerMovePosition = null;
                 }
                 catch (InvalidMoveSyntaxException ex)

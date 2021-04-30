@@ -197,7 +197,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void ImplementTurn_throws_InvalidMoveEntryException()
+        public void ImplementTurn_returns_InvalidMoveEntryException_message()
         {
             var input = new StubConsoleInput();
             input.WithReadLine("0,1");
@@ -206,27 +206,145 @@ namespace TicTacToe2D.Tests
             var board = new Board(SourceData.BoardMovePlayerY());
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
-            var result = Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
             Assert.Equal("Oh no, a piece is already at this place! Try again...", output.GetWriteLine(1));
         }
 
-        // [Fact]
-        // public void PlayGame_write_welcome()
-        // {
-        //     var input = new StubConsoleInput();
-        //     var playerInput = "0,0";
-        //     input.WithReadLine(playerInput);
-        //     var output = new StubOutput();
-        //     var board = new Board(3);
-        //     var controller = new Controller(board);
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     controller.PlayGame(game, output, input);
-        //     Assert.Equal("Welcome to Tic Tac Toe!\nHere's the current board:.  .  .  \n.  .  .  \n.  .  .  \n", output.GetWriteLine());
-        // }
-        /*
-            Tests required for Implementturn;
-                line 62 - Environment.Exit(0)
-                catch InvalidMoveEntryExce
-        */
+        [Fact]
+        public void ImplementTurn_returns_InvalidMoveSyntaxException_message()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0;1");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Equal("Invalid format. Please try again...", output.GetWriteLine(1));
+        }
+
+        [Fact]
+        public void ImplementTurn_throws_ArgumentException_Y()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,9");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Equal("Position Y coordinate is out of range. Please try again...", output.GetWriteLine(1));
+        }
+
+        [Fact]
+        public void ImplementTurn_throws_ArgumentException_X()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("9,0");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Equal("Position X coordinate is out of range. Please try again...", output.GetWriteLine(1));
+        }
+
+        [Fact]
+        public void PlayGame_write_welcome()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,0");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(3);
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            controller.PlayGame(game, output, input);
+            Assert.Contains("Welcome to Tic Tac Toe!\nHere's the current board:.  .  .  \n.  .  .  \n.  .  .  \n", output.GetWriteLine());
+        }
+        [Fact]
+        public void PlayGame_player_ends_game()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,0");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(3);
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            controller.PlayGame(game, output, input);
+            Assert.Contains("Player 2 has ended the game.", output.GetWriteLine());
+        }
+
+        [Fact]
+        public void PlayGame_drawn_game()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,0");
+            input.WithReadLine("0,1");
+            input.WithReadLine("0,2");
+            input.WithReadLine("1,1");
+            input.WithReadLine("1,0");
+            input.WithReadLine("1,2");
+            input.WithReadLine("2,1");
+            input.WithReadLine("2,0");
+            input.WithReadLine("2,2");
+            var output = new StubOutput();
+            var board = new Board(3);
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            controller.PlayGame(game, output, input);
+            Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
+        }
+
+        [Fact]
+        public void PlayGame_drawn_game_v2()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("1,0");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardIsNotADraw());
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            controller.PlayGame(game, output, input);
+            Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
+        }
+
+        [Fact]
+        public void PlayGame_X_wins_game()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,0");
+            input.WithReadLine("0,1");
+            input.WithReadLine("0,2");
+            input.WithReadLine("1,1");
+            input.WithReadLine("1,0");
+            input.WithReadLine("1,2");
+            input.WithReadLine("2,0");
+            var output = new StubOutput();
+            var board = new Board(3);
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            controller.PlayGame(game, output, input);
+            Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
+        }
+
+        [Fact]
+        public void PlayGame_X_wins_game_v2()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("1,0");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardIsNotADrawV2());
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            controller.PlayGame(game, output, input);
+            Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
+        }
     }
 }
