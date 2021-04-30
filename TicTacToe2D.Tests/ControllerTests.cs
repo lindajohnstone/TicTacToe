@@ -100,12 +100,11 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayerEndsGame_user_input_as_string_q_ends_game_outputs_message()//TODO: fix test
+        public void PlayerEndsGame_user_input_as_string_q_ends_game_outputs_message()
         {
             var output = new StubOutput();
             var player = Player.X;
             var playerInput = "q";
-            //var expected = "Player 1 has ended the game.";
             Assert.Throws<PlayerAbortsGameException>(() => InputParser.PlayerEndsGame(player, playerInput));
         }
 
@@ -146,7 +145,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void Controller_check_move_player() // TODO: is this a valid test - doesn't use PlayGame or ImplementTurn
+        public void Controller_check_move_player() 
         {
             var board = new Board(3);
             var input = new StubConsoleInput();
@@ -160,7 +159,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void Controller_position_field_contents() // TODO: is this a valid test - doesn't use PlayGame or ImplementTurn
+        public void Controller_position_field_contents() 
         {
             var input = new StubConsoleInput();
             var output = new StubOutput();
@@ -195,7 +194,7 @@ namespace TicTacToe2D.Tests
             Assert.Equal(Player.X, game.GetCurrentPlayer());
             Assert.Equal(Player.O, game.SetNextPlayer());
         }
-
+        //TODO: why do some tests using input have to use 'input.WithReadLine("q")' to not throw a 'ThrowForEmptyQueue'
         [Fact]
         public void ImplementTurn_returns_InvalidMoveEntryException_message()
         {
@@ -207,7 +206,7 @@ namespace TicTacToe2D.Tests
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-            Assert.Equal("Oh no, a piece is already at this place! Try again...", output.GetWriteLine(1));
+            Assert.Equal("Oh no, a piece is already at this place! Try again...", output.GetWriteLine());
         }
 
         [Fact]
@@ -221,7 +220,7 @@ namespace TicTacToe2D.Tests
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-            Assert.Equal("Invalid format. Please try again...", output.GetWriteLine(1));
+            Assert.Equal("Invalid format. Please try again...", output.GetWriteLine());
         }
 
         [Fact]
@@ -235,7 +234,7 @@ namespace TicTacToe2D.Tests
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-            Assert.Equal("Position Y coordinate is out of range. Please try again...", output.GetWriteLine(1));
+            Assert.Equal("Position Y coordinate is out of range. Please try again...", output.GetWriteLine());
         }
 
         [Fact]
@@ -249,7 +248,7 @@ namespace TicTacToe2D.Tests
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-            Assert.Equal("Position X coordinate is out of range. Please try again...", output.GetWriteLine(1));
+            Assert.Equal("Position X coordinate is out of range. Please try again...", output.GetWriteLine());
         }
 
         [Fact]

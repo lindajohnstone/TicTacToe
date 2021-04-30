@@ -62,18 +62,5 @@ namespace TicTacToe2D
 
             return fieldContents;
         }
-
-        // public override bool Equals(object obj)
-        // {
-        //     return obj is GameContext context &&
-        //            EqualityComparer<Board>.Default.Equals(GameBoard, context.GameBoard) &&
-        //            Players == context.Players &&
-        //            EqualityComparer<Validations>.Default.Equals(_validations, context._validations);
-        // }
-
-        // public override int GetHashCode()
-        // {
-        //     return HashCode.Combine(GameBoard, Players, _validations);
-        // }
     }
 }
