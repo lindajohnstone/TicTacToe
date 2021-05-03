@@ -13,7 +13,7 @@ namespace TicTacToe2D.Tests
         {
             var input = "0,0";
             var result = InputParser.GetPlayerMove(input);
-            Assert.Equal(new Position(0, 0), result);
+            Assert.Equal(new Position2D(0, 0), result);
         }
 
         [Fact]
@@ -27,7 +27,7 @@ namespace TicTacToe2D.Tests
         [InlineData("0,1")]
         public void PlayGame_move_player(string input)
         {
-            var board = new Board(SourceData.BoardIsInitialized());
+            var board = new Board2D(SourceData.BoardIsInitialized());
             var fieldContents = FieldContents.x;
             var result = board.MovePlayer(InputParser.GetPlayerMove(input), fieldContents);
             var expected = (SourceData.BoardXFirstMove() == result);
@@ -40,7 +40,7 @@ namespace TicTacToe2D.Tests
         [InlineData("b,0")]
         public void GetPlayerMove_throws_exception_with_invalid_format(string input)
         {
-            var board = new Board(SourceData.BoardIsInitialized());
+            var board = new Board2D(SourceData.BoardIsInitialized());
             var result = Assert.Throws<InvalidMoveSyntaxException>(() => InputParser.GetPlayerMove(input));
             Assert.Equal("Invalid format. Please try again...", result.Message);
         }
@@ -48,11 +48,11 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void Controller_has_board_players()
         {
-            var board = new Board(3);
+            var board = new Board2D(3);
             var controller = new Controller(board);
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
-            Assert.Equal(controller.GameBoard, new Board(3));
+            Assert.Equal(controller.GameBoard, new Board2D(3));
             Assert.Equal(Player.X, controller.Players[0]);
             Assert.Equal(Player.O, controller.Players[1]);
         }
@@ -60,7 +60,7 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void WinningRow()
         {
-            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var board = new Board2D(SourceData.BoardWinningDiagonalLR());
             var controller = new Controller(board);
             var player = controller.Players[0];
             var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
@@ -71,7 +71,7 @@ namespace TicTacToe2D.Tests
         public void End_game_win_output_message()
         {
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var board = new Board2D(SourceData.BoardWinningDiagonalLR());
             var controller = new Controller(board);
             var player = controller.Players[0];
             var expected = "Hooray! Player 1 has won the game!";
@@ -93,7 +93,7 @@ namespace TicTacToe2D.Tests
         public void End_game_drawn_game_output_message()
         {
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardIsADraw());
+            var board = new Board2D(SourceData.BoardIsADraw());
             var expected = "Game is drawn. Better luck next time.";
             OutputFormatter.PrintDrawnGame(output);
             Assert.Equal(expected, output.GetWriteLine());
@@ -147,11 +147,11 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void Controller_check_move_player() 
         {
-            var board = new Board(3);
+            var board = new Board2D(3);
             var input = new StubConsoleInput();
             var output = new StubOutput();
             var controller = new Controller(board);
-            var position = new Position(0, 1);
+            var position = new Position2D(0, 1);
             var fieldContents = FieldContents.x;
             var result = controller.GameBoard.MovePlayer(position, fieldContents);
             var expected = (SourceData.BoardXFirstMove() == result);
@@ -163,9 +163,9 @@ namespace TicTacToe2D.Tests
         {
             var input = new StubConsoleInput();
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var board = new Board2D(SourceData.BoardWinningDiagonalLR());
             var controller = new Controller(board);
-            var position = new Position(0, 0);
+            var position = new Position2D(0, 0);
             var result = controller.Game.GameBoard.GetField(position);
             Assert.Equal(FieldContents.x, result);
         }
@@ -187,7 +187,7 @@ namespace TicTacToe2D.Tests
             var playerInput = "0,1";
             input.WithReadLine(playerInput);
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             controller.ImplementTurn(game, output, input);
@@ -202,7 +202,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("0,1");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardMovePlayerY());
+            var board = new Board2D(SourceData.BoardMovePlayerY());
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
@@ -216,7 +216,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("0;1");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardMovePlayerY());
+            var board = new Board2D(SourceData.BoardMovePlayerY());
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
@@ -230,7 +230,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("0,9");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardMovePlayerY());
+            var board = new Board2D(SourceData.BoardMovePlayerY());
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
@@ -244,7 +244,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("9,0");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardMovePlayerY());
+            var board = new Board2D(SourceData.BoardMovePlayerY());
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
@@ -258,7 +258,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("0,0");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             controller.PlayGame(game, output, input);
@@ -271,7 +271,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("0,0");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             controller.PlayGame(game, output, input);
@@ -292,7 +292,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("2,0");
             input.WithReadLine("2,2");
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             controller.PlayGame(game, output, input);
@@ -306,7 +306,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("1,0");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardIsNotADraw());
+            var board = new Board2D(SourceData.BoardIsNotADraw());
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             controller.PlayGame(game, output, input);
@@ -325,7 +325,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("1,2");
             input.WithReadLine("2,0");
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             controller.PlayGame(game, output, input);
@@ -339,7 +339,7 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("1,0");
             input.WithReadLine("q");
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardIsNotADrawV2());
+            var board = new Board2D(SourceData.BoardIsNotADrawV2());
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             controller.PlayGame(game, output, input);

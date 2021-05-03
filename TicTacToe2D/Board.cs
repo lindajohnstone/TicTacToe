@@ -1,15 +1,15 @@
-    using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace TicTacToe2D
 {
-    public class Board
+    public abstract class Board
     {
         // container of fields
         private Dictionary<Position, FieldContents> FieldDictionary { get; set; }
 
-        private List<List<Position>> WinningLines { get; set; }
+        private List<List<Position2D>> WinningLines { get; set; }
 
         private List<Position> AllPositions { get; set; }
 
@@ -23,12 +23,11 @@ namespace TicTacToe2D
             Initialize(boardSize, BoardInitializer(boardSize));
         }
 
-        public Board(FieldContents[][] sourceData)
+        protected Board()
         {
-            Initialize(sourceData.Length, BoardInitializer(sourceData));
+            // derived classes responsible for calling Initialize
         }
         
-
         public Board(Board sourceBoard)
         {
             Initialize(sourceBoard.Width, sourceBoard.FieldDictionary);
@@ -43,70 +42,39 @@ namespace TicTacToe2D
             AllPositions = CreateAllPositions(boardSize);
         }
 
-        public static Dictionary<Position, FieldContents> BoardInitializer(FieldContents[][] sourceData)
-        {
-            var boardSize = sourceData.Length;
-            var FieldDictionary = new Dictionary<Position, FieldContents>();
-            for (int row = 0; row < boardSize; row++)
-            {
-                if (sourceData[row].Length != boardSize)
-                {
-                    throw new ArgumentOutOfRangeException("sourceData should be a square array");
-                }
-                for (int column = 0; column < boardSize; column++)
-                {
-                    var position = new Position(row, column);
-                    FieldDictionary.Add(position, sourceData[row][column]);
-                }
-            }
-            return FieldDictionary;
-        }
+        protected abstract Dictionary<Position, FieldContents> BoardInitializer(int boardSize);
 
-        public static Dictionary<Position, FieldContents> BoardInitializer(int boardSize)
+        private static List<List<Position2D>> CreateWinningLines(int boardSize)
         {
-            var FieldDictionary = new Dictionary<Position, FieldContents>();
-            for (int row = 0; row < boardSize; row++)
-            {
-                for (int column = 0; column < boardSize; column++)
-                {
-                    var position = new Position(row, column);
-                    FieldDictionary.Add(position, FieldContents.empty);
-                }
-            }
-            return FieldDictionary;
-        }
-
-        private static List<List<Position>> CreateWinningLines(int boardSize)
-        {
-            var WinningLines = new List<List<Position>>();
+            var WinningLines = new List<List<Position2D>>();
             // add all winning rows
             for (var row = 0; row < boardSize; row++)
             {
-                var line = CreateWinningLine(new Position(0, row), new Position(1, 0), boardSize);
+                var line = CreateWinningLine(new Position2D(0, row), new Position2D(1, 0), boardSize);
                 WinningLines.Add(line);
             }
 
             // add all winning columns
             for (var column = 0; column < boardSize; column++)
             {
-                var line = CreateWinningLine(new Position(column, 0), new Position(0, 1), boardSize);
+                var line = CreateWinningLine(new Position2D(column, 0), new Position2D(0, 1), boardSize);
                 WinningLines.Add(line);
             }
 
             // add winning diagonals 
             
-            var line1 = CreateWinningLine(new Position(0, 0), new Position(1, 1), boardSize);
+            var line1 = CreateWinningLine(new Position2D(0, 0), new Position2D(1, 1), boardSize);
             WinningLines.Add(line1);
         
-            var line2 = CreateWinningLine(new Position((boardSize - 1), 0), new Position(-1, 1), boardSize);
+            var line2 = CreateWinningLine(new Position2D((boardSize - 1), 0), new Position2D(-1, 1), boardSize);
             WinningLines.Add(line2);
            
             return WinningLines;
         }
 
-        private static List<Position> CreateWinningLine(Position start, Position delta, int boardSize)
+        private static List<Position2D> CreateWinningLine(Position2D start, Position2D delta, int boardSize)
         {
-            var line = new List<Position>();
+            var line = new List<Position2D>();
             var currentPosition = start;
             for (var i = 0; i < boardSize; i++)
             {
@@ -116,7 +84,7 @@ namespace TicTacToe2D
             return line;
         }
 
-        public List<List<Position>> GetWinningLines()
+        public List<List<Position2D>> GetWinningLines()
         {
             return WinningLines;
         }
@@ -128,7 +96,7 @@ namespace TicTacToe2D
             {
                 for (var column = 0; column < boardSize; column++)
                 {
-                    AllPositions.Add(new Position(row, column));
+                    AllPositions.Add(new Position2D(row, column));
                 }
             }
             return AllPositions; 
@@ -139,9 +107,11 @@ namespace TicTacToe2D
             return AllPositions;
         }
 
-        public Board MovePlayer(Position position, FieldContents fieldContents)
+        protected abstract Board2D Clone();
+        
+        public Board2D MovePlayer(Position position, FieldContents fieldContents)
         {
-            var board = new Board(this);
+            var board = Clone();
             board.SetField(position, fieldContents);
             return board;
         }

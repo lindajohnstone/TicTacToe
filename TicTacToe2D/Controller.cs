@@ -10,15 +10,15 @@ namespace TicTacToe2D
         // Controls the game. input == Gamecontext, returns Gamecontext
         public GameContext Game { get; set; }
 
-        public Board GameBoard { get; private set; }
+        public Board2D GameBoard { get; private set; }
         public List<Player> Players { get; private set; }
 
         public Queue TurnQueue { get; set; }
-        public Controller(Board board)
+        public Controller(Board2D board)
         {
             Initialize(board);
         }
-        public void Initialize(Board board)
+        public void Initialize(Board2D board)
         {
             Players = new List<Player> { Player.X, Player.O };
             GameBoard = board;

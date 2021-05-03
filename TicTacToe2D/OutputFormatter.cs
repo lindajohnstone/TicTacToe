@@ -9,19 +9,19 @@ namespace TicTacToe2D
         // print board to console
         // print win (which player) or draw 
 
-        public static void PrintWelcome(Board board, IOutput output)
+        public static void PrintWelcome(Board2D board, IOutput output)
         {
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
             PrintBoard(board, output);
             output.ConsoleWriteLine("");
         }
-        public static void DrawBoard(Board board, IOutput output)
+        public static void DrawBoard(Board2D board, IOutput output)
         {
             for (var column = 0; column < board.Width; column++)
             {
                 for (var row = 0; row < board.Width; row++)
                 {
-                    var position = board.GetField(new Position(column, row));
+                    var position = board.GetField(new Position2D(column, row));
                     switch (position)
                     {
                         case (FieldContents.y):
@@ -39,7 +39,7 @@ namespace TicTacToe2D
             }
         }
 
-        public static void PrintBoard(Board board, IOutput output)
+        public static void PrintBoard(Board2D board, IOutput output)
         {
             output.ConsoleWriteLine("Here's the current board:");
             DrawBoard(board, output);
@@ -51,7 +51,7 @@ namespace TicTacToe2D
             output.ConsoleWrite(message);
         }
 
-        public static void PrintNewBoard(Board board, IOutput output)
+        public static void PrintNewBoard(Board2D board, IOutput output)
         {
             output.ConsoleWriteLine("Move accepted. Here's the current board: ");
             DrawBoard(board, output);

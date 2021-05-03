@@ -19,7 +19,7 @@ namespace TicTacToe2D.Tests
         public void DrawGame_as_string()
         {
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardIsInitialized());
+            var board = new Board2D(SourceData.BoardIsInitialized());
             var expected = ".  .  .  \n.  .  .  \n.  .  .  \n";
             OutputFormatter.DrawBoard(board, output);
             Assert.Equal(expected, output.GetWriteLine());
@@ -29,7 +29,7 @@ namespace TicTacToe2D.Tests
         public void DrawGame_as_string_playerX()
         {
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardMovePlayer());
+            var board = new Board2D(SourceData.BoardMovePlayer());
             var expected = "X  .  .  \n.  .  .  \n.  .  .  \n";
             OutputFormatter.DrawBoard(board, output);
             Assert.Equal(expected, output.GetWriteLine());
@@ -39,7 +39,7 @@ namespace TicTacToe2D.Tests
         public void DrawGame_as_string_playerY()
         {
             var output = new StubOutput();
-            var board = new Board(SourceData.BoardMovePlayerY());
+            var board = new Board2D(SourceData.BoardMovePlayerY());
             var expected = "X  O  .  \n.  .  .  \n.  .  .  \n";
             OutputFormatter.DrawBoard(board, output);
             Assert.Equal(expected, output.GetWriteLine());
@@ -49,7 +49,7 @@ namespace TicTacToe2D.Tests
         public void PrintWelcome_as_string()
         {
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var expected = "Welcome to Tic Tac Toe!\nHere's the current board:.  .  .  \n.  .  .  \n.  .  .  \n";
             OutputFormatter.PrintWelcome(board, output);
             Assert.Equal(expected, output.GetWriteLine());
@@ -59,7 +59,7 @@ namespace TicTacToe2D.Tests
         public void PrintBoard_as_string()
         {
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var expected = "Here's the current board:.  .  .  \n.  .  .  \n.  .  .  \n";
             OutputFormatter.PrintBoard(board, output);
             Assert.Equal(expected, output.GetWriteLine());
@@ -69,7 +69,7 @@ namespace TicTacToe2D.Tests
         public void PrintNewBoard_as_string()
         {
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board2D(3);
             var expected = "Move accepted. Here's the current board: .  .  .  \n.  .  .  \n.  .  .  \n";
             OutputFormatter.PrintNewBoard(board, output);
             Assert.Equal(expected, output.GetWriteLine());
