@@ -56,7 +56,7 @@ namespace TicTacToe2D
             return FieldDictionary;
         }
 
-        protected override Board2D Clone()
+        protected override Board Clone()
         {
             return new Board2D(this);
         }

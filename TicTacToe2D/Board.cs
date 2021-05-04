@@ -17,6 +17,8 @@ namespace TicTacToe2D
         
         public int Height { get; private set; }
 
+        
+
         public Board(int boardSize)
         {
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
@@ -33,7 +35,7 @@ namespace TicTacToe2D
             Initialize(sourceBoard.Width, sourceBoard.FieldDictionary);
         }
 
-        public void Initialize(int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
+        protected virtual void Initialize(int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
         {
             Width = boardSize;
             Height = boardSize;
@@ -107,7 +109,7 @@ namespace TicTacToe2D
             return AllPositions;
         }
 
-        protected abstract Board2D Clone();
+        protected abstract Board Clone();
         
         public Board MovePlayer(Position position, FieldContents fieldContents)
         {
@@ -128,7 +130,7 @@ namespace TicTacToe2D
             this.FieldDictionary[position] = fieldContents;
         }
 
-        private void EnsureValidPosition(Position position) 
+        protected virtual void EnsureValidPosition(Position position) 
         {
             if (position.X < 0 || position.X >= Width)
             {

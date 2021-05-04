@@ -217,5 +217,28 @@ namespace TicTacToe2D.Tests
             };
             return new Board2D(initData);
         }
+
+        public static Board3D Board3DIsInitialized()
+        {
+            var initData = new FieldContents[][][]
+            {
+                new FieldContents[][] {
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+                },
+                new FieldContents[][] {
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+                },
+                new FieldContents[][] {
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+                }
+            };
+            return new Board3D(initData);
+        }
     }
 }
