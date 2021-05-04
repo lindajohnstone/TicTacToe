@@ -47,7 +47,7 @@ namespace TicTacToe2D
             }
             return false;
         }
-        public static bool operator ==(Position2D obj1, Position2D obj2)
+        public static bool operator ==(Position2D obj1, Position obj2)
         {
             if (OperatorOverride(obj1, obj2))
             {
@@ -56,7 +56,7 @@ namespace TicTacToe2D
             return false;
         }
 
-        public static bool operator !=(Position2D obj1, Position2D obj2)
+        public static bool operator !=(Position2D obj1, Position obj2)
         {
             if (!OperatorOverride(obj1, obj2))
             {

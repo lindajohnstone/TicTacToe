@@ -7,7 +7,7 @@ namespace TicTacToe2D.Tests
     {
         [Theory]
         [InlineData(3)]
-        public void Board_dimensions(int dimensionLength)
+        public void Board2D_dimensions(int dimensionLength)
         {
             var expected = dimensionLength;
             var result = new Board2D(dimensionLength);
@@ -25,7 +25,7 @@ namespace TicTacToe2D.Tests
         [InlineData(2, 0, FieldContents.x)]
         [InlineData(2, 1, FieldContents.y)]
         [InlineData(2, 2, FieldContents.empty)]
-        public void Board_has_valid_fields(int x, int y, FieldContents expected)
+        public void Board2D_has_valid_fields(int x, int y, FieldContents expected)
         {
             var position = new Position2D(x, y);
             var result = SourceData.BoardIsWinningBoardTrue().GetField(position);
@@ -33,7 +33,7 @@ namespace TicTacToe2D.Tests
         }
         
         [Fact] 
-        public void Board_invalid_Y_position()
+        public void Board2D_invalid_Y_position()
         {
             var position = new Position2D(1, 3);
             var board = new Board2D(3);
@@ -42,7 +42,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void Board_invalid_X_position()
+        public void Board2D_invalid_X_position()
         {
             var position = new Position2D(6, 0);
             var board = new Board2D(3);
@@ -51,7 +51,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void Board_is_initialized()
+        public void Board2D_is_initialized()
         {
             var board = new Board2D(SourceData.BoardIsInitialized());
             Assert.True(board == (new Board2D(3)));
@@ -59,7 +59,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void Board_X_MovePlayer()
+        public void Board2D_X_MovePlayer()
         {
             var board = new Board2D(SourceData.BoardIsInitialized());
             var position = new Position2D(0, 1);
@@ -67,6 +67,15 @@ namespace TicTacToe2D.Tests
             var result = board.MovePlayer(position, fieldContents);
             var expected = (SourceData.BoardXFirstMove() == result);
             Assert.True(expected);
+        }
+        [Theory]
+        [InlineData(3)]
+        public void Board3D_dimensions(int dimensionLength)
+        {
+            var expected = dimensionLength;
+            var result = new Board3D(dimensionLength);
+            Assert.Equal(expected, result.Width);
+            Assert.Equal(expected, result.Height);
         }
     }
 }

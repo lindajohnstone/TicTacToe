@@ -109,7 +109,7 @@ namespace TicTacToe2D
 
         protected abstract Board2D Clone();
         
-        public Board2D MovePlayer(Position position, FieldContents fieldContents)
+        public Board MovePlayer(Position position, FieldContents fieldContents)
         {
             var board = Clone();
             board.SetField(position, fieldContents);
