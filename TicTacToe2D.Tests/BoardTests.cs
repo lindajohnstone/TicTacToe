@@ -79,14 +79,6 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, result.Depth);
         }
 
-        // [Fact]
-        // public void Board3D_is_initialized()
-        // {
-        //     var board = new Board3D(SourceData.Board3DIsInitialized());
-        //     Assert.True(board == (new Board3D(3)));
-        //     Assert.True(board.Equals(new Board3D(3)));
-        // }
-
         [Fact]
         public void Board3D_invalid_Y_position()
         {
@@ -113,5 +105,13 @@ namespace TicTacToe2D.Tests
             var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
             Assert.Equal("Position Z coordinate is out of range. Please try again...", result.Message);
         }
+
+        // [Fact]
+        // public void Board3D_is_initialized()
+        // {
+        //     var board = new Board3D(SourceData.Board3DIsInitialized());
+        //     Assert.True(board == (new Board3D(3)));
+        //     Assert.True(board.Equals(new Board3D(3)));
+        // }
     }
 }
