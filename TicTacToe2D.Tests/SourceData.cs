@@ -240,5 +240,28 @@ namespace TicTacToe2D.Tests
             };
             return new Board3D(initData);
         }
+
+        public static Board3D Board3DIsWinningBoardTrue()
+        {
+            var initData = new FieldContents[][][]
+            {
+                new FieldContents[][] {
+                    new []{FieldContents.x, FieldContents.y, FieldContents.empty},
+                    new []{FieldContents.x, FieldContents.y, FieldContents.empty},
+                    new []{FieldContents.x, FieldContents.y, FieldContents.empty}
+                },
+                new FieldContents[][] {
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+                },
+                new FieldContents[][] {
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
+                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+                }
+            };
+            return new Board3D(initData);
+        }
     }
 }
