@@ -21,7 +21,7 @@ namespace TicTacToe2D
             }
         }
 
-        public static Position2D operator +(Position2D obj1, Position2D obj2)
+        public static Position operator +(Position2D obj1, Position obj2)
         {
             return new Position2D((obj1.X + obj2.X), (obj1.Y + obj2.Y));
         }

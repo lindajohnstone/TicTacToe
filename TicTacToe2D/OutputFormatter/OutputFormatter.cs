@@ -9,11 +9,9 @@ namespace TicTacToe2D
         // print board to console
         // print win (which player) or draw 
 
-        public void PrintWelcome(Board2D board, IOutput output)
+        public void PrintWelcome(IOutput output)
         {
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
-            PrintBoard(board, output);
-            output.ConsoleWriteLine("");
         }
         public void DrawBoard(Board2D board, IOutput output)
         {
@@ -35,7 +33,7 @@ namespace TicTacToe2D
                             break;
                     }
                 }
-                output.ConsoleWrite(Environment.NewLine);
+                PrintNewLine(output);
             }
         }
 
@@ -55,7 +53,6 @@ namespace TicTacToe2D
         {
             output.ConsoleWriteLine("Move accepted. Here's the current board: ");
             DrawBoard(board, output);
-            output.ConsoleWriteLine("");
         }
 
         public void PrintEndGame(Player player, IOutput output)
@@ -73,6 +70,11 @@ namespace TicTacToe2D
         public void PrintDrawnGame(IOutput output)
         {
             output.ConsoleWriteLine("Game is drawn. Better luck next time.");
+        }
+
+        public void PrintNewLine(IOutput output)
+        {
+            output.ConsoleWrite(Environment.NewLine);
         }
     }
 }

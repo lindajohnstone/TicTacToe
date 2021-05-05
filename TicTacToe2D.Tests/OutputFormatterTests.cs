@@ -54,9 +54,9 @@ namespace TicTacToe2D.Tests
         {
             var output = new StubOutput();
             var board = new Board2D(3);
-            var expected = "Welcome to Tic Tac Toe!\nHere's the current board:.  .  .  \n.  .  .  \n.  .  .  \n";
+            var expected = "Welcome to Tic Tac Toe!\n";
             var outputFormatter = new OutputFormatter();
-            outputFormatter.PrintWelcome(board, output);
+            outputFormatter.PrintWelcome(output);
             Assert.Equal(expected, output.GetWriteLine());
         }
 
@@ -79,6 +79,16 @@ namespace TicTacToe2D.Tests
             var expected = "Move accepted. Here's the current board: .  .  .  \n.  .  .  \n.  .  .  \n";
             var outputFormatter = new OutputFormatter();
             outputFormatter.PrintNewBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
+
+        [Fact]
+        public void PrintNewLine()
+        {
+            var output = new StubOutput();
+            var outputFormatter = new OutputFormatter();
+            var expected = "\n";
+            outputFormatter.PrintNewLine(output);
             Assert.Equal(expected, output.GetWriteLine());
         }
     }

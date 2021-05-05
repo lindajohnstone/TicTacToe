@@ -27,7 +27,8 @@ namespace TicTacToe2D
 
         public void PlayGame(GameContext game, IOutput output, IInput input, OutputFormatter outputFormatter)
         {
-            outputFormatter.PrintWelcome(game.GameBoard, output);
+            outputFormatter.PrintWelcome(output);
+            outputFormatter.PrintBoard(game.GameBoard, output);
             while (true)
             {
                 outputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
@@ -73,7 +74,7 @@ namespace TicTacToe2D
                 }
                 catch (InvalidMoveEntryException ex) 
                 {
-                    output.ConsoleWriteLine(ex.Message);// TODO: for all exceptions - 
+                    output.ConsoleWriteLine(ex.Message);
                     playerMovePosition = null;
                 }
                 catch (InvalidMoveSyntaxException ex)

@@ -9,9 +9,9 @@ namespace TicTacToe2D
         // container of fields
         private Dictionary<Position, FieldContents> FieldDictionary { get; set; }
 
-        private List<List<Position2D>> WinningLines { get; set; }
+        private List<List<Position>> WinningLines { get; set; }
 
-        private List<Position> AllPositions { get; set; }
+        private List<Position> AllPositions { get; set; 
 
         public int Width { get; private set; }
         
@@ -46,9 +46,9 @@ namespace TicTacToe2D
 
         protected abstract Dictionary<Position, FieldContents> BoardInitializer(int boardSize);
 
-        private static List<List<Position2D>> CreateWinningLines(int boardSize)
+        private static List<List<Position>> CreateWinningLines(int boardSize)
         {
-            var WinningLines = new List<List<Position2D>>();
+            var WinningLines = new List<List<Position>>();
             // add all winning rows
             for (var row = 0; row < boardSize; row++)
             {
@@ -74,9 +74,9 @@ namespace TicTacToe2D
             return WinningLines;
         }
 
-        private static List<Position2D> CreateWinningLine(Position2D start, Position2D delta, int boardSize)
+        private static List<Position> CreateWinningLine(Position start, Position delta, int boardSize)
         {
-            var line = new List<Position2D>();
+            var line = new List<Position>();
             var currentPosition = start;
             for (var i = 0; i < boardSize; i++)
             {
@@ -91,18 +91,8 @@ namespace TicTacToe2D
             return WinningLines;
         }
 
-        private static List<Position> CreateAllPositions(int boardSize)
-        {
-            var AllPositions = new List<Position>();
-            for (var row = 0; row < boardSize; row++)
-            {
-                for (var column = 0; column < boardSize; column++)
-                {
-                    AllPositions.Add(new Position2D(row, column));
-                }
-            }
-            return AllPositions; 
-        }
+        protected abstract virtual List<Position> CreateAllPositions(int boardSize);
+
 
         public List<Position> GetAllPositions()
         {

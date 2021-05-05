@@ -122,5 +122,23 @@ namespace TicTacToe2D
         {
             return HashCode.Combine(base.GetHashCode(), Width, Height, Depth);
         }
+
+        protected override List<Position> CreateAllPositions(int boardSize)
+        {
+            {
+                var AllPositions = new List<Position>();
+                for (var x = 0; x < boardSize; x++)
+                {
+                    for (var y = 0; y < boardSize; y++)
+                    {
+                        for (var z = 0; z < boardSize; z++)
+                        {
+                            AllPositions.Add(new Position3D(x, y, z));
+                        }
+                    }
+                }
+                return AllPositions;
+            }
+        }
     }
 }

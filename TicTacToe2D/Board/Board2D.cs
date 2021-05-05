@@ -60,5 +60,18 @@ namespace TicTacToe2D
         {
             return new Board2D(this);
         }
+
+        protected override List<Position> CreateAllPositions(int boardSize)
+        {
+            var AllPositions = new List<Position>();
+            for (var row = 0; row < boardSize; row++)
+            {
+                for (var column = 0; column < boardSize; column++)
+                {
+                    AllPositions.Add(new Position2D(row, column));
+                }
+            }
+            return AllPositions;
+        }
     }
 }
