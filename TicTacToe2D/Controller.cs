@@ -25,30 +25,30 @@ namespace TicTacToe2D
             Game = new GameContext(GameBoard, Players);
         }
 
-        public void PlayGame(GameContext game, IOutput output, IInput input)
+        public void PlayGame(GameContext game, IOutput output, IInput input, OutputFormatter outputFormatter)
         {
-            OutputFormatter.PrintWelcome(game.GameBoard, output);
+            outputFormatter.PrintWelcome(game.GameBoard, output);
             while (true)
             {
-                OutputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
+                outputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
                 try
                 {
                     ImplementTurn(game, output, input);
                 }
                 catch(PlayerAbortsGameException ex)
                 {
-                    OutputFormatter.PrintEndGame(game.GetCurrentPlayer(), output);
+                    outputFormatter.PrintEndGame(game.GetCurrentPlayer(), output);
                     break;
                 }
-                OutputFormatter.PrintNewBoard(game.GameBoard, output);
+                outputFormatter.PrintNewBoard(game.GameBoard, output);
                 if (GamePredicate.IsWinningBoard(game)) 
                 {
-                    OutputFormatter.PrintWinGame(game.GetCurrentPlayer(), output);
+                    outputFormatter.PrintWinGame(game.GetCurrentPlayer(), output);
                     break;
                 }
                 if (GamePredicate.IsADraw(game))
                 {
-                    OutputFormatter.PrintDrawnGame(output);
+                    outputFormatter.PrintDrawnGame(output);
                     break;
                 }
                 game.SetNextPlayer();

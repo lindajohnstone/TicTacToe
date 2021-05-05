@@ -75,7 +75,8 @@ namespace TicTacToe2D.Tests
             var controller = new Controller(board);
             var player = controller.Players[0];
             var expected = "Hooray! Player 1 has won the game!";
-            OutputFormatter.PrintWinGame(player, output);
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.PrintWinGame(player, output);
             Assert.Equal(expected, output.GetWriteLine());
         }
 
@@ -85,7 +86,8 @@ namespace TicTacToe2D.Tests
             var output = new StubOutput();
             var player = Player.X;
             var expected = "Player 1 has ended the game.";
-            OutputFormatter.PrintEndGame(player, output);
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.PrintEndGame(player, output);
             Assert.Equal(expected, output.GetWriteLine());
         }
 
@@ -95,7 +97,8 @@ namespace TicTacToe2D.Tests
             var output = new StubOutput();
             var board = new Board2D(SourceData.BoardIsADraw());
             var expected = "Game is drawn. Better luck next time.";
-            OutputFormatter.PrintDrawnGame(output);
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.PrintDrawnGame(output);
             Assert.Equal(expected, output.GetWriteLine());
         }
 
@@ -261,7 +264,8 @@ namespace TicTacToe2D.Tests
             var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            controller.PlayGame(game, output, input);
+            var outputFormatter = new OutputFormatter();
+            controller.PlayGame(game, output, input, outputFormatter);
             Assert.Contains("Welcome to Tic Tac Toe!\nHere's the current board:.  .  .  \n.  .  .  \n.  .  .  \n", output.GetWriteLine());
         }
         [Fact]
@@ -274,7 +278,8 @@ namespace TicTacToe2D.Tests
             var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            controller.PlayGame(game, output, input);
+            var outputFormatter = new OutputFormatter();
+            controller.PlayGame(game, output, input, outputFormatter);
             Assert.Contains("Player 2 has ended the game.", output.GetWriteLine());
         }
 
@@ -295,7 +300,8 @@ namespace TicTacToe2D.Tests
             var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            controller.PlayGame(game, output, input);
+            var outputFormatter = new OutputFormatter();
+            controller.PlayGame(game, output, input, outputFormatter);
             Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
         }
 
@@ -309,7 +315,8 @@ namespace TicTacToe2D.Tests
             var board = new Board2D(SourceData.BoardIsNotADraw());
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            controller.PlayGame(game, output, input);
+            var outputFormatter = new OutputFormatter();
+            controller.PlayGame(game, output, input, outputFormatter);
             Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
         }
 
@@ -328,7 +335,8 @@ namespace TicTacToe2D.Tests
             var board = new Board2D(3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            controller.PlayGame(game, output, input);
+            var outputFormatter = new OutputFormatter();
+            controller.PlayGame(game, output, input, outputFormatter);
             Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
         }
 
@@ -342,7 +350,8 @@ namespace TicTacToe2D.Tests
             var board = new Board2D(SourceData.BoardIsNotADrawV2());
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-            controller.PlayGame(game, output, input);
+            var outputFormatter = new OutputFormatter();
+            controller.PlayGame(game, output, input, outputFormatter);
             Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
         }
     }
