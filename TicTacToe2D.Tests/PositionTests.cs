@@ -18,7 +18,7 @@ namespace TicTacToe2D.Tests
             var input = new[] { x, y };
             var result = new Position2D(input[0], input[1]);
             var expected = input;
-            Assert.Equal(expected[0], result.X);
+            Assert.Equal(expected[0], result.DimensionCount);
             Assert.Equal(expected[1], result.Y);
         }
 

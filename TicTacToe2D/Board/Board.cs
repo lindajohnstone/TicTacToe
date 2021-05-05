@@ -11,7 +11,7 @@ namespace TicTacToe2D
 
         private List<List<Position>> WinningLines { get; set; }
 
-        private List<Position> AllPositions { get; set; 
+        private List<Position> AllPositions { get; set; }
 
         public int Width { get; private set; }
         

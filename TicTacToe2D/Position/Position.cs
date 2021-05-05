@@ -1,87 +1,101 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TicTacToe2D
 {
-    public abstract class Position
+    public class Position : IPosition
     {
-        // store location of field
-        // (0,1)
+        private List<DimensionValue> _dimensionValues;
+        public int DimensionCount => _dimensionValues.Count;
 
-        public int X { get; set; }
-        public int Y { get; set; }
-        public int Z { get; set; }
-        public Position(int x, int y)
+        public Position(IEnumerable<DimensionValue> positions)
         {
-            X = x;
-            Y = y;
+            _dimensionValues = new List<DimensionValue>(positions);
         }
 
-        public Position(int x, int y, int z)
+        public int GetPosition(int dimension)
         {
-            X = x;
-            Y = y;
-            Z = z;
+            return _dimensionValues[dimension].Value;
         }
 
-        // public override bool Equals(object obj)
+        public IEnumerator<DimensionValue> GetEnumerator()
+        {
+            return _dimensionValues.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return _dimensionValues.GetEnumerator();
+        }
+
+        public override bool Equals(object obj)
+        {
+
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+
+            Position position = (Position)obj;
+            if (position.DimensionCount != DimensionCount)
+            {
+                return false;
+            }
+            
+            return _dimensionValues.All((x) => position.GetPosition(x.Dimension) == x.Value);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
+        // public static Position operator +(Position obj1, Position obj2)
         // {
-
-        //     if (obj == null || GetType() != obj.GetType())
-        //     {
-        //         return false;
-        //     }
-
-        //     else
-        //     {
-        //         Position2D position = (Position2D)obj;
-        //         return X == position.X && Y == position.Y;
-        //     }
+        //     return new Position((obj1.X + obj2.X), (obj1.Y + obj2.Y));
         // }
-
-        public static Position operator +(Position obj1, Position obj2)
-        {
-            obj1.
-            return new Position((obj1.X + obj2.X), (obj1.Y + obj2.Y));
-        }
 
         // public override int GetHashCode()
         // {
         //     return X ^ Y;
         // }
 
-        // public static bool OperatorOverride(Position obj1, Position obj2)
-        // {
-        //     if ((object)obj1 == null && (object)obj2 == null)
-        //     {
-        //         return true;
-        //     }
-        //     if ((object)obj1 == null || (object)obj2 == null)
-        //     {
-        //         return false;
-        //     }
-        //     if (obj1.X == obj2.X && obj1.Y == obj2.Y)
-        //     {
-        //         return true;
-        //     }
-        //     return false;
-        // }
-        // public static bool operator ==(Position2D obj1, Position2D obj2)
-        // {
-        //     if (OperatorOverride(obj1, obj2))
-        //     {
-        //         return true;
-        //     }
-        //     return false;
-        // }
+        public static bool OperatorOverride(Position obj1, Position obj2)
+        {
+            if ((object)obj1 == null && (object)obj2 == null)
+            {
+                return true;
+            }
+            if ((object)obj1 == null || (object)obj2 == null)
+            {
+                return false;
+            }
+            if (obj1.DimensionCount != obj2.DimensionCount)
+            {
+                return false;
+            }
+            return obj1.All((x) => obj2.GetPosition(x.Dimension) == x.Value);
+        }
+        public static bool operator ==(Position obj1, Position obj2)
+        {
+            return OperatorOverride(obj1, obj2);
+        }
 
-        // public static bool operator !=(Position2D obj1, Position2D obj2)
-        // {
-        //     if (!OperatorOverride(obj1, obj2))
-        //     {
-        //         return false;
-        //     }
-        //     return true;
-        // }
+        public static bool operator !=(Position obj1, Position obj2)
+        {
+            return !OperatorOverride(obj1, obj2);
+        }
+
+        public static List<DimensionValue> Factory_2DPosition()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
