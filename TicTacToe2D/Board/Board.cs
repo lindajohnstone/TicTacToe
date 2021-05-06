@@ -183,25 +183,19 @@ namespace TicTacToe2D
         // {
         //     return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
         // }
-        public static Board Factory_2DBoard(DimensionValue dimensionValue, int boardSize) // needs dimension and boardsize
-        {
-            var fd = new Dictionary<Position, FieldContents>()
-            {
-                //     var FieldDictionary = new Dictionary<Position, FieldContents>();
-                //     for (int row = 0; row < boardSize; row++)
-                //     {
-                //         for (int column = 0; column < boardSize; column++)
-                //         {
-                //             var position = new Position2D(row, column);
-                //             FieldDictionary.Add(position, FieldContents.empty);
-                //         }
-                //     }
-                //     return FieldDictionary;
-                //  new Position,// DimensionValue.Value
-                // new FieldContents
-                fd.Add(Position.Factory_2DPosition(x, y), FieldContents.empty);
-        };
-            return new Board(boardSize);
-        }
+        // public static void Factory_2DBoard(Position position, int boardSize) // what return type?
+        // {
+        //     var fd = new Dictionary<Position, FieldContents>();
+        //     //{
+        //     for (int row = 0; row < boardSize; row++)
+        //     {
+        //         for (int column = 0; column < boardSize; column++)
+        //         {
+        //             fd.Add(Position.Factory_2DPosition(row, column), FieldContents.empty);
+        //         }
+        //     }
+        //     // return fd;
+        //     //};
+        // }
     }
 }

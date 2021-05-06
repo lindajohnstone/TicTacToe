@@ -32,14 +32,14 @@ namespace TicTacToe2D.Tests
         //     Assert.Equal(expected, result);
         // }
         
-        // [Fact] 
-        // public void Board_invalid_Y_position()
-        // {
-        //     var position = TicTacToe2D.Position.Factory_2DPosition(1, 3);
-        //     var board = new Board(3);
-        //     var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
-        //     Assert.Equal("Position Y coordinate is out of range. Please try again...", result.Message);
-        // }
+        [Fact] 
+        public void Board_invalid_Y_position()
+        {
+            var position = TicTacToe2D.Position.Factory_2DPosition(1, 3);
+            var board = new Board(3);
+            var result = Assert.Throws<ArgumentException>(() => board.GetField(position));
+            Assert.Equal("Position Y coordinate is out of range. Please try again...", result.Message);
+        }
 
         // [Fact]
         // public void Board_invalid_X_position()
