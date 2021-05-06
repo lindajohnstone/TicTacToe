@@ -43,7 +43,6 @@ namespace TicTacToe2D
             {
                 return false;
             }
-            
             return _dimensionValues.All((x) => position.GetPosition(x.Dimension) == x.Value);
         }
 
@@ -93,9 +92,25 @@ namespace TicTacToe2D
             return !OperatorOverride(obj1, obj2);
         }
 
-        public static List<DimensionValue> Factory_2DPosition()
+        public static Position Factory_2DPosition(int x, int y)
         {
-            throw new NotImplementedException();
+            var dv = new List<DimensionValue>() 
+            { 
+                new DimensionValue(0,x),
+                new DimensionValue(1,y)
+            };
+            return new Position(dv);
+        }
+
+        public static Position Factory_3DPosition(int x, int y, int z)
+        {
+            var dv = new List<DimensionValue>()
+            {
+                new DimensionValue(0,x),
+                new DimensionValue(1,y),
+                new DimensionValue(2,z)
+            };
+            return new Position(dv);
         }
     }
 }

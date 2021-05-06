@@ -13,31 +13,31 @@ namespace TicTacToe2D
         {
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
         }
-        public void DrawBoard(Board2D board, IOutput output)
+        public void DrawBoard(Board board, IOutput output)
         {
             for (var column = 0; column < board.Width; column++)
             {
                 for (var row = 0; row < board.Width; row++)
                 {
-                    var position = board.GetField(new Position2D(column, row));
-                    switch (position)
-                    {
-                        case (FieldContents.y):
-                            output.ConsoleWrite("O  ");
-                            break;
-                        case (FieldContents.x):
-                            output.ConsoleWrite("X  ");
-                            break;
-                        case (FieldContents.empty):
-                            output.ConsoleWrite(".  ");
-                            break;
-                    }
+                    // var position = board.GetField(new Position(column, row));
+                    // switch (position)
+                    // {
+                    //     case (FieldContents.y):
+                    //         output.ConsoleWrite("O  ");
+                    //         break;
+                    //     case (FieldContents.x):
+                    //         output.ConsoleWrite("X  ");
+                    //         break;
+                    //     case (FieldContents.empty):
+                    //         output.ConsoleWrite(".  ");
+                    //         break;
+                    // }
                 }
                 PrintNewLine(output);
             }
         }
 
-        public void PrintBoard(Board2D board, IOutput output)
+        public void PrintBoard(Board board, IOutput output)
         {
             output.ConsoleWriteLine("Here's the current board:");
             DrawBoard(board, output);
@@ -49,7 +49,7 @@ namespace TicTacToe2D
             output.ConsoleWrite(message);
         }
 
-        public void PrintNewBoard(Board2D board, IOutput output)
+        public void PrintNewBoard(Board board, IOutput output)
         {
             output.ConsoleWriteLine("Move accepted. Here's the current board: ");
             DrawBoard(board, output);

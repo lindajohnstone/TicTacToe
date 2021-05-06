@@ -14,7 +14,7 @@ namespace TicTacToe2D
             var inputArray = SplitInput(playerInput);
             if (IsValidInput(inputArray))
             {
-                return new Position2D(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
+                return Position.Factory_2DPosition(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));
             }
             throw new InvalidMoveSyntaxException();
         }

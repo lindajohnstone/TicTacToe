@@ -20,12 +20,12 @@ namespace TicTacToe2D
         {
             return IsWinningBoard(game.GameBoard, game.GameBoard.GetWinningLines(), game.PlayerFieldContents(game.GetCurrentPlayer()));
         }
-        public static bool IsWinningBoard(Board2D board, List<List<Position2D>> winningLines, FieldContents fieldContents)
+        public static bool IsWinningBoard(Board board, List<List<Position>> winningLines, FieldContents fieldContents)
         {
             return winningLines.Any((line) => IsWinningLine(board, fieldContents, line));
         }
 
-        private static bool IsWinningLine(Board2D board, FieldContents fieldContents, List<Position2D> positions)
+        private static bool IsWinningLine(Board board, FieldContents fieldContents, List<Position> positions)
         {
             return positions.All((x) => board.GetField(x) == fieldContents);
         }
@@ -35,7 +35,7 @@ namespace TicTacToe2D
             return IsADraw(game.GameBoard);
         }
 
-        public static bool IsADraw(Board2D board)
+        public static bool IsADraw(Board board)
         {
             return board.GetAllPositions().All((x) => board.GetField(x) != FieldContents.empty);
         }

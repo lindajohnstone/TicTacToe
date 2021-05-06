@@ -8,19 +8,19 @@ namespace TicTacToe2D
     {
         // stores Board, Player, game state
         // accesses board, player, validations?
-        public Board2D GameBoard { get; private set; }
+        public Board GameBoard { get; private set; }
         public List<Player> Players { get; private set; } 
         private Validations _validations;
         
         public TurnQueue TurnQueue { get; set; }
         
-        public GameContext(Board2D board, List<Player> players) 
+        public GameContext(Board board, List<Player> players) 
         {
             var validations = new Validations();
             Initialize(players, board, validations);
         }
         
-        public void Initialize(List<Player> players, Board2D board, Validations validations)
+        public void Initialize(List<Player> players, Board board, Validations validations)
         {
             GameBoard = board;
             Players = players;
