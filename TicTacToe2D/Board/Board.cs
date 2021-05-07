@@ -25,10 +25,10 @@ namespace TicTacToe2D
             Initialize(boardSize, BoardInitializer(boardSize));
         }
 
-        // public Board(FieldContents[][] sourceData)
-        // {
-        //     Initialize(sourceData.Length, BoardInitializer(sourceData));
-        // }
+        public Board(int boardSize, Dictionary<Position, FieldContents> sourceData)
+        {
+            Initialize(boardSize, sourceData);
+        }
         
         public Board(Board sourceBoard)
         {
@@ -37,8 +37,11 @@ namespace TicTacToe2D
 
         public void Initialize(int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
         {
-            Width = boardSize;
-            Height = boardSize;
+            DimensionLength = new List<int>();
+            for (var i = 0; i < boardSize; i++)
+            {
+                DimensionLength.Add(boardSize);
+            }
             FieldDictionary = fieldDictionary;
             WinningLines = CreateWinningLines(boardSize);
             AllPositions = CreateAllPositions(boardSize);
@@ -53,27 +56,27 @@ namespace TicTacToe2D
         private static List<List<Position>> CreateWinningLines(int boardSize)
         {
             var WinningLines = new List<List<Position>>();
-            // // add all winning rows
-            // for (var row = 0; row < boardSize; row++)
-            // {
-            //     var line = CreateWinningLine(new Position(0, row), new Position2D(1, 0), boardSize);
-            //     WinningLines.Add(line);
-            // }
+            // add all winning rows
+            for (var row = 0; row < boardSize; row++)
+            {
+                var line = CreateWinningLine(Position.Factory_2DPosition(0, row), Position.Factory_2DPosition(1, 0), boardSize);
+                WinningLines.Add(line);
+            }
 
-            // // add all winning columns
-            // for (var column = 0; column < boardSize; column++)
-            // {
-            //     var line = CreateWinningLine(new Position(column, 0), new Position2D(0, 1), boardSize);
-            //     WinningLines.Add(line);
-            // }
+            // add all winning columns
+            for (var column = 0; column < boardSize; column++)
+            {
+                var line = CreateWinningLine(Position.Factory_2DPosition(column, 0), Position.Factory_2DPosition(0, 1), boardSize);
+                WinningLines.Add(line);
+            }
 
-            // // add winning diagonals 
+            // add winning diagonals 
             
-            // var line1 = CreateWinningLine(new Position(0, 0), new Position2D(1, 1), boardSize);
-            // WinningLines.Add(line1);
+            var line1 = CreateWinningLine(Position.Factory_2DPosition(0, 0), Position.Factory_2DPosition(1, 1), boardSize);
+            WinningLines.Add(line1);
         
-            // var line2 = CreateWinningLine(new Position((boardSize - 1), 0), new Position2D(-1, 1), boardSize);
-            // WinningLines.Add(line2);
+            var line2 = CreateWinningLine(Position.Factory_2DPosition((boardSize - 1), 0), Position.Factory_2DPosition(-1, 1), boardSize);
+            WinningLines.Add(line2);
            
             return WinningLines;
         }
@@ -183,19 +186,17 @@ namespace TicTacToe2D
         // {
         //     return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
         // }
-        // public static void Factory_2DBoard(Position position, int boardSize) // what return type?
-        // {
-        //     var fd = new Dictionary<Position, FieldContents>();
-        //     //{
-        //     for (int row = 0; row < boardSize; row++)
-        //     {
-        //         for (int column = 0; column < boardSize; column++)
-        //         {
-        //             fd.Add(Position.Factory_2DPosition(row, column), FieldContents.empty);
-        //         }
-        //     }
-        //     // return fd;
-        //     //};
-        // }
+        public static Board Factory_2DBoard(FieldContents[][] fc, int boardSize) 
+        {
+            var fd = new Dictionary<Position, FieldContents>();
+            for (int x = 0; x < boardSize; x++)
+            {
+                for (int y = 0; y < boardSize; y++)
+                {
+                    fd.Add(Position.Factory_2DPosition(x, y), fc[y][x]);
+                }
+            }
+            return new Board(boardSize, fd);
+        }
     }
 }

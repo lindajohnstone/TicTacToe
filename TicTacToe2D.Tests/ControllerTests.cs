@@ -8,13 +8,13 @@ namespace TicTacToe2D.Tests
 {
     public class ControllerTests
     {
-        // [Fact]
-        // public void InputParser_GetPlayerMove()
-        // {
-        //     var input = "0,0";
-        //     var result = InputParser.GetPlayerMove(input);
-        //     Assert.Equal(new Position(0, 0), result);
-        // }
+        [Fact]
+        public void InputParser_GetPlayerMove()
+        {
+            var input = "0,0";
+            var result = InputParser.GetPlayerMove(input);
+            Assert.Equal(TicTacToe2D.Position.Factory_2DPosition(0, 0), result);
+        }
 
         [Fact]
         public void Player_position_is_null()

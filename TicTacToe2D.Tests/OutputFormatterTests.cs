@@ -20,7 +20,7 @@ namespace TicTacToe2D.Tests
         // public void DrawGame_as_string()
         // {
         //     var output = new StubOutput();
-        //     var board = new Board2D(SourceData.BoardIsInitialized());
+        //     var board = new Board(SourceData.BoardIsInitialized());
         //     var expected = ".  .  .  \n.  .  .  \n.  .  .  \n";
         //     var outputFormatter = new OutputFormatter();
         //     outputFormatter.DrawBoard(board, output);
@@ -31,7 +31,7 @@ namespace TicTacToe2D.Tests
         // public void DrawGame_as_string_playerX()
         // {
         //     var output = new StubOutput();
-        //     var board = new Board2D(SourceData.BoardMovePlayer());
+        //     var board = new Board(SourceData.BoardMovePlayer());
         //     var expected = "X  .  .  \n.  .  .  \n.  .  .  \n";
         //     var outputFormatter = new OutputFormatter();
         //     outputFormatter.DrawBoard(board, output);
@@ -42,7 +42,7 @@ namespace TicTacToe2D.Tests
         // public void DrawGame_as_string_playerY()
         // {
         //     var output = new StubOutput();
-        //     var board = new Board2D(SourceData.BoardMovePlayerY());
+        //     var board = new Board(SourceData.BoardMovePlayerY());
         //     var expected = "X  O  .  \n.  .  .  \n.  .  .  \n";
         //     var outputFormatter = new OutputFormatter();
         //     outputFormatter.DrawBoard(board, output);
@@ -53,7 +53,7 @@ namespace TicTacToe2D.Tests
         public void PrintWelcome_as_string()
         {
             var output = new StubOutput();
-            var board = new Board2D(3);
+            var board = new Board(3);
             var expected = "Welcome to Tic Tac Toe!\n";
             var outputFormatter = new OutputFormatter();
             outputFormatter.PrintWelcome(output);
@@ -64,7 +64,7 @@ namespace TicTacToe2D.Tests
         // public void PrintBoard_as_string()
         // {
         //     var output = new StubOutput();
-        //     var board = new Board2D(3);
+        //     var board = new Board(3);
         //     var expected = "Here's the current board:.  .  .  \n.  .  .  \n.  .  .  \n";
         //     var outputFormatter = new OutputFormatter();
         //     outputFormatter.PrintBoard(board, output);
@@ -75,7 +75,7 @@ namespace TicTacToe2D.Tests
         // public void PrintNewBoard_as_string()
         // {
         //     var output = new StubOutput();
-        //     var board = new Board2D(3);
+        //     var board = new Board(3);
         //     var expected = "Move accepted. Here's the current board: .  .  .  \n.  .  .  \n.  .  .  \n";
         //     var outputFormatter = new OutputFormatter();
         //     outputFormatter.PrintNewBoard(board, output);

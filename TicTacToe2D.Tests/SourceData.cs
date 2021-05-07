@@ -1,8 +1,10 @@
+using System.Collections.Generic;
+
 namespace TicTacToe2D.Tests
 {
     public static class SourceData
     {
-        public static Board2D BoardIsWinningBoardTrue()
+        public static Board BoardIsWinningBoardTrue()
         {
             var initData = new FieldContents[][] 
             {
@@ -10,8 +12,9 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.x, FieldContents.y, FieldContents.empty},
                 new []{FieldContents.x, FieldContents.y, FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
+
         public static Board2D BoardIsInitialized()
         {
             var initData = new FieldContents[][] 

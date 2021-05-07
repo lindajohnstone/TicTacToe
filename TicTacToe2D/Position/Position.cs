@@ -30,7 +30,7 @@ namespace TicTacToe2D
             return _dimensionValues.GetEnumerator();
         }
 
-        public override bool Equals(object obj)
+        public new bool Equals(object obj)
         {
 
             if (obj == null || GetType() != obj.GetType())
@@ -48,9 +48,14 @@ namespace TicTacToe2D
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            int hash = 0;
+            foreach(var dv in _dimensionValues)
+            {
+                hash += dv.Value ^ dv.Dimension;
+            }
+            return hash;
         }
-
+        
         public override string ToString()
         {
             return base.ToString();
@@ -59,11 +64,6 @@ namespace TicTacToe2D
         // public static Position operator +(Position obj1, Position obj2)
         // {
         //     return new Position((obj1.X + obj2.X), (obj1.Y + obj2.Y));
-        // }
-
-        // public override int GetHashCode()
-        // {
-        //     return X ^ Y;
         // }
 
         public static bool OperatorOverride(Position obj1, Position obj2)
