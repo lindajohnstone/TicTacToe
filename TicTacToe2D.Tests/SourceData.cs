@@ -15,7 +15,7 @@ namespace TicTacToe2D.Tests
             return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardIsInitialized()
+        public static Board BoardIsInitialized()
         {
             var initData = new FieldContents[][] 
             {
@@ -23,9 +23,9 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
                 new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
-        public static Board2D BoardXFirstMove()
+        public static Board BoardXFirstMove()
         {
             var initData = new FieldContents[][] 
             {
@@ -33,10 +33,10 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
                 new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
         
-        public static Board2D BoardIsWinningBoardFalse()
+        public static Board BoardIsWinningBoardFalse()
         {
             var initData = new FieldContents[][] 
             {
@@ -44,10 +44,10 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.y,     FieldContents.empty, FieldContents.y},
                 new []{FieldContents.empty, FieldContents.x,     FieldContents.y}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardIsWinningBoardXWinningColumn()
+        public static Board BoardIsWinningBoardXWinningColumn()
         {
             var initData = new FieldContents[][] 
             {
@@ -55,9 +55,9 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.x, FieldContents.y, FieldContents.empty},
                 new []{FieldContents.x, FieldContents.empty, FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
-        public static Board2D BoardIsWinningBoardYWinningColumn()
+        public static Board BoardIsWinningBoardYWinningColumn()
         {
             var initData = new FieldContents[][] 
             {
@@ -65,10 +65,10 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.x,     FieldContents.y, FieldContents.x},
                 new []{FieldContents.empty, FieldContents.y, FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardYWinsXLoses()
+        public static Board BoardYWinsXLoses()
         {
             var initData = new FieldContents[][] 
             {
@@ -76,10 +76,10 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.y,     FieldContents.y,        FieldContents.y},
                 new []{FieldContents.empty, FieldContents.x,        FieldContents.y}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardYWinsXWins()
+        public static Board BoardYWinsXWins()
         {
             var initData = new FieldContents[][] 
             {
@@ -87,10 +87,10 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.empty, FieldContents.x,        FieldContents.y},
                 new []{FieldContents.y,     FieldContents.empty,    FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardNeitherXNorYWins()
+        public static Board BoardNeitherXNorYWins()
         {
             var initData = new FieldContents[][]
             {
@@ -98,9 +98,9 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.empty, FieldContents.x,    FieldContents.y},
                 new []{FieldContents.y,     FieldContents.x,    FieldContents.y}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
-        public static Board2D BoardXWinningTopRow()
+        public static Board BoardXWinningTopRow()
         {
             var initData = new FieldContents[][]
             {
@@ -108,10 +108,10 @@ namespace TicTacToe2D.Tests
                 new []  {FieldContents.empty,   FieldContents.y,    FieldContents.y},
                 new []  {FieldContents.y,       FieldContents.x,    FieldContents.y}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardYWinningCentreRow()
+        public static Board BoardYWinningCentreRow()
         {
             var initData = new FieldContents[][]
             {
@@ -119,10 +119,10 @@ namespace TicTacToe2D.Tests
                 new []  {FieldContents.y,   FieldContents.y,    FieldContents.y},
                 new []  {FieldContents.x,   FieldContents.x,    FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardWinningRow3()
+        public static Board BoardWinningRow3()
         {
             var initData = new FieldContents[][]
             {
@@ -130,10 +130,10 @@ namespace TicTacToe2D.Tests
                 new []  {FieldContents.y,     FieldContents.y,    FieldContents.y},
                 new []  {FieldContents.x,     FieldContents.x,    FieldContents.x}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardWinningDiagonalLR()
+        public static Board BoardWinningDiagonalLR()
         {
             var initData = new FieldContents[][]
             {
@@ -141,10 +141,10 @@ namespace TicTacToe2D.Tests
                 new []  {FieldContents.y,   FieldContents.x,    FieldContents.y},
                 new []  {FieldContents.x,   FieldContents.y,    FieldContents.x}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardWinningDiagonalRL()
+        public static Board BoardWinningDiagonalRL()
         {
             var initData = new FieldContents[][]
             {
@@ -152,10 +152,10 @@ namespace TicTacToe2D.Tests
                 new []  {FieldContents.y,   FieldContents.x,    FieldContents.y},
                 new []  {FieldContents.x,   FieldContents.y,    FieldContents.x}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardMovePlayer()
+        public static Board BoardMovePlayer()
         {
             var initData = new FieldContents[][]
             {
@@ -163,10 +163,10 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
                 new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardIsADraw()
+        public static Board BoardIsADraw()
         {
             var initData = new FieldContents[][]
             {
@@ -174,10 +174,10 @@ namespace TicTacToe2D.Tests
                 new [] { FieldContents.x,   FieldContents.y,    FieldContents.y},
                 new [] { FieldContents.y,   FieldContents.x,    FieldContents.x}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
         
-        public static Board2D BoardIsNotADraw()// next move is a draw
+        public static Board BoardIsNotADraw()// next move is a draw
         {
             var initData = new FieldContents[][]
             {
@@ -185,10 +185,10 @@ namespace TicTacToe2D.Tests
                 new [] { FieldContents.empty,   FieldContents.y,    FieldContents.y},
                 new [] { FieldContents.y,       FieldContents.x,    FieldContents.x}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardIsNotADrawV2()// next move is a win
+        public static Board BoardIsNotADrawV2()// next move is a win
         {
             var initData = new FieldContents[][]
             {
@@ -196,10 +196,10 @@ namespace TicTacToe2D.Tests
                 new [] { FieldContents.empty,   FieldContents.x,    FieldContents.x},
                 new [] { FieldContents.y,       FieldContents.y,    FieldContents.x}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardValidTurn()
+        public static Board BoardValidTurn()
         {
             var initData = new FieldContents[][]
             {
@@ -207,10 +207,10 @@ namespace TicTacToe2D.Tests
                 new [] { FieldContents.empty,   FieldContents.empty,    FieldContents.empty},
                 new [] { FieldContents.y,       FieldContents.empty,    FieldContents.x}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board2D BoardMovePlayerY()
+        public static Board BoardMovePlayerY()
         {
             var initData = new FieldContents[][]
             {
@@ -218,10 +218,10 @@ namespace TicTacToe2D.Tests
                 new []{FieldContents.empty, FieldContents.empty,    FieldContents.empty},
                 new []{FieldContents.empty, FieldContents.empty,    FieldContents.empty}
             };
-            return new Board2D(initData);
+            return TicTacToe2D.Board.Factory_2DBoard(initData, 3);
         }
 
-        public static Board3D Board3DIsInitialized()
+        public static Board Board3DIsInitialized()
         {
             var initData = new FieldContents[][][]
             {
@@ -241,10 +241,10 @@ namespace TicTacToe2D.Tests
                     new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
                 }
             };
-            return new Board3D(initData);
+            return TicTacToe2D.Board.Factory_3DBoard(initData, 3);
         }
 
-        public static Board3D Board3DIsWinningBoardTrue()
+        public static Board Board3DIsWinningBoardTrue()
         {
             var initData = new FieldContents[][][]
             {
@@ -264,7 +264,7 @@ namespace TicTacToe2D.Tests
                     new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
                 }
             };
-            return new Board3D(initData);
+            return TicTacToe2D.Board.Factory_3DBoard(initData, 3);
         }
     }
 }

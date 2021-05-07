@@ -198,5 +198,10 @@ namespace TicTacToe2D
             }
             return new Board(boardSize, fd);
         }
+
+        public static Board Factory_3DBoard(FieldContents[][][] initData, int v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
