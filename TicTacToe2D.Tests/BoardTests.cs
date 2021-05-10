@@ -17,14 +17,14 @@ namespace TicTacToe2D.Tests
 
         [Theory]
         [InlineData(0, 0, FieldContents.x)]
-        // [InlineData(0, 1, FieldContents.y)]
-        // [InlineData(0, 2, FieldContents.empty)]
-        // [InlineData(1, 0, FieldContents.x)]
-        // [InlineData(1, 1, FieldContents.y)]
-        // [InlineData(1, 2, FieldContents.empty)]
-        // [InlineData(2, 0, FieldContents.x)]
-        // [InlineData(2, 1, FieldContents.y)]
-        // [InlineData(2, 2, FieldContents.empty)]
+        [InlineData(0, 1, FieldContents.y)]
+        [InlineData(0, 2, FieldContents.empty)]
+        [InlineData(1, 0, FieldContents.x)]
+        [InlineData(1, 1, FieldContents.y)]
+        [InlineData(1, 2, FieldContents.empty)]
+        [InlineData(2, 0, FieldContents.x)]
+        [InlineData(2, 1, FieldContents.y)]
+        [InlineData(2, 2, FieldContents.empty)]
         public void Board_has_valid_fields(int x, int y, FieldContents expected)
         {
             var position = TicTacToe2D.Position.Factory_2DPosition(x, y);
@@ -58,16 +58,16 @@ namespace TicTacToe2D.Tests
         //     Assert.True(board.Equals(new Board(3)));
         // }
 
-        // [Fact]
-        // public void Board_X_MovePlayer()
-        // {
-        //     var board = new Board(SourceData.BoardIsInitialized());
-        //     var position = TicTacToe2D.Position.Factory_2DPosition(0, 1);
-        //     var fieldContents = FieldContents.x;
-        //     var result = board.MovePlayer(position, fieldContents);
-        //     var expected = (SourceData.BoardXFirstMove() == result);
-        //     Assert.True(expected);
-        // }
+        [Fact]
+        public void Board_X_MovePlayer()
+        {
+            var board = new Board(SourceData.BoardIsInitialized());
+            var position = TicTacToe2D.Position.Factory_2DPosition(0, 1);
+            var fieldContents = FieldContents.x;
+            var result = board.MovePlayer(position, fieldContents);
+            var expected = (SourceData.BoardXFirstMove() == result);
+            Assert.True(expected);
+        }
 
         // [Theory]
         // [InlineData(3)]

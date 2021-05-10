@@ -19,19 +19,19 @@ namespace TicTacToe2D
             {
                 for (var row = 0; row < board.Width; row++)
                 {
-                    // var position = board.GetField(new Position(column, row));
-                    // switch (position)
-                    // {
-                    //     case (FieldContents.y):
-                    //         output.ConsoleWrite("O  ");
-                    //         break;
-                    //     case (FieldContents.x):
-                    //         output.ConsoleWrite("X  ");
-                    //         break;
-                    //     case (FieldContents.empty):
-                    //         output.ConsoleWrite(".  ");
-                    //         break;
-                    // }
+                    var position = board.GetField(Position.Factory_2DPosition(column, row));
+                    switch (position)
+                    {
+                        case (FieldContents.y):
+                            output.ConsoleWrite("O  ");
+                            break;
+                        case (FieldContents.x):
+                            output.ConsoleWrite("X  ");
+                            break;
+                        case (FieldContents.empty):
+                            output.ConsoleWrite(".  ");
+                            break;
+                    }
                 }
                 PrintNewLine(output);
             }

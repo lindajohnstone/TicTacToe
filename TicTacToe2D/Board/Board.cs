@@ -193,7 +193,7 @@ namespace TicTacToe2D
             {
                 for (int y = 0; y < boardSize; y++)
                 {
-                    fd.Add(Position.Factory_2DPosition(x, y), fc[y][x]);
+                    fd.Add(Position.Factory_2DPosition(x, y), fc[x][y]);// fc[y][x]
                 }
             }
             return new Board(boardSize, fd);
