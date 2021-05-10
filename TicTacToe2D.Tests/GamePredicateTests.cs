@@ -6,36 +6,37 @@ namespace TicTacToe2D.Tests
 {
     public class GamePredicateTests
     {
-        // [Fact]
-        // public void BoardWinningRow3() 
-        // {
-        //     var board = new Board(SourceData.BoardWinningRow3());
-        //     var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
-        //     Assert.True(result);
-        // }
-        // [Fact]
-        // public void BoardYWinningCentreRow() 
-        // {
-        //     var board = new Board(SourceData.BoardYWinningCentreRow());
-        //     var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y);
-        //     Assert.True(result);
-        // }
-        
-        // [Fact]
-        // public void BoardXWinningTopRow() 
-        // {
-        //     var board = new Board(SourceData.BoardXWinningTopRow());
-        //     var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
-        //     Assert.True(result);
-        // }
+        [Fact]
+        public void BoardWinningRow3() 
+        {
+            var board = new Board(SourceData.BoardWinningRow3());
+            var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
+            Assert.True(result);
+        }
 
-        // [Fact]
-        // public void IsWinningBoard_true() 
-        // {
-        //     var board = new Board(SourceData.BoardIsWinningBoardTrue());
-        //     Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-        //     Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
-        // }
+        [Fact]
+        public void BoardYWinningCentreRow() 
+        {
+            var board = new Board(SourceData.BoardYWinningCentreRow());
+            var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y);
+            Assert.True(result);
+        }
+        
+        [Fact]
+        public void BoardXWinningTopRow() 
+        {
+            var board = new Board(SourceData.BoardXWinningTopRow());
+            var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
+            Assert.True(result);
+        }
+
+        [Fact]
+        public void IsWinningBoard_true() 
+        {
+            var board = new Board(SourceData.BoardIsWinningBoardTrue());
+            Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+            Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
+        }
         
         // [Fact]
         // public void GamePredicate_neither_player_wins() 
@@ -69,40 +70,40 @@ namespace TicTacToe2D.Tests
         //     Assert.False(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
         // }
 
-        // [Fact]
-        // public void IsWinningBoard_X_wins_column1() 
-        // {
-        //     var board = new Board(SourceData.BoardIsWinningBoardXWinningColumn());
-        //     Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-        // }
+        [Fact]
+        public void IsWinningBoard_X_wins_column1() 
+        {
+            var board = new Board(SourceData.BoardIsWinningBoardXWinningColumn());
+            Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+        }
 
-        // [Fact]
-        // public void IsWinningBoard_Y_wins_Column3() 
-        // {
-        //     var board = new Board(SourceData.BoardIsWinningBoardYWinningColumn());
-        //     Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
-        // }
+        [Fact]
+        public void IsWinningBoard_Y_wins_Column3() 
+        {
+            var board = new Board(SourceData.BoardIsWinningBoardYWinningColumn());
+            Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.y));
+        }
 
-        // [Fact]
-        // public void BoardWinningDiagonalLR()  
-        // {
-        //     var board = new Board(SourceData.BoardWinningDiagonalLR());
-        //     Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-        // }
+        [Fact]
+        public void BoardWinningDiagonalLR()  
+        {
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+        }
 
-        // [Fact]
-        // public void BoardWinningDiagonalRL() 
-        // {
-        //     var board = new Board(SourceData.BoardWinningDiagonalRL());
-        //     Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
-        // }
+        [Fact]
+        public void BoardWinningDiagonalRL() 
+        {
+            var board = new Board(SourceData.BoardWinningDiagonalRL());
+            Assert.True(GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x));
+        }
 
-        // [Fact]
-        // public void BoardIsADraw()
-        // {
-        //     var board = new Board(SourceData.BoardIsADraw());
-        //     Assert.True(GamePredicate.IsADraw(board));
-        // }
+        [Fact]
+        public void BoardIsADraw()
+        {
+            var board = new Board(SourceData.BoardIsADraw());
+            Assert.True(GamePredicate.IsADraw(board));
+        }
 
         // [Fact]
         // public void BoardIsNotADraw()

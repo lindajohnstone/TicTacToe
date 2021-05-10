@@ -34,16 +34,16 @@ namespace TicTacToe2D.Tests
         //     Assert.True(expected);
         // }
 
-        // [Theory]
-        // [InlineData("0,b")]
-        // [InlineData("l,m")]
-        // [InlineData("b,0")]
-        // public void GetPlayerMove_throws_exception_with_invalid_format(string input)
-        // {
-        //     var board = new Board(SourceData.BoardIsInitialized());
-        //     var result = Assert.Throws<InvalidMoveSyntaxException>(() => InputParser.GetPlayerMove(input));
-        //     Assert.Equal("Invalid format. Please try again...", result.Message);
-        // }
+        [Theory]
+        [InlineData("0,b")]
+        [InlineData("l,m")]
+        [InlineData("b,0")]
+        public void GetPlayerMove_throws_exception_with_invalid_format(string input)
+        {
+            var board = new Board(SourceData.BoardIsInitialized());
+            var result = Assert.Throws<InvalidMoveSyntaxException>(() => InputParser.GetPlayerMove(input));
+            Assert.Equal("Invalid format. Please try again...", result.Message);
+        }
 
         // [Fact]
         // public void Controller_has_board_players()
@@ -52,33 +52,33 @@ namespace TicTacToe2D.Tests
         //     var controller = new Controller(board);
         //     var players = new List<Player> { Player.X, Player.O };
         //     var game = new GameContext(board, players);
-        //     Assert.Equal(controller.GameBoard, new Board2D(3));
+        //     Assert.Equal(controller.GameBoard, new Board(3));
         //     Assert.Equal(Player.X, controller.Players[0]);
         //     Assert.Equal(Player.O, controller.Players[1]);
         // }
 
-        // [Fact]
-        // public void WinningRow()
-        // {
-        //     var board = new Board(SourceData.BoardWinningDiagonalLR());
-        //     var controller = new Controller(board);
-        //     var player = controller.Players[0];
-        //     var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
-        //     Assert.True(result);
-        // }
+        [Fact]
+        public void WinningRow()
+        {
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var controller = new Controller(board);
+            var player = controller.Players[0];
+            var result = GamePredicate.IsWinningBoard(board, board.GetWinningLines(), FieldContents.x);
+            Assert.True(result);
+        }
 
-        // [Fact]
-        // public void End_game_win_output_message()
-        // {
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardWinningDiagonalLR());
-        //     var controller = new Controller(board);
-        //     var player = controller.Players[0];
-        //     var expected = "Hooray! Player 1 has won the game!";
-        //     var outputFormatter = new OutputFormatter();
-        //     outputFormatter.PrintWinGame(player, output);
-        //     Assert.Equal(expected, output.GetWriteLine());
-        // }
+        [Fact]
+        public void End_game_win_output_message()
+        {
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var controller = new Controller(board);
+            var player = controller.Players[0];
+            var expected = "Hooray! Player 1 has won the game!";
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.PrintWinGame(player, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
 
         [Fact]
         public void End_game_user_ends_game_output_message()
@@ -91,16 +91,16 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, output.GetWriteLine());
         }
 
-        // [Fact]
-        // public void End_game_drawn_game_output_message()
-        // {
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardIsADraw());
-        //     var expected = "Game is drawn. Better luck next time.";
-        //     var outputFormatter = new OutputFormatter();
-        //     outputFormatter.PrintDrawnGame(output);
-        //     Assert.Equal(expected, output.GetWriteLine());
-        // }
+        [Fact]
+        public void End_game_drawn_game_output_message()
+        {
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardIsADraw());
+            var expected = "Game is drawn. Better luck next time.";
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.PrintDrawnGame(output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
 
         [Fact]
         public void PlayerEndsGame_user_input_as_string_q_ends_game_outputs_message()
@@ -154,12 +154,12 @@ namespace TicTacToe2D.Tests
         //     var input = new StubConsoleInput();
         //     var output = new StubOutput();
         //     var controller = new Controller(board);
-        //     var position = new Position(0, 1);
+        //     var position = TicTacToe2D.Position.Factory_2DPosition(0, 1);
         //     var fieldContents = FieldContents.x;
         //     var result = controller.GameBoard.MovePlayer(position, fieldContents);
         //     var expected = (SourceData.BoardXFirstMove() == result);
         //     Assert.True(expected);
-        //}
+        // }
 
         // [Fact]
         // public void Controller_position_field_contents() 
@@ -168,7 +168,7 @@ namespace TicTacToe2D.Tests
         //     var output = new StubOutput();
         //     var board = new Board(SourceData.BoardWinningDiagonalLR());
         //     var controller = new Controller(board);
-        //     var position = new Position(0, 0);
+        //     var position = TicTacToe2D.Position.Factory_2DPosition(0, 0);
         //     var result = controller.Game.GameBoard.GetField(position);
         //     Assert.Equal(FieldContents.x, result);
         // }
@@ -197,6 +197,7 @@ namespace TicTacToe2D.Tests
         //     Assert.Equal(Player.X, game.GetCurrentPlayer());
         //     Assert.Equal(Player.O, game.SetNextPlayer());
         // }
+
         //TODO: why do some tests using input have to use 'input.WithReadLine("q")' to not throw a 'ThrowForEmptyQueue'
         // [Fact]
         // public void ImplementTurn_returns_InvalidMoveEntryException_message()
@@ -212,19 +213,19 @@ namespace TicTacToe2D.Tests
         //     Assert.Equal("Oh no, a piece is already at this place! Try again...", output.GetWriteLine());
         // }
 
-        // [Fact]
-        // public void ImplementTurn_returns_InvalidMoveSyntaxException_message()
-        // {
-        //     var input = new StubConsoleInput();
-        //     input.WithReadLine("0;1");
-        //     input.WithReadLine("q");
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardMovePlayerY());
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var controller = new Controller(board);
-        //     Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-        //     Assert.Equal("Invalid format. Please try again...", output.GetWriteLine());
-        // }
+        [Fact]
+        public void ImplementTurn_returns_InvalidMoveSyntaxException_message()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0;1");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Equal("Invalid format. Please try again...", output.GetWriteLine());
+        }
 
         // [Fact]
         // public void ImplementTurn_throws_ArgumentException_Y()
@@ -268,6 +269,7 @@ namespace TicTacToe2D.Tests
         //     controller.PlayGame(game, output, input, outputFormatter);
         //     Assert.Contains("Welcome to Tic Tac Toe!\nHere's the current board:.  .  .  \n.  .  .  \n.  .  .  \n", output.GetWriteLine());
         // }
+
         // [Fact]
         // public void PlayGame_player_ends_game()
         // {
@@ -312,7 +314,7 @@ namespace TicTacToe2D.Tests
         //     input.WithReadLine("1,0");
         //     input.WithReadLine("q");
         //     var output = new StubOutput();
-        //     var board = new Board2D(SourceData.BoardIsNotADraw());
+        //     var board = new Board(SourceData.BoardIsNotADraw());
         //     var controller = new Controller(board);
         //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
         //     var outputFormatter = new OutputFormatter();

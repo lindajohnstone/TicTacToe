@@ -17,15 +17,15 @@ namespace TicTacToe2D.Tests
             Assert.Equal(Player.O, result[1]);
         }
 
-        [Fact]
-        public void GameContext_has_board()
-        {
-            var board = new Board(3);
-            var players = new List<Player> { Player.X, Player.O };
-            var result = new GameContext(board, players).GameBoard;
-            Assert.Equal(3, result.Width);
-            Assert.Equal(3, result.Height);
-        }
+        // [Fact]
+        // public void GameContext_has_board()
+        // {
+        //     var board = new Board(3);
+        //     var players = new List<Player> { Player.X, Player.O };
+        //     var result = new GameContext(board, players).GameBoard;
+        //     Assert.Equal(3, result.Width);
+        //     Assert.Equal(3, result.Height);
+        // }
 
         [Fact]
         public void GameContext_get_current_player()  
