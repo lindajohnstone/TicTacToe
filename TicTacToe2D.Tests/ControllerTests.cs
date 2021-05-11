@@ -23,16 +23,16 @@ namespace TicTacToe2D.Tests
             Assert.True(playerMovePosition == null);
         }
 
-        // [Theory]
-        // [InlineData("0,1")]
-        // public void PlayGame_move_player(string input)
-        // {
-        //     var board = new Board(SourceData.BoardIsInitialized());
-        //     var fieldContents = FieldContents.x;
-        //     var result = board.MovePlayer(InputParser.GetPlayerMove(input), fieldContents);
-        //     var expected = (SourceData.BoardXFirstMove() == result);
-        //     Assert.True(expected);
-        // }
+        [Theory]
+        [InlineData("0,1")]
+        public void PlayGame_move_player(string input)
+        {
+            var board = new Board(SourceData.BoardIsInitialized());
+            var fieldContents = FieldContents.x;
+            var result = board.MovePlayer(InputParser.GetPlayerMove(input), fieldContents);
+            var expected = (SourceData.BoardXFirstMove() == result);
+            Assert.True(expected);
+        }
 
         [Theory]
         [InlineData("0,b")]
@@ -45,17 +45,17 @@ namespace TicTacToe2D.Tests
             Assert.Equal("Invalid format. Please try again...", result.Message);
         }
 
-        // [Fact]
-        // public void Controller_has_board_players()
-        // {
-        //     var board = new Board(3);
-        //     var controller = new Controller(board);
-        //     var players = new List<Player> { Player.X, Player.O };
-        //     var game = new GameContext(board, players);
-        //     Assert.Equal(controller.GameBoard, new Board(3));
-        //     Assert.Equal(Player.X, controller.Players[0]);
-        //     Assert.Equal(Player.O, controller.Players[1]);
-        // }
+        [Fact]
+        public void Controller_has_board_players()
+        {
+            var board = new Board(3);
+            var controller = new Controller(board);
+            var players = new List<Player> { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            Assert.Equal(controller.GameBoard, new Board(3));
+            Assert.Equal(Player.X, controller.Players[0]);
+            Assert.Equal(Player.O, controller.Players[1]);
+        }
 
         [Fact]
         public void WinningRow()
@@ -147,31 +147,31 @@ namespace TicTacToe2D.Tests
             Assert.NotEqual(Player.O, result);
         }
 
-        // [Fact]
-        // public void Controller_check_move_player() 
-        // {
-        //     var board = new Board(3);
-        //     var input = new StubConsoleInput();
-        //     var output = new StubOutput();
-        //     var controller = new Controller(board);
-        //     var position = TicTacToe2D.Position.Factory_2DPosition(0, 1);
-        //     var fieldContents = FieldContents.x;
-        //     var result = controller.GameBoard.MovePlayer(position, fieldContents);
-        //     var expected = (SourceData.BoardXFirstMove() == result);
-        //     Assert.True(expected);
-        // }
+        [Fact]
+        public void Controller_check_move_player() 
+        {
+            var board = new Board(3);
+            var input = new StubConsoleInput();
+            var output = new StubOutput();
+            var controller = new Controller(board);
+            var position = TicTacToe2D.Position.Factory_2DPosition(0, 1);
+            var fieldContents = FieldContents.x;
+            var result = controller.GameBoard.MovePlayer(position, fieldContents);
+            var expected = (SourceData.BoardXFirstMove() == result);
+            Assert.True(expected);
+        }
 
-        // [Fact]
-        // public void Controller_position_field_contents() 
-        // {
-        //     var input = new StubConsoleInput();
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardWinningDiagonalLR());
-        //     var controller = new Controller(board);
-        //     var position = TicTacToe2D.Position.Factory_2DPosition(0, 0);
-        //     var result = controller.Game.GameBoard.GetField(position);
-        //     Assert.Equal(FieldContents.x, result);
-        // }
+        [Fact]
+        public void Controller_position_field_contents() 
+        {
+            var input = new StubConsoleInput();
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardWinningDiagonalLR());
+            var controller = new Controller(board);
+            var position = TicTacToe2D.Position.Factory_2DPosition(0, 0);
+            var result = controller.Game.GameBoard.GetField(position);
+            Assert.Equal(FieldContents.x, result);
+        }
 
         [Theory]
         [InlineData("0,2")]
@@ -183,20 +183,20 @@ namespace TicTacToe2D.Tests
             Assert.Equal(value, input.ConsoleReadLine());
         }
 
-        // [Fact]
-        // public void ImplementTurn_player_move_position()
-        // {
-        //     var input = new StubConsoleInput();
-        //     var playerInput = "0,1";
-        //     input.WithReadLine(playerInput);
-        //     var output = new StubOutput();
-        //     var board = new Board(3);
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var controller = new Controller(board);
-        //     controller.ImplementTurn(game, output, input);
-        //     Assert.Equal(Player.X, game.GetCurrentPlayer());
-        //     Assert.Equal(Player.O, game.SetNextPlayer());
-        // }
+        [Fact]
+        public void ImplementTurn_player_move_position()
+        {
+            var input = new StubConsoleInput();
+            var playerInput = "0,1";
+            input.WithReadLine(playerInput);
+            var output = new StubOutput();
+            var board = new Board(3);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            controller.ImplementTurn(game, output, input);
+            Assert.Equal(Player.X, game.GetCurrentPlayer());
+            Assert.Equal(Player.O, game.SetNextPlayer());
+        }
 
         //TODO: why do some tests using input have to use 'input.WithReadLine("q")' to not throw a 'ThrowForEmptyQueue'
         // [Fact]

@@ -101,7 +101,7 @@ namespace TicTacToe2D
         {
             if (other is null)
                 return false;
-            return this.GetPosition(0) == other.GetPosition(0) && this.GetPosition(1) == other.GetPosition(1);
+            return OperatorOverride(this, other);
         }
 
         public override bool Equals(object obj)

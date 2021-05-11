@@ -32,7 +32,7 @@ namespace TicTacToe2D
         
         public Board(Board sourceBoard)
         {
-            Initialize(sourceBoard.Width, sourceBoard.FieldDictionary);
+            Initialize(sourceBoard.DimensionLength[0], sourceBoard.FieldDictionary);
         }
 
         public void Initialize(int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
@@ -143,49 +143,52 @@ namespace TicTacToe2D
             }
         }
 
-        // public static bool OperatorOverride(Board obj1, Board obj2)
-        // {
-        //     if (obj1.Width == obj2.Width && obj1.Height == obj2.Height)
-        //     {
-        //         return obj1.GetAllPositions().All((x) => obj1.GetField(x) == obj2.GetField(x));
-        //     }
-        //     return false;
-        // }
+        public static bool OperatorOverride(Board obj1, Board obj2)
+        {
+            for (int i = 0; i < obj1.DimensionLength.Count; i++)
+            {
+                if (obj1.DimensionLength[i] == obj2.DimensionLength[i])
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
-        // public static bool operator ==(Board obj1, Board obj2 )
-        // {
-        //     if (OperatorOverride(obj1, obj2))
-        //     {
-        //         return true;
-        //     }
-        //     return false;
-        // }
+        public static bool operator ==(Board obj1, Board obj2 )
+        {
+            if (OperatorOverride(obj1, obj2))
+            {
+                return true;
+            }
+            return false;
+        }
 
-        // public static bool operator !=(Board obj1, Board obj2)
-        // {
-        //     if (!OperatorOverride(obj1, obj2))
-        //     {
-        //         return false;
-        //     }
-        //     return true;
-        // }
+        public static bool operator !=(Board obj1, Board obj2)
+        {
+            if (!OperatorOverride(obj1, obj2))
+            {
+                return false;
+            }
+            return true;
+        }
 
-        // public override bool Equals(object obj)
-        // {
-        //     if (obj == null || GetType() != obj.GetType())
-        //     {
-        //         return false;
-        //     }
-        //     else
-        //     {
-        //         return OperatorOverride(this, (Board)obj);
-        //     }
-        // }
+        public override bool Equals(object obj)
+        {
+            if (obj == null || GetType() != obj.GetType())
+            {
+                return false;
+            }
+            else
+            {
+                return OperatorOverride(this, (Board)obj);
+            }
+        }
 
-        // public override int GetHashCode()
-        // {
-        //     return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
-        // }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
+        }
         public static Board Factory_2DBoard(FieldContents[][] fc, int boardSize) 
         {
             var fd = new Dictionary<Position, FieldContents>();
@@ -193,15 +196,26 @@ namespace TicTacToe2D
             {
                 for (int y = 0; y < boardSize; y++)
                 {
-                    fd.Add(Position.Factory_2DPosition(x, y), fc[x][y]);// fc[y][x]
+                    fd.Add(Position.Factory_2DPosition(x, y), fc[y][x]);
                 }
             }
             return new Board(boardSize, fd);
         }
 
-        public static Board Factory_3DBoard(FieldContents[][][] initData, int v)
+        public static Board Factory_3DBoard(FieldContents[][][] fc, int boardSize)
         {
-            throw new NotImplementedException();
+            var fd = new Dictionary<Position, FieldContents>();
+            for (int x = 0; x < boardSize; x++)
+            {
+                for (int y = 0; y < boardSize; y++)
+                {
+                    for (int z = 0; z < boardSize; z++)
+                    {
+                        fd.Add(Position.Factory_3DPosition(x, y, z), fc[z][y][x]);
+                    }
+                }
+            }
+            return new Board(boardSize, fd);
         }
     }
 }

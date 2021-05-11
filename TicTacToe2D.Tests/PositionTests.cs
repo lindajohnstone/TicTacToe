@@ -103,6 +103,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Theory]
+        [InlineData(0,0,0,0,0,1,false)]
         [InlineData(1, 2, 3, 1, 2, 3, true)]
         [InlineData(2, 3, 4, 2, 3, 4, true)]
         [InlineData(1000, 2000, 3000, 1000, 2000, 3000, true)]
