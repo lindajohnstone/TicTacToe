@@ -10,27 +10,27 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void GameContext_has_players()
         {
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var players = new List<Player> { Player.X, Player.O }; 
             var result = new GameContext(board, players).Players;
             Assert.Equal(Player.X, result[0]);
             Assert.Equal(Player.O, result[1]);
         }
 
-        // [Fact]
-        // public void GameContext_has_board()
-        // {
-        //     var board = new Board(3);
-        //     var players = new List<Player> { Player.X, Player.O };
-        //     var result = new GameContext(board, players).GameBoard;
-        //     Assert.Equal(3, result.Width);
-        //     Assert.Equal(3, result.Height);
-        // }
+        [Fact]
+        public void GameContext_has_board()
+        {
+            var board = new Board(2, 3);
+            var players = new List<Player> { Player.X, Player.O };
+            var result = new GameContext(board, players).GameBoard;
+            Assert.Equal(3, result.DimensionLength[0]);
+            //Assert.Equal(3, result.Height);
+        }
 
         [Fact]
         public void GameContext_get_current_player()  
         {
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
             var result = game.GetCurrentPlayer();
@@ -49,7 +49,7 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void GetPlayers_from_Player_enum()
         {
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var players = new List<Player>();
             var game = new GameContext(board, players);
             var result = game.GetPlayers();
@@ -60,7 +60,7 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void PlayerFieldContents_player_x_fieldcontents_x()
         {
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var players = new List<Player>() { Player.X, Player.O };
             var player = players[0];
             var game = new GameContext(board, players);
@@ -73,7 +73,7 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void PlayerFieldContents_player_o_fieldcontents_y()
         {
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var players = new List<Player>() { Player.X, Player.O };
             var player = players[1];
             var game = new GameContext(board, players);

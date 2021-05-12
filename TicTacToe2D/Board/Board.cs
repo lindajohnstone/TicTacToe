@@ -19,23 +19,23 @@ namespace TicTacToe2D
 
         public List<int> DimensionLength { get; private set; }
 
-        public Board(int boardSize)
+        public Board(int dimensionCount, int boardSize)
         {
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
-            Initialize(boardSize, BoardInitializer(boardSize));
+            Initialize(dimensionCount, boardSize, BoardInitializer(dimensionCount, boardSize));
         }
-
-        public Board(int boardSize, Dictionary<Position, FieldContents> sourceData)
+        
+        public Board(int dimensionCount, int boardSize, Dictionary<Position, FieldContents> sourceData)
         {
-            Initialize(boardSize, sourceData);
+            Initialize(dimensionCount, boardSize, sourceData);
         }
         
         public Board(Board sourceBoard)
         {
-            Initialize(sourceBoard.DimensionLength[0], sourceBoard.FieldDictionary);
+            Initialize(DimensionLength.Count, sourceBoard.DimensionLength[0], sourceBoard.FieldDictionary);
         }
 
-        public void Initialize(int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
+        public void Initialize(int dimensionCount, int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
         {
             DimensionLength = new List<int>();
             for (var i = 0; i < boardSize; i++)
@@ -47,10 +47,34 @@ namespace TicTacToe2D
             AllPositions = CreateAllPositions(boardSize);
         }
 
-        protected Dictionary<Position, FieldContents> BoardInitializer(int boardSize)
+        protected Dictionary<Position, FieldContents> BoardInitializer(int dimensionCount, int boardSize)
         {
             var positions = new Dictionary<Position, FieldContents>();
+            var dimensionsList = new List<int>();
+            for (var i = 0; i < dimensionCount; i++)
+            {
+                dimensionsList.Add(i);
+            }
+            RecursiveBoardInitializer(boardSize, dimensionsList,new List<DimensionValue>(), positions);
             return positions;
+        }
+
+        protected static void RecursiveBoardInitializer(int boardSize, List<int> dimensionsList, List<DimensionValue> setDimensionsList, Dictionary<Position, FieldContents> bc)
+        {
+            if(dimensionsList.Count == 0)
+            {
+                var position = new Position(setDimensionsList);
+                bc.Add(position, FieldContents.empty);
+                return;
+            }
+            int head = dimensionsList[0];
+            List<int> tail = dimensionsList.GetRange(1, dimensionsList.Count - 1);
+            for (var i = 0; i < boardSize; i++)
+            {
+                var newSetDimensionsList = new List<DimensionValue>(setDimensionsList);
+                newSetDimensionsList.Add(new DimensionValue(head, i));
+                RecursiveBoardInitializer(boardSize, tail, newSetDimensionsList, bc);
+            }
         }
 
         private static List<List<Position>> CreateWinningLines(int boardSize)
@@ -199,7 +223,7 @@ namespace TicTacToe2D
                     fd.Add(Position.Factory_2DPosition(x, y), fc[y][x]);
                 }
             }
-            return new Board(boardSize, fd);
+            return new Board(2, boardSize, fd);
         }
 
         public static Board Factory_3DBoard(FieldContents[][][] fc, int boardSize)
@@ -215,7 +239,7 @@ namespace TicTacToe2D
                     }
                 }
             }
-            return new Board(boardSize, fd);
+            return new Board(3, boardSize, fd);
         }
     }
 }

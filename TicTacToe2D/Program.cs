@@ -12,7 +12,7 @@ namespace TicTacToe2D
             var input = new ConsoleInput();
             var output = new ConsoleOutput();
             var outputFormatter = new OutputFormatter();
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var controller = new Controller(board);
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);

@@ -53,7 +53,7 @@ namespace TicTacToe2D.Tests
         public void PrintWelcome_as_string()
         {
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var expected = "Welcome to Tic Tac Toe!\n";
             var outputFormatter = new OutputFormatter();
             outputFormatter.PrintWelcome(output);

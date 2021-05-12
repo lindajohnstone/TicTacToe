@@ -48,11 +48,11 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void Controller_has_board_players()
         {
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var controller = new Controller(board);
             var players = new List<Player> { Player.X, Player.O };
             var game = new GameContext(board, players);
-            Assert.Equal(controller.GameBoard, new Board(3));
+            Assert.Equal(controller.GameBoard, new Board(2, 3));
             Assert.Equal(Player.X, controller.Players[0]);
             Assert.Equal(Player.O, controller.Players[1]);
         }
@@ -150,7 +150,7 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void Controller_check_move_player() 
         {
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var input = new StubConsoleInput();
             var output = new StubOutput();
             var controller = new Controller(board);
@@ -184,13 +184,14 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void ImplementTurn_player_move_position()
+        public void ImplementTurn_player_move_position() 
+        // TODO: test failing - System.Collections.Generic.KeyNotFoundException : The given key 'TicTacToe2D.Position' was not present in the dictionary.
         {
             var input = new StubConsoleInput();
             var playerInput = "0,1";
             input.WithReadLine(playerInput);
             var output = new StubOutput();
-            var board = new Board(3);
+            var board = new Board(2, 3);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var controller = new Controller(board);
             controller.ImplementTurn(game, output, input);
@@ -198,21 +199,7 @@ namespace TicTacToe2D.Tests
             Assert.Equal(Player.O, game.SetNextPlayer());
         }
 
-        //TODO: why do some tests using input have to use 'input.WithReadLine("q")' to not throw a 'ThrowForEmptyQueue'
-        // [Fact]
-        // public void ImplementTurn_returns_InvalidMoveEntryException_message()
-        // {
-        //     var input = new StubConsoleInput();
-        //     input.WithReadLine("0,1");
-        //     input.WithReadLine("q");
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardMovePlayerY());
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var controller = new Controller(board);
-        //     Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-        //     Assert.Equal("Oh no, a piece is already at this place! Try again...", output.GetWriteLine());
-        // }
-
+        // TODO: why do some tests using input have to use 'input.WithReadLine("q")' to not throw a 'ThrowForEmptyQueue'
         [Fact]
         public void ImplementTurn_returns_InvalidMoveSyntaxException_message()
         {
@@ -227,36 +214,36 @@ namespace TicTacToe2D.Tests
             Assert.Equal("Invalid format. Please try again...", output.GetWriteLine());
         }
 
-        // [Fact]
-        // public void ImplementTurn_throws_ArgumentException_Y()
-        // {
-        //     var input = new StubConsoleInput();
-        //     input.WithReadLine("0,9");
-        //     input.WithReadLine("q");
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardMovePlayerY());
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var controller = new Controller(board);
-        //     Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-        //     Assert.Equal("Position Y coordinate is out of range. Please try again...", output.GetWriteLine());
-        // }
+        [Fact]
+        public void ImplementTurn_throws_ArgumentException_Y()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,9");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Equal("Position coordinate is out of range. Please try again...", output.GetWriteLine());
+        }
+
+        [Fact]
+        public void ImplementTurn_throws_ArgumentException_X()
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("9,0");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var controller = new Controller(board);
+            Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
+            Assert.Equal("Position coordinate is out of range. Please try again...", output.GetWriteLine());
+        }
 
         // [Fact]
-        // public void ImplementTurn_throws_ArgumentException_X()
-        // {
-        //     var input = new StubConsoleInput();
-        //     input.WithReadLine("9,0");
-        //     input.WithReadLine("q");
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardMovePlayerY());
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var controller = new Controller(board);
-        //     Assert.Throws<PlayerAbortsGameException>(() => controller.ImplementTurn(game, output, input));
-        //     Assert.Equal("Position X coordinate is out of range. Please try again...", output.GetWriteLine());
-        // }
-
-        // [Fact]
-        // public void PlayGame_write_welcome()
+        // public void PlayGame_write_welcome() // failing
         // {
         //     var input = new StubConsoleInput();
         //     input.WithReadLine("0,0");
@@ -271,7 +258,7 @@ namespace TicTacToe2D.Tests
         // }
 
         // [Fact]
-        // public void PlayGame_player_ends_game()
+        // public void PlayGame_player_ends_game() // failing
         // {
         //     var input = new StubConsoleInput();
         //     input.WithReadLine("0,0");

@@ -244,24 +244,24 @@ namespace TicTacToe2D.Tests
             return TicTacToe2D.Board.Factory_3DBoard(initData, 3);
         }
 
-        public static Board Board3DIsWinningBoardTrue()
+        public static Board Board3DFirstBoard()
         {
             var initData = new FieldContents[][][]
             {
                 new FieldContents[][] {
-                    new []{FieldContents.x,     FieldContents.y, FieldContents.empty},
-                    new []{FieldContents.x,     FieldContents.y, FieldContents.empty},
-                    new []{FieldContents.x,     FieldContents.y, FieldContents.empty}
+                    new []{FieldContents.x,         FieldContents.y,        FieldContents.empty},
+                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty},
+                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty}
                 },
                 new FieldContents[][] {
-                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
-                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
-                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty},
+                    new []{FieldContents.x,         FieldContents.y,        FieldContents.empty},
+                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty}
                 },
                 new FieldContents[][] {
-                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
-                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty},
-                    new []{FieldContents.empty, FieldContents.empty, FieldContents.empty}
+                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty},
+                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty},
+                    new []{FieldContents.x,         FieldContents.y,        FieldContents.empty}
                 }
             };
             return TicTacToe2D.Board.Factory_3DBoard(initData, 3);
