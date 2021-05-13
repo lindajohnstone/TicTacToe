@@ -12,48 +12,46 @@ namespace TicTacToe2D
         {
             _dimensionValues = new List<DimensionValue>(positions);
         }
+
         public int GetPosition(int dimension)
         {
             return _dimensionValues[dimension].Value;
         }
+
         public IEnumerator<DimensionValue> GetEnumerator()
         {
             return _dimensionValues.GetEnumerator();
         }
+
         IEnumerator IEnumerable.GetEnumerator()
         {
             return _dimensionValues.GetEnumerator();
         }
-        // public new bool Equals(object obj)
-        // {
-        //     if (obj == null || GetType() != obj.GetType())
-        //     {
-        //         return false;
-        //     }
-        //     Position position = (Position)obj;
-        //     if (position.DimensionCount != DimensionCount)
-        //     {
-        //         return false;
-        //     }
-        //     return _dimensionValues.All((x) => position.GetPosition(x.Dimension) == x.Value);
-        // }
-        // public override int GetHashCode()
-        // {
-        //     int hash = 0;
-        //     foreach(var dv in _dimensionValues)
-        //     {
-        //         hash += dv.Value ^ dv.Dimension;
-        //     }
-        //     return hash;
-        // }
+        
         public override string ToString()
         {
             return base.ToString();
         }
-        // public static Position operator +(Position obj1, Position obj2)
-        // {
-        //     return new Position((obj1.X + obj2.X), (obj1.Y + obj2.Y));
-        // }
+
+        public static Position operator +(Position obj1, Position obj2)
+        {
+            if (obj1 == null || obj2 == null)
+            {
+                throw new ArgumentNullException();
+            }
+            if (obj1.DimensionCount != obj2.DimensionCount)
+            {
+                throw new ArgumentException("Addition requires matching position objects to have the same number of dimensions.");
+            }
+            var dimensionList = new List<DimensionValue>();
+            for (int i = 0; i < obj1.DimensionCount; i++)
+            {
+                var value = obj1.GetPosition(i) + obj2.GetPosition(i);
+                dimensionList.Add(new DimensionValue(i, value));
+            }
+            return new Position(dimensionList);
+        }
+
         public static bool OperatorOverride(Position obj1, Position obj2)
         {
             if ((object)obj1 == null && (object)obj2 == null)
@@ -70,14 +68,17 @@ namespace TicTacToe2D
             }
             return obj1.All((x) => obj2.GetPosition(x.Dimension) == x.Value);
         }
+
         public static bool operator ==(Position obj1, Position obj2)
         {
             return OperatorOverride(obj1, obj2);
         }
+
         public static bool operator !=(Position obj1, Position obj2)
         {
             return !OperatorOverride(obj1, obj2);
         }
+
         public static Position Factory_2DPosition(int x, int y)
         {
             var dv = new List<DimensionValue>()
@@ -97,6 +98,7 @@ namespace TicTacToe2D
             };
             return new Position(dv);
         }
+
         public bool Equals(Position other)
         {
             if (other is null)

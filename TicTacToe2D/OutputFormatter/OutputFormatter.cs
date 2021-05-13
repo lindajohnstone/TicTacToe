@@ -19,7 +19,7 @@ namespace TicTacToe2D
             {
                 for (var row = 0; row < board.Width; row++)
                 {
-                    var position = board.GetField(Position.Factory_2DPosition(column, row));
+                    var position = board.GetField(Position.Factory_2DPosition(column, row)); // TODO: how to call position
                     switch (position)
                     {
                         case (FieldContents.y):

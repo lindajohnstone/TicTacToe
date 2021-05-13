@@ -18,7 +18,10 @@ namespace TicTacToe2D
 
         public static bool IsWinningBoard(GameContext game)
         {
-            return IsWinningBoard(game.GameBoard, game.GameBoard.GetWinningLines(), game.PlayerFieldContents(game.GetCurrentPlayer()));
+            var board = game.GameBoard;
+            var winningLines = game.GameBoard.GetWinningLines();
+            var fc = game.PlayerFieldContents(game.GetCurrentPlayer());
+            return IsWinningBoard(board, winningLines, fc);
         }
         public static bool IsWinningBoard(Board board, List<List<Position>> winningLines, FieldContents fieldContents)
         {

@@ -32,7 +32,10 @@ namespace TicTacToe2D
         
         public Board(Board sourceBoard)
         {
-            Initialize(DimensionLength.Count, sourceBoard.DimensionLength[0], sourceBoard.FieldDictionary);
+            var dimensionCount = sourceBoard.DimensionLength.Count; // error
+            var boardsize = sourceBoard.DimensionLength[0];  // error
+            var fd = sourceBoard.FieldDictionary;
+            Initialize(dimensionCount, sourceBoard.DimensionLength[0], fd); // TODO: fails here
         }
 
         public void Initialize(int dimensionCount, int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
@@ -112,7 +115,7 @@ namespace TicTacToe2D
             for (var i = 0; i < boardSize; i++)
             {
                 line.Add(currentPosition);
-                //currentPosition += delta;
+                currentPosition += delta;
             }
             return line;
         }

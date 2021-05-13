@@ -61,8 +61,8 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void Board_X_MovePlayer()
         {
-            var board = new Board(SourceData.BoardIsInitialized());
-            var position = TicTacToe2D.Position.Factory_2DPosition(1, 0);
+            var board = new Board(SourceData.BoardIsInitialized()); // reads board but...
+            var position = TicTacToe2D.Position.Factory_2DPosition(1, 0);// never makes to this line
             var fieldContents = FieldContents.x;
             var result = board.MovePlayer(position, fieldContents);
             var expected = (SourceData.BoardXFirstMove() == result);
