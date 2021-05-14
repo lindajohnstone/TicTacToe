@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace TicTacToe2D.Tests
@@ -61,8 +62,8 @@ namespace TicTacToe2D.Tests
         [Fact]
         public void Board_X_MovePlayer()
         {
-            var board = new Board(SourceData.BoardIsInitialized()); // reads board but...
-            var position = TicTacToe2D.Position.Factory_2DPosition(1, 0);// never makes to this line
+            var board = new Board(SourceData.BoardIsInitialized()); 
+            var position = TicTacToe2D.Position.Factory_2DPosition(1, 0);
             var fieldContents = FieldContents.x;
             var result = board.MovePlayer(position, fieldContents);
             var expected = (SourceData.BoardXFirstMove() == result);
@@ -115,21 +116,50 @@ namespace TicTacToe2D.Tests
             Assert.True(board.Equals(new Board(3, 3)));
         }
 
-        // [Theory]
-        // [InlineData(0, 0, FieldContents.x)]
-        // [InlineData(0, 1, FieldContents.x)]
-        // [InlineData(0, 2, FieldContents.x)]
-        // [InlineData(1, 0, FieldContents.y)]
-        // [InlineData(1, 1, FieldContents.y)]
-        // [InlineData(1, 2, FieldContents.y)]
-        // [InlineData(2, 0, FieldContents.empty)]
-        // [InlineData(2, 1, FieldContents.empty)]
-        // [InlineData(2, 2, FieldContents.empty)]
-        // public void Board_3D_has_valid_fields(int x, int y, int z, FieldContents expected)
-        // {
-        //     var position = TicTacToe2D.Position.Factory_2DPosition(x, y);
-        //     var result = SourceData.Board3DFirstBoard().GetField(position);
-        //     Assert.Equal(expected, result);
-        // }
+        [Theory]
+        [InlineData(0, 0, 0, FieldContents.x)]
+        [InlineData(0, 0, 1, FieldContents.empty)]
+        [InlineData(0, 0, 2, FieldContents.empty)]
+        [InlineData(0, 1, 0, FieldContents.empty)]
+        [InlineData(0, 1, 1, FieldContents.x)]
+        [InlineData(0, 1, 2, FieldContents.empty)]
+        [InlineData(0, 2, 0, FieldContents.empty)]
+        [InlineData(0, 2, 1, FieldContents.empty)]
+        [InlineData(0, 2, 2, FieldContents.x)]
+        [InlineData(1, 0, 0, FieldContents.y)]
+        [InlineData(1, 0, 1, FieldContents.empty)]
+        [InlineData(1, 0, 2, FieldContents.empty)]
+        [InlineData(1, 1, 0, FieldContents.empty)]
+        [InlineData(1, 1, 1, FieldContents.y)]
+        [InlineData(1, 1, 2, FieldContents.empty)]
+        [InlineData(1, 2, 0, FieldContents.empty)]
+        [InlineData(1, 2, 1, FieldContents.empty)]
+        [InlineData(1, 2, 2, FieldContents.y)]
+        [InlineData(2, 0, 0, FieldContents.empty)]
+        [InlineData(2, 0, 1, FieldContents.empty)]
+        [InlineData(2, 0, 2, FieldContents.empty)]
+        [InlineData(2, 1, 0, FieldContents.empty)]
+        [InlineData(2, 1, 1, FieldContents.empty)]
+        [InlineData(2, 1, 2, FieldContents.empty)]
+        [InlineData(2, 2, 0, FieldContents.empty)]
+        [InlineData(2, 2, 1, FieldContents.empty)]
+        [InlineData(2, 2, 2, FieldContents.empty)]
+        public void Board_3D_has_valid_fields(int x, int y, int z, FieldContents expected)
+        {
+            var position = TicTacToe2D.Position.Factory_3DPosition(x, y, z);
+            var result = SourceData.Board3DFirstBoard().GetField(position);
+            Assert.Equal(expected, result);
+        }
+
+        [Fact]
+        public void Board_all_positions_list_created()
+        {
+            var dimension = 2;
+            var positions = new List<Position>();
+            var board = new Board(dimension, 3);
+            var expected = 9;
+            var result = board.GetAllPositions();
+            Assert.Equal(expected, result.Count);
+        }
     }
 }

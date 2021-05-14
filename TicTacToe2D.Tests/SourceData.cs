@@ -249,8 +249,8 @@ namespace TicTacToe2D.Tests
             var initData = new FieldContents[][][]
             {
                 new FieldContents[][] {
-                    new []{FieldContents.x,         FieldContents.y,        FieldContents.empty},
-                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty},
+                    new []{FieldContents.x,         FieldContents.y,        FieldContents.empty},   
+                    new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty},     
                     new []{FieldContents.empty,     FieldContents.empty,    FieldContents.empty}
                 },
                 new FieldContents[][] {

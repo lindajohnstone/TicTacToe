@@ -32,10 +32,10 @@ namespace TicTacToe2D
         
         public Board(Board sourceBoard)
         {
-            var dimensionCount = sourceBoard.DimensionLength.Count; // error
-            var boardsize = sourceBoard.DimensionLength[0];  // error
+            var dimensionCount = sourceBoard.DimensionLength.Count; 
+            var boardsize = sourceBoard.DimensionLength[0];  
             var fd = sourceBoard.FieldDictionary;
-            Initialize(dimensionCount, sourceBoard.DimensionLength[0], fd); // TODO: fails here
+            Initialize(dimensionCount, sourceBoard.DimensionLength[0], fd); 
         }
 
         public void Initialize(int dimensionCount, int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
@@ -47,7 +47,7 @@ namespace TicTacToe2D
             }
             FieldDictionary = fieldDictionary;
             WinningLines = CreateWinningLines(boardSize);
-            AllPositions = CreateAllPositions(boardSize);
+            AllPositions = CreateAllPositions(dimensionCount);
         }
 
         protected Dictionary<Position, FieldContents> BoardInitializer(int dimensionCount, int boardSize)
@@ -125,9 +125,26 @@ namespace TicTacToe2D
             return WinningLines;
         }
 
-        protected List<Position> CreateAllPositions(int boardSize)
+        protected List<Position> CreateAllPositions(int dimensionCount)// is a List<List<DimensionValue>>
         {
             var positions = new List<Position>();
+            var boardCount = dimensionCount == 2 ? 1 : dimensionCount;
+            for (int z = 1; z <= boardCount; z++)// Math.Pow(boardSize, dimensionLength)
+            {
+
+                for (int x = 0; x < DimensionLength.Count; x++)
+                {
+                    for (int y = 0; y < DimensionLength.Count; y++)
+                    {
+                        var dv1 = new DimensionValue(boardCount, x);
+                        var dv2 = new DimensionValue(boardCount, y);
+                        var dimensionsList = new List<DimensionValue>();
+                        dimensionsList.Add(dv1);
+                        dimensionsList.Add(dv2);
+                        positions.Add(new Position(dimensionsList));
+                    }
+                }  
+            }
             return positions;
         }
 

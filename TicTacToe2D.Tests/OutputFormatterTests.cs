@@ -16,16 +16,16 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, output.GetWriteLine());
         }
 
-        [Fact]
-        public void DrawGame_as_string()
-        {
-            var output = new StubOutput();
-            var board = new Board(SourceData.BoardIsInitialized());
-            var expected = ".  .  .  \n.  .  .  \n.  .  .  \n";
-            var outputFormatter = new OutputFormatter();
-            outputFormatter.DrawBoard(board, output);
-            Assert.Equal(expected, output.GetWriteLine());
-        }
+        // [Fact]
+        // public void DrawGame_as_string()
+        // {
+        //     var output = new StubOutput();
+        //     var board = new Board(SourceData.BoardIsInitialized());
+        //     var expected = ".  .  .  \n.  .  .  \n.  .  .  \n";
+        //     var outputFormatter = new OutputFormatter();
+        //     outputFormatter.DrawBoard(board, output);
+        //     Assert.Equal(expected, output.GetWriteLine());
+        // }
 
         // [Fact]
         // public void DrawGame_as_string_playerX()
