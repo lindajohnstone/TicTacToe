@@ -132,11 +132,11 @@ namespace TicTacToe2D
             return WinningLines;
         }
 
-        protected List<Position> CreateAllPositions(int dimensionCount)// is a List<IEnumerable<DimensionValue>>
+        protected List<Position> CreateAllPositions(int dimensionCount) // is a List<IEnumerable<DimensionValue>>
         {
             var positions = new List<Position>();
             var boardCount = dimensionCount == 2 ? 1 : dimensionCount;
-            for (int z = 1; z <= boardCount; z++)// Math.Pow(boardSize, dimensionLength)
+            for (int z = 1; z <= boardCount; z++)
             {
                 for (int x = 0; x < DimensionLength.Count; x++)
                 {

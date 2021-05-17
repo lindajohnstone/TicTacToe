@@ -13,7 +13,7 @@ namespace TicTacToe2D
         {
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
         }
-        public void DrawBoard(Board board, IOutput output) //TODO: not drawing board - GetField?
+        public void DrawBoard(Board board, IOutput output) //TODO: not drawing board 
         {
             for (var column = 0; column < board.Width; column++)
             {

@@ -38,13 +38,13 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, result);
         }
 
-        // [Fact]
-        // public void Check_count_of_empty_fields()
-        // {
-        //     var board = SourceData.BoardIsInitialized();
-        //     var result = board.GetAllPositions().Where((x) => board.GetField(x) == FieldContents.empty);
-        //     Assert.Equal(9, result.Count());
-        // }
+        [Fact]
+        public void Check_count_of_empty_fields()
+        {
+            var board = SourceData.BoardIsInitialized();
+            var result = board.GetAllPositions().Where((x) => board.GetField(x) == FieldContents.empty);
+            Assert.Equal(9, result.Count());
+        }
 
         [Fact]
         public void GetPlayers_from_Player_enum()

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 namespace TicTacToe2D
 {
-    public class Position : IPosition, IEquatable<Position>
+    public class Position : IPosition, IEquatable<Position> //TODO: is IPosition being used
     {
         private List<DimensionValue> _dimensionValues;
         public int DimensionCount => _dimensionValues.Count;
@@ -78,7 +78,23 @@ namespace TicTacToe2D
         {
             return !OperatorOverride(obj1, obj2);
         }
+        
+        public bool Equals(Position other)
+        {
+            if (other is null)
+                return false;
+            return OperatorOverride(this, other);
+        }
 
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Position);
+        }
+
+        public override int GetHashCode()
+        {
+            return (GetPosition(0), GetPosition(1)).GetHashCode();
+        }
         public static Position Factory_2DPosition(int x, int y)
         {
             var dv = new List<DimensionValue>()
@@ -97,23 +113,6 @@ namespace TicTacToe2D
                 new DimensionValue(2,z)
             };
             return new Position(dv);
-        }
-
-        public bool Equals(Position other)
-        {
-            if (other is null)
-                return false;
-            return OperatorOverride(this, other);
-        }
-
-        public override bool Equals(object obj)
-        {
-            return Equals(obj as Position);
-        }
-
-        public override int GetHashCode() 
-        {
-            return (GetPosition(0), GetPosition(1)).GetHashCode();
         }
     }
 }
