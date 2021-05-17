@@ -17,17 +17,19 @@ namespace TicTacToe2D
         
         public int Height { get; private set; }
 
-        public List<int> DimensionLength { get; private set; }
-
+        public List<int> DimensionLength { get; private set; } // stores the length for each dimension separately
+        public List<int> DimensionList { get; private set; }
         public Board(int dimensionCount, int boardSize)
         {
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
-            Initialize(dimensionCount, boardSize, BoardInitializer(dimensionCount, boardSize));
+            var dimensionList = DimensionInitializer(dimensionCount);
+            Initialize(dimensionList, boardSize, BoardInitializer(dimensionList, boardSize));
         }
         
         public Board(int dimensionCount, int boardSize, Dictionary<Position, FieldContents> sourceData)
         {
-            Initialize(dimensionCount, boardSize, sourceData);
+            var dimensionList = DimensionInitializer(dimensionCount);
+            Initialize(dimensionList, boardSize, sourceData);
         }
         
         public Board(Board sourceBoard)
@@ -35,11 +37,13 @@ namespace TicTacToe2D
             var dimensionCount = sourceBoard.DimensionLength.Count; 
             var boardsize = sourceBoard.DimensionLength[0];  
             var fd = sourceBoard.FieldDictionary;
-            Initialize(dimensionCount, sourceBoard.DimensionLength[0], fd); 
+            var dimensionList = DimensionInitializer(dimensionCount);
+            Initialize(dimensionList, sourceBoard.DimensionLength[0], fd); 
         }
 
-        public void Initialize(int dimensionCount, int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
+        public void Initialize(List<int> dimensionList, int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
         {
+            DimensionList = dimensionList;
             DimensionLength = new List<int>();
             for (var i = 0; i < boardSize; i++)
             {
@@ -47,24 +51,27 @@ namespace TicTacToe2D
             }
             FieldDictionary = fieldDictionary;
             WinningLines = CreateWinningLines(boardSize);
-            AllPositions = CreateAllPositions(dimensionCount);
+            AllPositions = CreateAllPositions(dimensionList.Count);
         }
-
-        protected Dictionary<Position, FieldContents> BoardInitializer(int dimensionCount, int boardSize)
+        protected List<int> DimensionInitializer(int dimensionCount)
         {
-            var positions = new Dictionary<Position, FieldContents>();
-            var dimensionsList = new List<int>();
+            var dimensionList = new List<int>();
             for (var i = 0; i < dimensionCount; i++)
             {
-                dimensionsList.Add(i);
+                dimensionList.Add(i);
             }
-            RecursiveBoardInitializer(boardSize, dimensionsList,new List<DimensionValue>(), positions);
+            return dimensionList;
+        }
+        protected Dictionary<Position, FieldContents> BoardInitializer(List<int> dimensionList, int boardSize)
+        {
+            var positions = new Dictionary<Position, FieldContents>();
+            RecursiveBoardInitializer(boardSize, dimensionList, new List<DimensionValue>(), positions);
             return positions;
         }
 
         protected static void RecursiveBoardInitializer(int boardSize, List<int> dimensionsList, List<DimensionValue> setDimensionsList, Dictionary<Position, FieldContents> bc)
         {
-            if(dimensionsList.Count == 0)
+            if (dimensionsList.Count == 0)
             {
                 var position = new Position(setDimensionsList);
                 bc.Add(position, FieldContents.empty);
@@ -125,13 +132,12 @@ namespace TicTacToe2D
             return WinningLines;
         }
 
-        protected List<Position> CreateAllPositions(int dimensionCount)// is a List<List<DimensionValue>>
+        protected List<Position> CreateAllPositions(int dimensionCount)// is a List<IEnumerable<DimensionValue>>
         {
             var positions = new List<Position>();
             var boardCount = dimensionCount == 2 ? 1 : dimensionCount;
             for (int z = 1; z <= boardCount; z++)// Math.Pow(boardSize, dimensionLength)
             {
-
                 for (int x = 0; x < DimensionLength.Count; x++)
                 {
                     for (int y = 0; y < DimensionLength.Count; y++)
