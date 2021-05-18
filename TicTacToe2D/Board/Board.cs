@@ -23,25 +23,28 @@ namespace TicTacToe2D
         {
             // implement population of dictionary with position and fieldContents based on 3x3 fieldContents.
             var dimensionList = DimensionInitializer(dimensionCount);
-            Initialize(dimensionList, boardSize, BoardInitializer(dimensionList, boardSize));
+            var allPositions = AllPositionsInitializer(dimensionList, boardSize);
+            Initialize(dimensionList, allPositions, boardSize, BoardInitializer(allPositions));
         }
         
         public Board(int dimensionCount, int boardSize, Dictionary<Position, FieldContents> sourceData)
         {
             var dimensionList = DimensionInitializer(dimensionCount);
-            Initialize(dimensionList, boardSize, sourceData);
+            var allPositions = AllPositionsInitializer(dimensionList, boardSize);
+            Initialize(dimensionList, allPositions, boardSize, sourceData);
         }
         
         public Board(Board sourceBoard)
         {
-            var dimensionCount = sourceBoard.DimensionLength.Count; 
+            var dimensionCount = sourceBoard.DimensionLength.Count;
             var boardsize = sourceBoard.DimensionLength[0];  
-            var fd = sourceBoard.FieldDictionary;
+            var fd = new Dictionary<Position, FieldContents>(sourceBoard.FieldDictionary);
             var dimensionList = DimensionInitializer(dimensionCount);
-            Initialize(dimensionList, sourceBoard.DimensionLength[0], fd); 
+            var allPositions = new List<Position>(sourceBoard.AllPositions);
+            Initialize(dimensionList, allPositions, sourceBoard.DimensionLength[0], fd); 
         }
 
-        public void Initialize(List<int> dimensionList, int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
+        public void Initialize(List<int> dimensionList, List<Position> allPositions, int boardSize, Dictionary<Position, FieldContents> fieldDictionary)
         {
             DimensionList = dimensionList;
             DimensionLength = new List<int>();
@@ -51,7 +54,7 @@ namespace TicTacToe2D
             }
             FieldDictionary = fieldDictionary;
             WinningLines = CreateWinningLines(boardSize);
-            AllPositions = CreateAllPositions(dimensionList.Count);
+            AllPositions = allPositions;
         }
         protected List<int> DimensionInitializer(int dimensionCount)
         {
@@ -62,19 +65,19 @@ namespace TicTacToe2D
             }
             return dimensionList;
         }
-        protected Dictionary<Position, FieldContents> BoardInitializer(List<int> dimensionList, int boardSize)
+
+        protected List<Position> AllPositionsInitializer(List<int> dimensionList, int boardSize)
         {
-            var positions = new Dictionary<Position, FieldContents>();
-            RecursiveBoardInitializer(boardSize, dimensionList, new List<DimensionValue>(), positions);
+            var positions = new List<Position>();
+            RecursiveAllPositionsInitializer(boardSize, dimensionList, new List<DimensionValue>(), positions);
             return positions;
         }
 
-        protected static void RecursiveBoardInitializer(int boardSize, List<int> dimensionsList, List<DimensionValue> setDimensionsList, Dictionary<Position, FieldContents> bc)
+        protected static void RecursiveAllPositionsInitializer(int boardSize, List<int> dimensionsList, List<DimensionValue> setDimensionsList, List<Position> positions)
         {
             if (dimensionsList.Count == 0)
             {
-                var position = new Position(setDimensionsList);
-                bc.Add(position, FieldContents.empty);
+                positions.Add(new Position(setDimensionsList));
                 return;
             }
             int head = dimensionsList[0];
@@ -83,9 +86,20 @@ namespace TicTacToe2D
             {
                 var newSetDimensionsList = new List<DimensionValue>(setDimensionsList);
                 newSetDimensionsList.Add(new DimensionValue(head, i));
-                RecursiveBoardInitializer(boardSize, tail, newSetDimensionsList, bc);
+                RecursiveAllPositionsInitializer(boardSize, tail, newSetDimensionsList, positions);
             }
         }
+
+        protected Dictionary<Position, FieldContents> BoardInitializer(List<Position> allPositions)
+        {
+            var boardContents = new Dictionary<Position, FieldContents>();
+            foreach(var position in allPositions)
+            {
+                boardContents.Add(position, FieldContents.empty);
+            }
+            return boardContents;
+        }
+
 
         private static List<List<Position>> CreateWinningLines(int boardSize)
         {
@@ -131,29 +145,6 @@ namespace TicTacToe2D
         {
             return WinningLines;
         }
-
-        protected List<Position> CreateAllPositions(int dimensionCount) // is a List<IEnumerable<DimensionValue>>
-        {
-            var positions = new List<Position>();
-            var boardCount = dimensionCount == 2 ? 1 : dimensionCount;
-            for (int z = 1; z <= boardCount; z++)
-            {
-                for (int x = 0; x < DimensionLength.Count; x++)
-                {
-                    for (int y = 0; y < DimensionLength.Count; y++)
-                    {
-                        var dv1 = new DimensionValue(boardCount, x);
-                        var dv2 = new DimensionValue(boardCount, y);
-                        var dimensionsList = new List<DimensionValue>();
-                        dimensionsList.Add(dv1);
-                        dimensionsList.Add(dv2);
-                        positions.Add(new Position(dimensionsList));
-                    }
-                }  
-            }
-            return positions;
-        }
-
 
         public List<Position> GetAllPositions()
         {
@@ -237,7 +228,7 @@ namespace TicTacToe2D
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(FieldDictionary, WinningLines, AllPositions, Width, Height);
+            return HashCode.Combine(FieldDictionary, WinningLines, AllPositions);
         }
         public static Board Factory_2DBoard(FieldContents[][] fc, int boardSize) 
         {

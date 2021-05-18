@@ -20,12 +20,23 @@ namespace TicTacToe2D
             Initialize(players, board, validations);
         }
         
+        public GameContext(GameContext source, Position position)
+        {
+            ApplyMove(source, position);
+        }
         public void Initialize(List<Player> players, Board board, Validations validations)
         {
             GameBoard = board;
             Players = players;
             _validations = validations;
             TurnQueue = new TurnQueue(players);
+        }
+        public static GameContext ApplyMove(GameContext game, Position position)
+        {
+            var newGC = new GameContext(game, position);
+            var player = game.GetCurrentPlayer();
+            newGC.GameBoard = game.GameBoard.MovePlayer(position, game.PlayerFieldContents(player));
+            return newGC;
         }
 
         public Player GetCurrentPlayer()

@@ -16,38 +16,38 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, output.GetWriteLine());
         }
 
-        // [Fact]
-        // public void DrawGame_as_string()
-        // {
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardIsInitialized());
-        //     var expected = ".  .  .  \n.  .  .  \n.  .  .  \n";
-        //     var outputFormatter = new OutputFormatter();
-        //     outputFormatter.DrawBoard(board, output);
-        //     Assert.Equal(expected, output.GetWriteLine());
-        // }
+        [Fact]
+        public void DrawGame_as_string()
+        {
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardIsInitialized());
+            var expected = ".  .  .  \n.  .  .  \n.  .  .  \n";
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.DrawBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
 
-        // [Fact]
-        // public void DrawGame_as_string_playerX()
-        // {
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardMovePlayer());
-        //     var expected = "X  .  .  \n.  .  .  \n.  .  .  \n";
-        //     var outputFormatter = new OutputFormatter();
-        //     outputFormatter.DrawBoard(board, output);
-        //     Assert.Equal(expected, output.GetWriteLine());
-        // }
+        [Fact]
+        public void DrawGame_as_string_playerX()
+        {
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayer());
+            var expected = "X  .  .  \n.  .  .  \n.  .  .  \n";
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.DrawBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
 
-        // [Fact]
-        // public void DrawGame_as_string_playerY()
-        // {
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardMovePlayerY());
-        //     var expected = "X  O  .  \n.  .  .  \n.  .  .  \n";
-        //     var outputFormatter = new OutputFormatter();
-        //     outputFormatter.DrawBoard(board, output);
-        //     Assert.Equal(expected, output.GetWriteLine());
-        // }
+        [Fact]
+        public void DrawGame_as_string_playerY()
+        {
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardMovePlayerY());
+            var expected = "X  .  .  \nO  .  .  \n.  .  .  \n";
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.DrawBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
 
         [Fact]
         public void PrintWelcome_as_string()
@@ -60,27 +60,27 @@ namespace TicTacToe2D.Tests
             Assert.Equal(expected, output.GetWriteLine());
         }
 
-        // [Fact]
-        // public void PrintBoard_as_string()
-        // {
-        //     var output = new StubOutput();
-        //     var board = new Board(3);
-        //     var expected = "Here's the current board:.  .  .  \n.  .  .  \n.  .  .  \n";
-        //     var outputFormatter = new OutputFormatter();
-        //     outputFormatter.PrintBoard(board, output);
-        //     Assert.Equal(expected, output.GetWriteLine());
-        // }
+        [Fact]
+        public void PrintBoard_as_string()
+        {
+            var output = new StubOutput();
+            var board = new Board(2, 3);
+            var expected = "Here's the current board:.  .  .  \n.  .  .  \n.  .  .  \n";
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.PrintBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
 
-        // [Fact]
-        // public void PrintNewBoard_as_string()
-        // {
-        //     var output = new StubOutput();
-        //     var board = new Board(3);
-        //     var expected = "Move accepted. Here's the current board: .  .  .  \n.  .  .  \n.  .  .  \n";
-        //     var outputFormatter = new OutputFormatter();
-        //     outputFormatter.PrintNewBoard(board, output);
-        //     Assert.Equal(expected, output.GetWriteLine());
-        // }
+        [Fact]
+        public void PrintNewBoard_as_string()
+        {
+            var output = new StubOutput();
+            var board = new Board(2, 3);
+            var expected = "Move accepted. Here's the current board: .  .  .  \n.  .  .  \n.  .  .  \n";
+            var outputFormatter = new OutputFormatter();
+            outputFormatter.PrintNewBoard(board, output);
+            Assert.Equal(expected, output.GetWriteLine());
+        }
 
         [Fact]
         public void PrintNewLine()

@@ -112,11 +112,11 @@ namespace TicTacToe2D.Tests
             Assert.False(GamePredicate.IsADraw(board));
         }
 
-        // [Fact]
-        // public void BoardIsNotADrawV2()
-        // {
-        //     var board = new Board(SourceData.BoardIsNotADrawV2());
-        //     Assert.False(GamePredicate.IsADraw(board));
-        // }
+        [Fact]
+        public void BoardIsNotADrawV2()
+        {
+            var board = new Board(SourceData.BoardIsNotADrawV2());
+            Assert.False(GamePredicate.IsADraw(board));
+        }
     }
 }

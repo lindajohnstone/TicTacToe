@@ -34,7 +34,7 @@ namespace TicTacToe2D
                 outputFormatter.PrintInstructions(game.GetCurrentPlayer(), output);
                 try
                 {
-                    ImplementTurn(game, output, input);
+                    game = ImplementTurn(game, output, input);
                 }
                 catch(PlayerAbortsGameException ex)
                 {
@@ -56,7 +56,7 @@ namespace TicTacToe2D
             }
         }
 
-        public void ImplementTurn(GameContext game, IOutput output, IInput input)
+        public GameContext ImplementTurn(GameContext game, IOutput output, IInput input)
         {
             var player = game.GetCurrentPlayer();
             
@@ -92,7 +92,9 @@ namespace TicTacToe2D
             var fieldContents = new FieldContents();
             
             fieldContents = game.PlayerFieldContents(player);
-            game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
+            var newBoard = game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
+            var newGC = new GameContext(newBoard, game.GetPlayers());
+            return newGC;
         }
     }
 }

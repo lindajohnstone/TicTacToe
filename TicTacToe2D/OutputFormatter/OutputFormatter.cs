@@ -15,9 +15,9 @@ namespace TicTacToe2D
         }
         public void DrawBoard(Board board, IOutput output) //TODO: not drawing board 
         {
-            for (var column = 0; column < board.Width; column++)
+            for (var column = 0; column < board.DimensionLength[0]; column++)
             {
-                for (var row = 0; row < board.Width; row++)
+                for (var row = 0; row < board.DimensionLength[0]; row++)
                 {
                     var position = board.GetField(Position.Factory_2DPosition(column, row)); // TODO: how to call position
                     switch (position)
