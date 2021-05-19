@@ -15,6 +15,11 @@ namespace TicTacToe2D
                 _queue.Enqueue(player);
             }
         }
+
+        public TurnQueue(TurnQueue source)
+        {
+            this._queue = new Queue<Player>(source._queue);
+        }
         
         public Player GetCurrentPlayer()
         {

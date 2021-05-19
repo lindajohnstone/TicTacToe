@@ -19,10 +19,13 @@ namespace TicTacToe2D
             var validations = new Validations();
             Initialize(players, board, validations);
         }
-        
-        public GameContext(GameContext source, Position position)
+        // copy constructor
+        // need to duplicate properties & fields in new instance
+        public GameContext(GameContext source)
         {
-            ApplyMove(source, position);
+            this.GameBoard = new Board(source.GameBoard);
+            this.Players = new List<Player>(source.Players);
+            this.TurnQueue = new TurnQueue(source.TurnQueue);
         }
         public void Initialize(List<Player> players, Board board, Validations validations)
         {
@@ -33,7 +36,7 @@ namespace TicTacToe2D
         }
         public static GameContext ApplyMove(GameContext game, Position position)
         {
-            var newGC = new GameContext(game, position);
+            var newGC = new GameContext(game);
             var player = game.GetCurrentPlayer();
             newGC.GameBoard = game.GameBoard.MovePlayer(position, game.PlayerFieldContents(player));
             return newGC;

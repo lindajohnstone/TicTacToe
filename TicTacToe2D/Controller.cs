@@ -89,11 +89,8 @@ namespace TicTacToe2D
             }
             while (playerMovePosition == null);
 
-            var fieldContents = new FieldContents();
-            
-            fieldContents = game.PlayerFieldContents(player);
-            var newBoard = game.GameBoard.MovePlayer(playerMovePosition, fieldContents);
-            var newGC = new GameContext(newBoard, game.GetPlayers());
+            var fieldContents = game.PlayerFieldContents(player);
+            var newGC = GameContext.ApplyMove(game, playerMovePosition);
             return newGC;
         }
     }
