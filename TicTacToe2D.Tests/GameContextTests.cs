@@ -24,7 +24,6 @@ namespace TicTacToe2D.Tests
             var players = new List<Player> { Player.X, Player.O };
             var result = new GameContext(board, players).GameBoard;
             Assert.Equal(3, result.DimensionLength[0]);
-            //Assert.Equal(3, result.Height);
         }
 
         [Fact]
@@ -81,6 +80,18 @@ namespace TicTacToe2D.Tests
             Assert.Equal(FieldContents.y, result);
             Assert.DoesNotMatch(FieldContents.x.ToString(), result.ToString());
             Assert.IsType<FieldContents>(result);
+        }
+
+        [Fact]
+        public void ApplyMove()
+        {
+            var board = new Board(2, 3);
+            var players = new List<Player>() { Player.X, Player.O };
+            var game = new GameContext(board, players);
+            var position = Position.Factory_2DPosition(0, 0);
+            var expected = new Board(SourceData.BoardMovePlayer());
+            var result = GameContext.ApplyMove(game, position);
+            Assert.Equal(expected, result.GameBoard);
         }
     }
 }

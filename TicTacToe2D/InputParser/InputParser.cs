@@ -14,7 +14,12 @@ namespace TicTacToe2D
             var inputArray = SplitInput(playerInput);
             if (IsValidInput(inputArray))
             {
-                return Position.Factory_2DPosition(Int32.Parse(inputArray[0]), Int32.Parse(inputArray[1]));// TODO: how to get position?
+                var dimensionList = new List<int>();
+                for (int i = 0; i < inputArray.Length; i++)
+                {
+                    dimensionList.Add(Int32.Parse(inputArray[i])); 
+                }
+                return Position.Factory_FromPlayerInput(dimensionList);
             }
             throw new InvalidMoveSyntaxException();
         }

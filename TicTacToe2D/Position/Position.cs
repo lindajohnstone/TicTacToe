@@ -114,5 +114,17 @@ namespace TicTacToe2D
             };
             return new Position(dv);
         }
+        public static Position Factory_FromPlayerInput(List<int> positions)
+        {
+            switch (positions.Count)
+            {
+                case 2:
+                    return Factory_2DPosition(positions[0], positions[1]);
+                case 3:
+                    return Factory_3DPosition(positions[0], positions[1], positions[2]);
+                default:
+                    throw new ArgumentException();
+            }
+        }
     }
 }
