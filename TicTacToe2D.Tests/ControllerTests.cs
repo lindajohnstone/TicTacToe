@@ -9,7 +9,7 @@ namespace TicTacToe2D.Tests
     public class ControllerTests
     {
         [Fact]
-        public void InputParser_GetPlayerMove()
+        public void InputParser_GetPlayerMove() 
         {
             var input = "0,0";
             var result = InputParser.GetPlayerMove(input);
@@ -224,7 +224,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void ImplementTurn_throws_ArgumentException_Y()
+        public void ImplementTurn_throws_ArgumentException_Y() 
         {
             var input = new StubConsoleInput();
             input.WithReadLine("0,9");
@@ -238,7 +238,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void ImplementTurn_throws_ArgumentException_X()
+        public void ImplementTurn_throws_ArgumentException_X() 
         {
             var input = new StubConsoleInput();
             input.WithReadLine("9,0");
@@ -252,7 +252,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayGame_write_welcome() // failing
+        public void PlayGame_write_welcome() 
         {
             var input = new StubConsoleInput();
             input.WithReadLine("0,0");
@@ -267,7 +267,7 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayGame_player_ends_game() // failing
+        public void PlayGame_player_ends_game() 
         {
             var input = new StubConsoleInput();
             input.WithReadLine("0,0");
@@ -282,9 +282,14 @@ namespace TicTacToe2D.Tests
         }
 
         [Fact]
-        public void PlayGame_drawn_game()
+        public void PlayGame_drawn_game() 
         {
             var input = new StubConsoleInput();
+            var output = new StubOutput();
+            var board = new Board(2, 3);
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var outputFormatter = new OutputFormatter();
             input.WithReadLine("0,0");
             input.WithReadLine("0,1");
             input.WithReadLine("0,2");
@@ -294,65 +299,61 @@ namespace TicTacToe2D.Tests
             input.WithReadLine("2,1");
             input.WithReadLine("2,0");
             input.WithReadLine("2,2");
+            input.WithReadLine("q");
+            controller.PlayGame(game, output, input, outputFormatter);
+            Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
+        }
+
+        [Fact]
+        public void PlayGame_drawn_game_v2() 
+        {
+            var input = new StubConsoleInput();
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardIsNotADraw());
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var outputFormatter = new OutputFormatter();
+            input.WithReadLine("0,1");
+            input.WithReadLine("q");
+            controller.PlayGame(game, output, input, outputFormatter);
+            Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
+        }
+
+        [Fact]
+        public void PlayGame_X_wins_game() 
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,0");
+            input.WithReadLine("0,1");
+            input.WithReadLine("0,2");
+            input.WithReadLine("1,1");
+            input.WithReadLine("1,0");
+            input.WithReadLine("1,2");
+            input.WithReadLine("2,0");
+            input.WithReadLine("q");
             var output = new StubOutput();
             var board = new Board(2, 3);
             var controller = new Controller(board);
             var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
             var outputFormatter = new OutputFormatter();
             controller.PlayGame(game, output, input, outputFormatter);
-            Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
+            Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
         }
 
-        // [Fact]
-        // public void PlayGame_drawn_game_v2() // TODO: failing 
-        // {
-        //     var input = new StubConsoleInput();
-        //     input.WithReadLine("1,0");
-        //     input.WithReadLine("q");
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardIsNotADraw());
-        //     var controller = new Controller(board);
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var outputFormatter = new OutputFormatter();
-        //     controller.PlayGame(game, output, input, outputFormatter);
-        //     Assert.Contains("Game is drawn. Better luck next time.", output.GetWriteLine());
-        // }
-
-        // [Fact]
-        // public void PlayGame_X_wins_game() // failing
-        // {
-        //     var input = new StubConsoleInput();
-        //     input.WithReadLine("0,0");
-        //     input.WithReadLine("0,1");
-        //     input.WithReadLine("0,2");
-        //     input.WithReadLine("1,1");
-        //     input.WithReadLine("1,0");
-        //     input.WithReadLine("1,2");
-        //     input.WithReadLine("2,0");
-        //     input.WithReadLine("q");
-        //     var output = new StubOutput();
-        //     var board = new Board(2, 3);
-        //     var controller = new Controller(board);
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var outputFormatter = new OutputFormatter();
-        //     controller.PlayGame(game, output, input, outputFormatter);
-        //     Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
-        // }
-
-        // [Fact]
-        // public void PlayGame_X_wins_game_v2() // TODO: failing 
-        // {
-        //     var input = new StubConsoleInput();
-        //     input.WithReadLine("1,0");
-        //     input.WithReadLine("q");
-        //     var output = new StubOutput();
-        //     var board = new Board(SourceData.BoardIsNotADrawV2());
-        //     var controller = new Controller(board);
-        //     var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
-        //     var outputFormatter = new OutputFormatter();
-        //     controller.PlayGame(game, output, input, outputFormatter);
-        //     Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
-        // }
+        [Fact]
+        public void PlayGame_X_wins_game_v2() // failing
+        {
+            var input = new StubConsoleInput();
+            input.WithReadLine("0,1");
+            input.WithReadLine("q");
+            var output = new StubOutput();
+            var board = new Board(SourceData.BoardIsNotADrawV2());
+            var controller = new Controller(board);
+            var game = new GameContext(board, new List<Player>() { Player.X, Player.O });
+            var outputFormatter = new OutputFormatter();
+            controller.PlayGame(game, output, input, outputFormatter);
+            Assert.Contains("Hooray! Player 1 has won the game!", output.GetWriteLine());
+        }
 
         [Fact]
         public void PlayGame_get_player_x()
@@ -376,21 +377,6 @@ namespace TicTacToe2D.Tests
             var controller = new Controller(board);
             var game = new GameContext(board, players);
             Assert.Equal(Player.O, controller.ImplementTurn(game, new StubOutput(), input).SetNextPlayer());
-        }
-
-        [Fact]
-        public void PlayGame_set_next_player_y()
-        {
-            var players = new List<Player>() { Player.X, Player.O };
-            var input = new StubConsoleInput();
-            var queue = new TurnQueue(players);
-            //queue.
-            input.WithReadLine("2,0");
-            var board = new Board(SourceData.BoardMovePlayer());
-            var controller = new Controller(board);
-            var game = new GameContext(board, players);
-            var newBoard = controller.ImplementTurn(game, new StubOutput(), input);
-            Assert.Equal(Player.X, controller.ImplementTurn(game, new StubOutput(), input).SetNextPlayer());
         }
     }
 }
