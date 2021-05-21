@@ -13,13 +13,13 @@ namespace TicTacToe2D
         {
             output.ConsoleWriteLine("Welcome to Tic Tac Toe!\n");
         }
-        public void DrawBoard(Board board, IOutput output) 
+        public void DrawBoard(Board board, IOutput output) // TODO: use recursion to write each board
         {
             for (var column = 0; column < board.DimensionLength[0]; column++)
             {
                 for (var row = 0; row < board.DimensionLength[0]; row++)
                 {
-                    var position = board.GetField(Position.Factory_2DPosition(column, row)); // TODO: how to call position
+                    var position = board.GetField(Position.Factory_2DPosition(column, row)); 
                     switch (position)
                     {
                         case (FieldContents.y):
